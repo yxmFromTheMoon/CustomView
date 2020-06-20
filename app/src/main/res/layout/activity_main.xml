@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <!--    <com.yxm.customview.view.TextView-->
@@ -13,13 +14,34 @@
     <!--        app:customText="Robin"-->
     <!--        android:padding="10dp"-->
     <!--        app:customTextColor="@color/colorAccent" />-->
-    <com.yxm.customview.view.QQStepView
-        android:id="@+id/step_view"
+<!--    <com.yxm.customview.view.QQStepView-->
+<!--        android:id="@+id/step_view"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:borderWidth="20dp"-->
+<!--        app:outerColor="@color/colorPrimary"-->
+<!--        app:innerColor="@color/colorAccent"-->
+<!--        app:stepTextColor="@color/colorAccent"-->
+<!--        app:stepTextSize="30sp" />-->
+
+    <com.yxm.customview.view.ColorTrackTextView
+        android:id="@+id/colorTrackTextView"
+        android:textSize="20sp"
+        android:text="Hello World"
+        app:originColor="@android:color/black"
+        app:changeColor="@android:color/holo_red_dark"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:borderWidth="20dp"
-        app:outerColor="@color/colorPrimary"
-        app:innerColor="@color/colorAccent"
-        app:stepTextColor="@color/colorAccent"
-        app:stepTextSize="30sp" />
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/leftToRight"
+        android:text="左到右"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/rightToLeft"
+        android:text="右到左"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 </LinearLayout>
