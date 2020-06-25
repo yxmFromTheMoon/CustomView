@@ -23,7 +23,15 @@
     </declare-styleable>
 
     <declare-styleable name="ColorTrackTextView">
-        <attr name="originColor" format="color"/>
-        <attr name="changeColor" format="color"/>
+        <attr name="originColor" format="color" />
+        <attr name="changeColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="CircleProgressView">
+        <attr name="circleProgressOuterColor" format="reference|color" />
+        <attr name="circleProgressInnerColor" format="reference|color" />
+        <attr name="circleProgressBorderWidth" format="dimension" />
+        <attr name="progressPercentColor" format="reference|color" />
+        <attr name="progressTextSize" format="dimension" />
     </declare-styleable>
 </resources>

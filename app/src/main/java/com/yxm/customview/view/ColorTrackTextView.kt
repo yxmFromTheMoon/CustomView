@@ -30,6 +30,7 @@ class ColorTrackTextView
         LEFT_TO_RIGHT,RIGHT_TO_LEFT
     }
     private var mDirection:Direction = Direction.LEFT_TO_RIGHT
+
     init {
         val typedArray = context.obtainStyledAttributes(attr,R.styleable.ColorTrackTextView)
         mOriginColor = typedArray.getColor(R.styleable.ColorTrackTextView_originColor,mOriginColor)

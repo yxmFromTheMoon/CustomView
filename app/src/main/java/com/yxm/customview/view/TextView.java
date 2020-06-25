@@ -8,14 +8,13 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 
 import com.yxm.customview.R;
+import com.yxm.customview.utils.Utils;
 
 /**
  * @author yxm
@@ -41,7 +40,7 @@ public class TextView extends View {
         super(context, attrs, defStyleAttr);
         TypedArray typedArray = context.obtainStyledAttributes(attrs,R.styleable.TextView);
         mText = typedArray.getString(R.styleable.TextView_customText);
-        mTextSize = typedArray.getDimensionPixelSize(R.styleable.TextView_customTextSize, sp2px(mTextSize));
+        mTextSize = typedArray.getDimensionPixelSize(R.styleable.TextView_customTextSize, Utils.sp2px(this,mTextSize));
         mTextColor = typedArray.getColor(R.styleable.TextView_customTextColor, mTextColor);
         typedArray.recycle();
         mPaint = new Paint();
@@ -130,10 +129,5 @@ public class TextView extends View {
                 break;
         }
         return super.onTouchEvent(event);
-    }
-
-    private int sp2px(float sp){
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP,
-                sp,getResources().getDisplayMetrics());
     }
 }

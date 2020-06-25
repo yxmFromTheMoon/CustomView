@@ -44,4 +44,15 @@
         android:text="右到左"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+
+    <com.yxm.customview.view.CircleProgressView
+        android:id="@+id/progress_circle_view"
+        app:progressPercentColor="@android:color/holo_red_dark"
+        app:circleProgressBorderWidth="20dp"
+        app:progressTextSize="15sp"
+        android:padding="10dp"
+        app:circleProgressOuterColor="@android:color/holo_blue_bright"
+        app:circleProgressInnerColor="@android:color/holo_orange_dark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 </LinearLayout>

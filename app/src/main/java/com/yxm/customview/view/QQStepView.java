@@ -102,9 +102,7 @@ public class QQStepView extends View {
         RectF rectF = new RectF(center - radius,center - radius,
                 center + radius,center + radius);
         canvas.drawArc(rectF,135,270,false,mOutPaint);
-//        mOutPaint.setColor(Color.BLACK);
-//        mOutPaint.setStrokeWidth(1);
-//        canvas.drawRect(rectF,mOutPaint);
+
         if(mStepMax == 0)
             return;
         //6.2 画内圆弧,不能写死，百分比，使用者设置，值是外面传过来的
