@@ -10,13 +10,14 @@
         tools:ignore="ProtectedPermissions" />
 
     <application
+        android:name=".basic.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".enter.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW"/>
@@ -24,17 +25,23 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".HandlerActivity"/>
+        <activity android:name=".activity.HandlerActivity"/>
 
-<!--        <provider-->
-<!--            android:authorities="${applicationId}.provider"-->
-<!--            android:name="androidx.core.content.FileProvider"-->
-<!--            android:exported="false"-->
-<!--            android:grantUriPermissions="true">-->
-<!--            <meta-data android:name="androidx.core.content.FILE_PROVIDER_PATHS"-->
-<!--                android:resource="@xml/provider_paths">-->
-<!--            </meta-data>-->
-<!--        </provider>-->
+        <activity android:name=".activity.TextViewActivity"/>
+
+        <activity android:name=".activity.CheckViewActivity"/>
+
+        <activity android:name=".activity.CircleProgressViewActivity"/>
+
+        <activity android:name=".activity.LoadingView58Activity"/>
+
+        <activity android:name=".activity.ViewPagerActivity"/>
+
+        <activity android:name=".activity.ColorTrackTextViewActivity"/>
+
+        <activity android:name=".activity.QQStepViewActivity"/>
+
+        <activity android:name=".activity.PieViewActivity"/>
 
     </application>
 

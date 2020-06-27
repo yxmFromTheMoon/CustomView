@@ -1,58 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    android:padding="16dp"
+    tools:context=".enter.MainActivity">
 
-    <!--    <com.yxm.customview.view.TextView-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        app:customText="Robin"-->
-    <!--        android:padding="10dp"-->
-    <!--        app:customTextColor="@color/colorAccent" />-->
-<!--    <com.yxm.customview.view.QQStepView-->
-<!--        android:id="@+id/step_view"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:borderWidth="20dp"-->
-<!--        app:outerColor="@color/colorPrimary"-->
-<!--        app:innerColor="@color/colorAccent"-->
-<!--        app:stepTextColor="@color/colorAccent"-->
-<!--        app:stepTextSize="30sp" />-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
-    <com.yxm.customview.view.ColorTrackTextView
-        android:id="@+id/colorTrackTextView"
-        android:textSize="20sp"
-        android:text="Hello World"
-        app:originColor="@android:color/black"
-        app:changeColor="@android:color/holo_red_dark"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <Button
-        android:id="@+id/leftToRight"
-        android:text="左到右"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <Button
-        android:id="@+id/rightToLeft"
-        android:text="右到左"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <com.yxm.customview.view.CircleProgressView
-        android:id="@+id/progress_circle_view"
-        app:progressPercentColor="@android:color/holo_red_dark"
-        app:circleProgressBorderWidth="20dp"
-        app:progressTextSize="15sp"
-        android:padding="10dp"
-        app:circleProgressOuterColor="@android:color/holo_blue_bright"
-        app:circleProgressInnerColor="@android:color/holo_orange_dark"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-</LinearLayout>
+</RelativeLayout>

@@ -130,4 +130,19 @@ public class TextView extends View {
         }
         return super.onTouchEvent(event);
     }
+
+    public void setText(String text){
+        mText = text;
+        requestLayout();
+    }
+
+    public void setTextSize(int textSize){
+        this.mTextSize = textSize;
+        requestLayout();
+    }
+
+    public void setTextColor(int color){
+        this.mTextColor = color;
+        requestLayout();
+    }
 }

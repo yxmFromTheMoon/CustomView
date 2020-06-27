@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.renderscript.Allocation;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -102,7 +101,11 @@ public class CircleProgressView extends View {
         Paint.FontMetricsInt fm = mProgressPercentPaint.getFontMetricsInt();
         int dy = (fm.bottom - fm.top) / 2 - fm.bottom;
         int baseLine = height / 2 + dy;
-        canvas.drawText(text,dx,baseLine,mProgressPercentPaint);
+        if(currentValue == maxValue){
+            canvas.drawText("Done!",dx,baseLine,mProgressPercentPaint);
+        }else {
+            canvas.drawText(text,dx,baseLine,mProgressPercentPaint);
+        }
     }
 
     public synchronized void setMaxValue(int value){

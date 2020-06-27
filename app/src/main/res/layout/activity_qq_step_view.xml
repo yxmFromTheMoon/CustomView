@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.yxm.customview.view.QQStepView
+        android:id="@+id/qq_step_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        app:borderWidth="30dp"
+        app:innerColor="@android:color/holo_red_light"
+        app:outerColor="@android:color/holo_green_light"
+        app:stepTextColor="@android:color/holo_blue_dark"
+        app:stepTextSize="30sp" />
+</RelativeLayout>

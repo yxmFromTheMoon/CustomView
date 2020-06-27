@@ -1,4 +1,4 @@
-package com.yxm.customview;
+package com.yxm.customview.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.yxm.customview.R;
 
 import java.lang.ref.WeakReference;
 

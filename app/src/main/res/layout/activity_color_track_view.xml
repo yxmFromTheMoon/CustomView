@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.yxm.customview.view.ColorTrackTextView
+        android:id="@+id/colorTrackTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="Hello World"
+        android:textSize="30dp"
+        app:changeColor="@android:color/holo_red_dark"
+        app:originColor="@android:color/black" />
+
+    <Button
+        android:id="@+id/left_to_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/colorTrackTextView"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="20dp"
+        android:text="左到右" />
+
+    <Button
+        android:id="@+id/right_to_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/colorTrackTextView"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_toEndOf="@id/left_to_right"
+        android:text="右到左" />
+
+</RelativeLayout>

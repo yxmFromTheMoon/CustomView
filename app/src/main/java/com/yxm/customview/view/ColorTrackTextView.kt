@@ -13,7 +13,7 @@ import com.yxm.customview.R
 /**
  * @author yxm
  * 2020/6/15 20:46
- * @function
+ * @function 颜色变化的TextView
  */
 class ColorTrackTextView
 @JvmOverloads constructor(context: Context, attr: AttributeSet? = null, defStyle: Int = 0)

@@ -14,6 +14,7 @@ import android.view.View;
 import androidx.annotation.Nullable;
 
 import com.yxm.customview.R;
+import com.yxm.customview.utils.Utils;
 
 /**
  * @author yxm
@@ -24,7 +25,7 @@ public class QQStepView extends View {
     private int mOutColor = Color.RED;
     private int mInnerColor = Color.BLUE;
     private int mBorderWidth = 20;
-    private int mStepTextSize = 15;
+    private int mStepTextSize = 20;
     private int mStepTextColor = Color.RED;
     private Paint mOutPaint;
     private Paint mInnerPaint;
@@ -56,7 +57,7 @@ public class QQStepView extends View {
         mOutColor = array.getColor(R.styleable.QQStepView_outerColor,mOutColor);
         mInnerColor = array.getColor(R.styleable.QQStepView_innerColor,mInnerColor);
         mBorderWidth = (int) array.getDimension(R.styleable.QQStepView_borderWidth,mBorderWidth);
-        mStepTextSize = array.getDimensionPixelSize(R.styleable.QQStepView_stepTextSize,mStepTextSize);
+        mStepTextSize = (int) array.getDimension(R.styleable.QQStepView_stepTextSize, Utils.sp2px(this,mStepTextSize));
         mStepTextColor = array.getColor(R.styleable.QQStepView_stepTextColor,mStepTextColor);
         array.recycle();
 

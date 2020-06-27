@@ -20,6 +20,7 @@ import java.util.ArrayList;
 public class PieView extends View {
 
     private Paint mPaint = new Paint();
+    private Paint mNamePaint;
     private int[] mColors = {Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW, Color.DKGRAY};
     private ArrayList<PieData> mData;
     private float mStartAngle = 0;
@@ -34,6 +35,11 @@ public class PieView extends View {
         super(context, attributeSet);
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setAntiAlias(true);
+        mNamePaint = new Paint();
+
+        mNamePaint.setAntiAlias(true);
+        mNamePaint.setColor(Color.BLACK);
+        mNamePaint.setTextSize(20);
     }
 
     @Override

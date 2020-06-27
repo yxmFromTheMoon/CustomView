@@ -47,6 +47,14 @@ public class CheckView extends View {
         initView(context);
     }
 
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        int width = MeasureSpec.getSize(widthMeasureSpec);
+        int height = MeasureSpec.getSize(heightMeasureSpec);
+        setMeasuredDimension(Math.min(width, height), Math.min(width, height));
+    }
+
     private void initView(Context context) {
         mContext = context;
         mPaint = new Paint();
@@ -58,21 +66,21 @@ public class CheckView extends View {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                if(animCurrentPage < animMaxPage && animCurrentPage >= 0){
+                if (animCurrentPage < animMaxPage && animCurrentPage >= 0) {
                     invalidate();
-                    if(animState == ANIM_NULL){
+                    if (animState == ANIM_NULL) {
                         return;
                     }
-                    if(animState == ANIM_CHECK){
+                    if (animState == ANIM_CHECK) {
                         animCurrentPage++;
-                    }else if(animCurrentPage == ANIM_UNCHECK){
+                    } else if (animCurrentPage == ANIM_UNCHECK) {
                         animCurrentPage--;
                     }
-                    this.sendEmptyMessageDelayed(0,animDuration / animMaxPage);
-                }else {
-                    if(isCheck){
+                    this.sendEmptyMessageDelayed(0, animDuration / animMaxPage);
+                } else {
+                    if (isCheck) {
                         animCurrentPage = animMaxPage - 1;
-                    }else {
+                    } else {
                         animCurrentPage = -1;
                     }
                     invalidate();
@@ -87,23 +95,23 @@ public class CheckView extends View {
         super.onSizeChanged(w, h, oldw, oldh);
         mWidth = w;
         mHeight = h;
-        Log.i("View","onSizeChanged()");
+        Log.i("View", "onSizeChanged()");
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         //将画布坐标系移动到中心
-        canvas.translate(mWidth / 2,mHeight / 2);
+        canvas.translate(mWidth / 2, mHeight / 2);
         //绘制背景圆形
-        canvas.drawCircle(0,0,240,mPaint);
+        canvas.drawCircle(0, 0, 240, mPaint);
         //得出图像边长
         int sideLength = mBitmap.getHeight();
         //得到图像选区和实际绘制位置
-        Rect src = new Rect(sideLength * animCurrentPage,0,sideLength * (animCurrentPage + 1),sideLength);
-        Rect dst = new Rect(-200,-200,200,200);
-        canvas.drawBitmap(mBitmap,src,dst,null);
-        Log.i("View","onDraw()" + sideLength + animCurrentPage);
+        Rect src = new Rect(sideLength * animCurrentPage, 0, sideLength * (animCurrentPage + 1), sideLength);
+        Rect dst = new Rect(-200, -200, 200, 200);
+        canvas.drawBitmap(mBitmap, src, dst, null);
+        Log.i("View", "onDraw()" + sideLength + animCurrentPage);
     }
 
     /**
@@ -132,6 +140,7 @@ public class CheckView extends View {
 
     /**
      * 设置动画时长
+     *
      * @param animDuration
      */
     public void setAnimDuration(int animDuration) {
@@ -142,9 +151,10 @@ public class CheckView extends View {
 
     /**
      * 设置背景圆形颜色
+     *
      * @param color
      */
-    public void setBackgroundColor(int color){
+    public void setBackgroundColor(int color) {
         mPaint.setColor(color);
     }
 }
