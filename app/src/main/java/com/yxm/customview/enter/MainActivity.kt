@@ -62,18 +62,19 @@ class MainActivity : BaseActivity(), EnterListAdapter.OnClickListener {
                 startActivity<CircleProgressViewActivity> {}
             }
             "4" -> {
-                startActivity<LoadingView58Activity> { }
+                startActivity<LoadingView58Activity> {}
             }
             "5" -> {
                 startActivity<ViewPagerActivity> {}
             }
             "6" -> {
-                startActivity<PieViewActivity> {  }
+                startActivity<PieViewActivity> {}
             }
             "7" -> {
                 startActivity<QQStepViewActivity> {}
             }
-            else -> {
+            "8" -> {
+                startActivity<RatingBarActivity> {}
             }
         }
     }
