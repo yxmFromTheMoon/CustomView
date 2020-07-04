@@ -2,6 +2,7 @@ package com.yxm.customview.utils
 
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
+import android.content.Context
 import android.util.TypedValue
 import android.view.View
 
@@ -17,6 +18,11 @@ object Utils {
     fun sp2px(view: View,sp: Float): Int {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP,
                 sp, view.resources.displayMetrics).toInt()
+    }
+
+    @JvmStatic
+    fun dp2px(context:Context,dp:Float):Int{
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,dp,context.resources.displayMetrics).toInt()
     }
 
     @JvmStatic

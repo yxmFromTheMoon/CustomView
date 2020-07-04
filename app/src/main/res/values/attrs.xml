@@ -40,4 +40,20 @@
         <attr name="starFocus" format="reference"/>
         <attr name="gradeNumbers" format="integer"/>
     </declare-styleable>
+
+    <declare-styleable name="LetterSideBar">
+        <attr name="letterColor" format="reference|color"/>
+        <attr name="letterSize" format="dimension"/>
+        <attr name="highLightLetterColor" format="reference|color"/>
+    </declare-styleable>
+
+    <declare-styleable name="SmoothCheckBox">
+        <attr name="color_tick" format="reference|color"/>
+        <attr name="duration" format="integer"/>
+        <attr name="color_unchecked_stroke" format="color|reference"/>
+        <attr name="color_checked" format="color|reference"/>
+        <attr name="color_unchecked" format="reference|color"/>
+        <attr name="stroke_width" format="dimension"/>
+        <attr name="outer_border_width" format="dimension"/>
+    </declare-styleable>
 </resources>
