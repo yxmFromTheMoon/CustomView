@@ -45,6 +45,10 @@
 
         <activity android:name=".activity.RatingBarActivity"/>
 
+        <activity android:name=".activity.SmoothCheckBoxActivity"/>
+
+        <activity android:name=".activity.LetterSideBarActivity"/>
+
     </application>
 
 </manifest>

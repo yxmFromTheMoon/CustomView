@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.yxm.customview.view.SmoothCheckBox
+        android:id="@+id/checkbox"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        app:color_unchecked_stroke="@android:color/black"
+        app:color_tick="@android:color/black"
+        app:color_unchecked="@android:color/transparent"
+        app:color_checked="@android:color/black"
+        app:stroke_width="2dp"
+        app:outer_border_width="2dp"
+        android:layout_centerInParent="true" />
+</RelativeLayout>
