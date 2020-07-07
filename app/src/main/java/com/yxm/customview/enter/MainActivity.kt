@@ -36,6 +36,7 @@ class MainActivity : BaseActivity(), EnterListAdapter.OnClickListener {
         val bean7 = ButtonBean("8", "RatingBar")
         val bean8 = ButtonBean("9", "CheckBox")
         val bean9 = ButtonBean("10", "LetterSideBar")
+        val bean10 = ButtonBean("11", "KGSlideMenu")
         mList.add(bean)
         mList.add(bean1)
         mList.add(bean2)
@@ -46,6 +47,7 @@ class MainActivity : BaseActivity(), EnterListAdapter.OnClickListener {
         mList.add(bean7)
         mList.add(bean8)
         mList.add(bean9)
+        mList.add(bean10)
         mAdapter = EnterListAdapter(mList)
         mRecyclerView.adapter = mAdapter
     }
@@ -83,8 +85,11 @@ class MainActivity : BaseActivity(), EnterListAdapter.OnClickListener {
             "9" -> {
                 startActivity<SmoothCheckBoxActivity> {}
             }
-            "10" ->{
+            "10" -> {
                 startActivity<LetterSideBarActivity> {}
+            }
+            "11" -> {
+                startActivity<KGMenuActivity> { }
             }
         }
     }
