@@ -49,6 +49,8 @@
 
         <activity android:name=".activity.LetterSideBarActivity"/>
 
+        <activity android:name=".activity.KGMenuActivity"/>
+
     </application>
 
 </manifest>

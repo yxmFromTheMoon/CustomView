@@ -57,7 +57,7 @@ class LetterSideBar @JvmOverloads constructor(context: Context, attributeSet: At
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         val itemHeight = (height - paddingBottom - paddingTop) / mLetters.size
-        for ((index, letter) in mLetters.withIndex()) {
+        for ((index, _) in mLetters.withIndex()) {
             val fontMetrics = mLetterPaint.fontMetrics
             val dy = (fontMetrics.bottom - fontMetrics.top) / 2 - fontMetrics.bottom
             //计算每个字母的中心位置，字母高度的一半 + 前面字母个数的高度

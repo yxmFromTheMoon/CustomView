@@ -3,8 +3,10 @@ package com.yxm.customview.utils
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.content.Context
+import android.util.DisplayMetrics
 import android.util.TypedValue
 import android.view.View
+import android.view.WindowManager
 
 /**
  * @Author yxm
@@ -39,5 +41,13 @@ object Utils {
         animator.duration = duration
         animator.addUpdateListener(listener)
         animator.start()
+    }
+
+    @JvmStatic
+    fun getScreenWidth(context: Context):Int{
+        val wm = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        val outMetrics = DisplayMetrics()
+        wm.defaultDisplay.getMetrics(outMetrics)
+        return outMetrics.widthPixels
     }
 }

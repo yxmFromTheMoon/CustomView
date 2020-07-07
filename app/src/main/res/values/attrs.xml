@@ -56,4 +56,8 @@
         <attr name="stroke_width" format="dimension"/>
         <attr name="outer_border_width" format="dimension"/>
     </declare-styleable>
+
+    <declare-styleable name="KGSlideMenu">
+        <attr name="rightMargin" format="dimension"/>
+    </declare-styleable>
 </resources>

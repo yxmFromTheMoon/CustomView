@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.yxm.customview.viewgruop.KGSlideMenu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:rightMargin="60dp"
+    android:background="@drawable/home_menu_bg"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <include
+            android:id="@+id/menu_layout"
+            layout="@layout/kg_menu" />
+
+        <include
+            android:id="@+id/content_layout"
+            layout="@layout/kg_content"/>
+
+    </LinearLayout>
+
+</com.yxm.customview.viewgruop.KGSlideMenu>
