@@ -51,6 +51,7 @@
 
         <activity android:name=".activity.KGMenuActivity"/>
 
+        <activity android:name=".activity.VerticalDragListViewActivity" />
     </application>
 
 </manifest>
