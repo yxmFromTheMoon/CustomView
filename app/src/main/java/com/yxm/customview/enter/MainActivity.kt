@@ -1,5 +1,6 @@
 package com.yxm.customview.enter
 
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.yxm.customview.R
@@ -7,6 +8,8 @@ import com.yxm.customview.activity.*
 import com.yxm.customview.basic.BaseActivity
 import com.yxm.customview.showToast
 import com.yxm.customview.startActivity
+import com.yxm.customview.view.ListDataScreenView
+import com.yxm.customview.view.ListMenuAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
@@ -15,6 +18,7 @@ class MainActivity : BaseActivity(), EnterListAdapter.OnClickListener {
     private lateinit var mRecyclerView: RecyclerView
     private var mAdapter: EnterListAdapter? = null
     private val mList = ArrayList<ButtonBean>()
+    private lateinit var mListDataView: ListDataScreenView
 
     override fun getLayoutId(): Int {
         return R.layout.activity_main
@@ -22,6 +26,13 @@ class MainActivity : BaseActivity(), EnterListAdapter.OnClickListener {
 
     override fun initView() {
         mRecyclerView = recycler_view
+        mListDataView = test_view
+        mListDataView.setAdapter(ListMenuAdapter(mContext))
+
+        test_iv.setOnClickListener {
+            Toast.makeText(this, "click", Toast.LENGTH_SHORT).show()
+        }
+
         mRecyclerView.layoutManager = LinearLayoutManager(mContext)
     }
 
