@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.yxm.customview.R
 import com.yxm.customview.activity.*
 import com.yxm.customview.basic.BaseActivity
+import com.yxm.customview.gone
 import com.yxm.customview.showToast
 import com.yxm.customview.startActivity
 import com.yxm.customview.view.ListDataScreenView
@@ -18,7 +19,6 @@ class MainActivity : BaseActivity(), EnterListAdapter.OnClickListener {
     private lateinit var mRecyclerView: RecyclerView
     private var mAdapter: EnterListAdapter? = null
     private val mList = ArrayList<ButtonBean>()
-    private lateinit var mListDataView: ListDataScreenView
 
     override fun getLayoutId(): Int {
         return R.layout.activity_main
@@ -26,14 +26,6 @@ class MainActivity : BaseActivity(), EnterListAdapter.OnClickListener {
 
     override fun initView() {
         mRecyclerView = recycler_view
-        mListDataView = test_view
-        mListDataView.setAdapter(ListMenuAdapter(mContext))
-
-        test_iv.setOnClickListener {
-            Toast.makeText(this, "click", Toast.LENGTH_SHORT).show()
-        }
-
-        mRecyclerView.layoutManager = LinearLayoutManager(mContext)
     }
 
     override fun initData() {
@@ -49,6 +41,8 @@ class MainActivity : BaseActivity(), EnterListAdapter.OnClickListener {
         val bean9 = ButtonBean("10", "LetterSideBar")
         val bean10 = ButtonBean("11", "KGSlideMenu")
         val bean11 = ButtonBean("12", "VerticalDragListView")
+        val bean12 = ButtonBean("13", "ListDataScreenView")
+        val bean13 = ButtonBean("14", "BouquetLoadingView")
         mList.add(bean)
         mList.add(bean1)
         mList.add(bean2)
@@ -61,6 +55,8 @@ class MainActivity : BaseActivity(), EnterListAdapter.OnClickListener {
         mList.add(bean9)
         mList.add(bean10)
         mList.add(bean11)
+        mList.add(bean12)
+        mList.add(bean13)
         mAdapter = EnterListAdapter(mList)
         mRecyclerView.adapter = mAdapter
     }
@@ -106,6 +102,12 @@ class MainActivity : BaseActivity(), EnterListAdapter.OnClickListener {
             }
             "12" -> {
                 startActivity<VerticalDragListViewActivity> {}
+            }
+            "13" -> {
+                startActivity<ListDataScreenActivity> { }
+            }
+            "14" -> {
+                startActivity<BouquetLoadingViewActivity> { }
             }
         }
     }

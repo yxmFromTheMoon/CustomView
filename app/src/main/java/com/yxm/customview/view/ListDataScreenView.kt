@@ -9,10 +9,13 @@ import android.util.AttributeSet
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Adapter
 import android.widget.FrameLayout
 import android.widget.LinearLayout
+import android.widget.Toast
 import com.yxm.customview.basic.BaseMenuAdapter
 import com.yxm.customview.gone
+import com.yxm.customview.observer.MenuObserver
 import com.yxm.customview.visible
 
 /**
@@ -30,7 +33,7 @@ class ListDataScreenView @JvmOverloads constructor(context: Context, attributeSe
     private lateinit var mMenuMiddleView: FrameLayout
     private lateinit var mMenuContainerView: FrameLayout
     private lateinit var mShadowView: View
-    private lateinit var mAdapter: BaseMenuAdapter
+    private var mAdapter: BaseMenuAdapter? = null
     private val mContext: Context = context
     private var mMenuContainerHeight = 0
     private val ANIMATOR_DURATION = 300
@@ -73,15 +76,32 @@ class ListDataScreenView @JvmOverloads constructor(context: Context, attributeSe
     }
 
     /**
+     * 具体的观察者
+     */
+    inner class AdapterMenuObserver : MenuObserver() {
+        override fun observerCloseMenu() {
+            closeMenu()
+        }
+    }
+
+    private var mMenuAdapterObserver: AdapterMenuObserver? = null
+
+    /**
      * 设置adapter
      */
     fun setAdapter(adapter: BaseMenuAdapter) {
+
+        if (mAdapter != null && mMenuAdapterObserver != null) {
+            mAdapter!!.unregisterDataSetObserver(mMenuAdapterObserver!!)
+        }
         mAdapter = adapter
+        mMenuAdapterObserver = AdapterMenuObserver()
+        mAdapter!!.registerDataSetObserver(mMenuAdapterObserver!!)
         //获取有多少条
-        val count = mAdapter.getCount()
+        val count = mAdapter!!.getCount()
         for (i in 0 until count) {
             //获取tab
-            val tabView = mAdapter.getTabView(i, mMenuTabView)
+            val tabView = mAdapter!!.getTabView(i, mMenuTabView)
             mMenuTabView.addView(tabView)
             val params = tabView.layoutParams as LayoutParams
             params.weight = 1f
@@ -89,7 +109,7 @@ class ListDataScreenView @JvmOverloads constructor(context: Context, attributeSe
             //设置点击事件
             setTabClick(tabView, i)
             //获取内容
-            val menuView = mAdapter.getMenuView(i, mMenuContainerView)
+            val menuView = mAdapter!!.getMenuView(i, mMenuContainerView)
             menuView.gone()
             mMenuContainerView.addView(menuView)
             val menuParams = menuView.layoutParams as FrameLayout.LayoutParams
@@ -114,11 +134,11 @@ class ListDataScreenView @JvmOverloads constructor(context: Context, attributeSe
                     //切换显示内容
                     var currentMenu = mMenuContainerView.getChildAt(mCurrentPosition)
                     currentMenu.gone()
-                    mAdapter.onMenuClose(mMenuTabView.getChildAt(mCurrentPosition))
+                    mAdapter!!.onMenuClose(mMenuTabView.getChildAt(mCurrentPosition))
                     mCurrentPosition = position
                     currentMenu = mMenuContainerView.getChildAt(mCurrentPosition)
                     currentMenu.visible()
-                    mAdapter.onMenuOpen(mMenuTabView.getChildAt(mCurrentPosition))
+                    mAdapter!!.onMenuOpen(mMenuTabView.getChildAt(mCurrentPosition))
                 }
             }
         }
@@ -145,7 +165,7 @@ class ListDataScreenView @JvmOverloads constructor(context: Context, attributeSe
 
             override fun onAnimationStart(animation: Animator?) {
                 isAnimatorExecute = true
-                mAdapter.onMenuClose(mMenuTabView.getChildAt(mCurrentPosition))
+                mAdapter!!.onMenuClose(mMenuTabView.getChildAt(mCurrentPosition))
             }
         })
         alphaAnimator.start()
@@ -176,7 +196,7 @@ class ListDataScreenView @JvmOverloads constructor(context: Context, attributeSe
             override fun onAnimationStart(animation: Animator?) {
                 isAnimatorExecute = true
                 //把当前的tabView传到外面，改变样式颜色等
-                mAdapter.onMenuOpen(tabView)
+                mAdapter!!.onMenuOpen(tabView)
             }
         })
         alphaAnimator.start()

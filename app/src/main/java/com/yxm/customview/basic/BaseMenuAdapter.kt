@@ -1,7 +1,9 @@
 package com.yxm.customview.basic
 
+import android.database.DataSetObserver
 import android.view.View
 import android.view.ViewGroup
+import com.yxm.customview.observer.MenuObserver
 
 /**
  * @author yxm
@@ -10,6 +12,20 @@ import android.view.ViewGroup
  * @description
  */
 abstract class BaseMenuAdapter {
+
+    private var mObserver: MenuObserver? = null
+
+    open fun registerDataSetObserver(observer: MenuObserver) {
+        mObserver = observer
+    }
+
+    open fun unregisterDataSetObserver(observer: MenuObserver) {
+        mObserver = null
+    }
+
+    fun closeMenu() {
+        mObserver?.observerCloseMenu()
+    }
 
     //获取数量
     abstract fun getCount(): Int
@@ -20,7 +36,7 @@ abstract class BaseMenuAdapter {
     //获取内容
     abstract fun getMenuView(position: Int, parent: ViewGroup): View
 
-    abstract fun onMenuOpen(tabView:View)
+    abstract fun onMenuOpen(tabView: View)
 
-    abstract fun onMenuClose(tabView:View)
+    abstract fun onMenuClose(tabView: View)
 }
