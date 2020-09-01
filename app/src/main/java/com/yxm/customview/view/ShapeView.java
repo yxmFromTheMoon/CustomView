@@ -16,7 +16,7 @@ import androidx.annotation.Nullable;
  * 2020/6/25 21:52
  * @Description 仿58同城加载view
  */
-public class LoadingView58 extends View {
+public class ShapeView extends View {
 
     private Shape mCurrentShape = Shape.Circle;
     private Paint mPaint;
@@ -26,15 +26,15 @@ public class LoadingView58 extends View {
         Circle, Square, Triangle
     }
 
-    public LoadingView58(Context context) {
+    public ShapeView(Context context) {
         this(context, null);
     }
 
-    public LoadingView58(Context context, @Nullable AttributeSet attrs) {
+    public ShapeView(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public LoadingView58(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public ShapeView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
@@ -99,4 +99,7 @@ public class LoadingView58 extends View {
         invalidate();
     }
 
+    public Shape getCurrentShape() {
+        return mCurrentShape;
+    }
 }

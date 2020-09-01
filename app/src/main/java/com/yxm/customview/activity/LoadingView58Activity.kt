@@ -2,7 +2,8 @@ package com.yxm.customview.activity
 
 import com.yxm.customview.R
 import com.yxm.customview.basic.BaseActivity
-import com.yxm.customview.view.LoadingView58
+import com.yxm.customview.view.LoadingView
+import com.yxm.customview.view.ShapeView
 import kotlinx.android.synthetic.main.activity_loading_view_58.*
 
 /**
@@ -13,15 +14,14 @@ import kotlinx.android.synthetic.main.activity_loading_view_58.*
  */
 class LoadingView58Activity : BaseActivity() {
 
-    private lateinit var loadingView: LoadingView58
+    private lateinit var loadingView: LoadingView
 
     override fun getLayoutId(): Int {
         return R.layout.activity_loading_view_58
     }
 
     override fun initView() {
-        loadingView = loading_view_58
-        exchange()
+        loadingView = loading_view
     }
 
     override fun initListener() {
@@ -31,18 +31,4 @@ class LoadingView58Activity : BaseActivity() {
     override fun initData() {
     }
 
-    fun exchange() {
-        Thread(Runnable {
-            while (true) {
-                runOnUiThread {
-                    loadingView.exchange()
-                }
-                try {
-                    Thread.sleep(1000)
-                } catch (e: InterruptedException) {
-                    e.printStackTrace()
-                }
-            }
-        }).start()
-    }
 }

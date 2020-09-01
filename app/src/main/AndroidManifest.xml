@@ -3,10 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.yxm.customview">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
         tools:ignore="ProtectedPermissions" />
 
     <application
@@ -20,37 +21,43 @@
         <activity android:name=".enter.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.HandlerActivity"/>
+        <activity android:name=".activity.HandlerActivity" />
 
-        <activity android:name=".activity.TextViewActivity"/>
+        <activity android:name=".activity.TextViewActivity" />
 
-        <activity android:name=".activity.CheckViewActivity"/>
+        <activity android:name=".activity.CheckViewActivity" />
 
-        <activity android:name=".activity.CircleProgressViewActivity"/>
+        <activity android:name=".activity.CircleProgressViewActivity" />
 
-        <activity android:name=".activity.LoadingView58Activity"/>
+        <activity android:name=".activity.LoadingView58Activity" />
 
-        <activity android:name=".activity.ViewPagerActivity"/>
+        <activity android:name=".activity.ViewPagerActivity" />
 
-        <activity android:name=".activity.ColorTrackTextViewActivity"/>
+        <activity android:name=".activity.ColorTrackTextViewActivity" />
 
-        <activity android:name=".activity.QQStepViewActivity"/>
+        <activity android:name=".activity.QQStepViewActivity" />
 
-        <activity android:name=".activity.PieViewActivity"/>
+        <activity android:name=".activity.PieViewActivity" />
 
-        <activity android:name=".activity.RatingBarActivity"/>
+        <activity android:name=".activity.RatingBarActivity" />
 
-        <activity android:name=".activity.SmoothCheckBoxActivity"/>
+        <activity android:name=".activity.SmoothCheckBoxActivity" />
 
-        <activity android:name=".activity.LetterSideBarActivity"/>
+        <activity android:name=".activity.LetterSideBarActivity" />
 
-        <activity android:name=".activity.KGMenuActivity"/>
+        <activity android:name=".activity.KGMenuActivity" />
 
+        <activity android:name=".activity.VerticalDragListViewActivity" />
+
+        <activity android:name=".activity.BouquetLoadingViewActivity" />
+
+        <activity android:name=".activity.ListDataScreenActivity" />
     </application>
 
 </manifest>
