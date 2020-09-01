@@ -43,6 +43,7 @@ class MainActivity : BaseActivity(), EnterListAdapter.OnClickListener {
         val bean11 = ButtonBean("12", "VerticalDragListView")
         val bean12 = ButtonBean("13", "ListDataScreenView")
         val bean13 = ButtonBean("14", "BouquetLoadingView")
+        val bean14 = ButtonBean("15", "CTripLoadingView")
         mList.add(bean)
         mList.add(bean1)
         mList.add(bean2)
@@ -57,6 +58,7 @@ class MainActivity : BaseActivity(), EnterListAdapter.OnClickListener {
         mList.add(bean11)
         mList.add(bean12)
         mList.add(bean13)
+        mList.add(bean14)
         mAdapter = EnterListAdapter(mList)
         mRecyclerView.adapter = mAdapter
     }
@@ -108,6 +110,9 @@ class MainActivity : BaseActivity(), EnterListAdapter.OnClickListener {
             }
             "14" -> {
                 startActivity<BouquetLoadingViewActivity> { }
+            }
+            "15" -> {
+                startActivity<CTripLoadingViewActivity> { }
             }
         }
     }

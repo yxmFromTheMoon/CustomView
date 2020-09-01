@@ -58,6 +58,8 @@
         <activity android:name=".activity.BouquetLoadingViewActivity" />
 
         <activity android:name=".activity.ListDataScreenActivity" />
+
+        <activity android:name=".activity.CTripLoadingViewActivity" />
     </application>
 
 </manifest>
