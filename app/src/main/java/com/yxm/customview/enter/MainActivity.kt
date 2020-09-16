@@ -1,16 +1,10 @@
 package com.yxm.customview.enter
 
-import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.yxm.customview.R
 import com.yxm.customview.activity.*
 import com.yxm.customview.basic.BaseActivity
-import com.yxm.customview.gone
-import com.yxm.customview.showToast
 import com.yxm.customview.startActivity
-import com.yxm.customview.view.ListDataScreenView
-import com.yxm.customview.view.ListMenuAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
@@ -44,6 +38,8 @@ class MainActivity : BaseActivity(), EnterListAdapter.OnClickListener {
         val bean12 = ButtonBean("13", "ListDataScreenView")
         val bean13 = ButtonBean("14", "BouquetLoadingView")
         val bean14 = ButtonBean("15", "CTripLoadingView")
+        val bean15 = ButtonBean("16", "CommonAdapter")
+        val bean16 = ButtonBean("17", "Bezier")
         mList.add(bean)
         mList.add(bean1)
         mList.add(bean2)
@@ -59,6 +55,8 @@ class MainActivity : BaseActivity(), EnterListAdapter.OnClickListener {
         mList.add(bean12)
         mList.add(bean13)
         mList.add(bean14)
+        mList.add(bean15)
+        mList.add(bean16)
         mAdapter = EnterListAdapter(mList)
         mRecyclerView.adapter = mAdapter
     }
@@ -113,6 +111,12 @@ class MainActivity : BaseActivity(), EnterListAdapter.OnClickListener {
             }
             "15" -> {
                 startActivity<CTripLoadingViewActivity> { }
+            }
+            "16" -> {
+                startActivity<CommonAdapterActivity> { }
+            }
+            "17" -> {
+                startActivity<BezierActivity> { }
             }
         }
     }

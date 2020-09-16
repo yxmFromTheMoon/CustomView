@@ -18,7 +18,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".recyclerview.RecyclerViewActivity">
+        <activity android:name=".enter.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -60,6 +60,11 @@
         <activity android:name=".activity.ListDataScreenActivity" />
 
         <activity android:name=".activity.CTripLoadingViewActivity" />
+
+        <activity android:name=".activity.BezierActivity" />
+
+        <activity android:name=".activity.CommonAdapterActivity" />
+
     </application>
 
 </manifest>
