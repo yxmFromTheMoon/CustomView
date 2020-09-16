@@ -1,12 +1,17 @@
 package com.yxm.customview.enter
 
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.flexbox.FlexDirection
+import com.google.android.flexbox.FlexWrap
+import com.google.android.flexbox.FlexboxLayoutManager
+import com.google.android.flexbox.JustifyContent
 import com.yxm.customview.R
 import com.yxm.customview.activity.*
 import com.yxm.customview.basic.BaseActivity
 import com.yxm.customview.startActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
+
 
 class MainActivity : BaseActivity(), EnterListAdapter.OnClickListener {
 
@@ -58,6 +63,11 @@ class MainActivity : BaseActivity(), EnterListAdapter.OnClickListener {
         mList.add(bean15)
         mList.add(bean16)
         mAdapter = EnterListAdapter(mList)
+        val layoutManager = FlexboxLayoutManager(this)
+        layoutManager.flexDirection = FlexDirection.ROW
+        layoutManager.flexWrap = FlexWrap.WRAP
+        layoutManager.justifyContent = JustifyContent.FLEX_START
+        mRecyclerView.layoutManager = layoutManager
         mRecyclerView.adapter = mAdapter
     }
 
