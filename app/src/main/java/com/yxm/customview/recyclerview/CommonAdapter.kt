@@ -26,10 +26,18 @@ abstract class CommonAdapter<T>(context: Context, layoutResId: Int, data: List<T
     protected var mLayoutId = layoutResId
     protected val mData = data
     private var mInflater: LayoutInflater
-    var mItemClickListener: ItemClickListener? = null
-    var mItemLongClickListener: ItemLongClickListener? = null
+    private var mItemClickListener: ItemClickListener? = null
+    private var mItemLongClickListener: ItemLongClickListener? = null
     protected var mEmptyViewLayoutId: Int = 0
     protected var mEmptyView: View? = null
+
+    fun setItemClickListener(listener: ItemClickListener){
+        this.mItemClickListener = listener
+    }
+
+    fun setItemLongClickListener(listener: ItemLongClickListener){
+        this.mItemLongClickListener = listener
+    }
 
     init {
         mInflater = LayoutInflater.from(mContext)
