@@ -31,11 +31,11 @@ abstract class CommonAdapter<T>(context: Context, layoutResId: Int, data: List<T
     protected var mEmptyViewLayoutId: Int = 0
     protected var mEmptyView: View? = null
 
-    fun setItemClickListener(listener: ItemClickListener){
+    fun setItemClickListener(listener: ItemClickListener) {
         this.mItemClickListener = listener
     }
 
-    fun setItemLongClickListener(listener: ItemLongClickListener){
+    fun setItemLongClickListener(listener: ItemLongClickListener) {
         this.mItemLongClickListener = listener
     }
 
@@ -57,6 +57,7 @@ abstract class CommonAdapter<T>(context: Context, layoutResId: Int, data: List<T
             mLayoutId = viewType
         }
         val view = mInflater.inflate(mLayoutId, parent, false)
+
         return ViewHolder(view)
     }
 
@@ -95,16 +96,18 @@ abstract class CommonAdapter<T>(context: Context, layoutResId: Int, data: List<T
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        convert(holder, mData[position], position)
-        holder.itemView.setOnClickListener {
-            mItemClickListener?.onItemClick(position)
-        }
-        holder.itemView.setOnLongClickListener {
-            mItemLongClickListener?.let {
-                return@setOnLongClickListener it.onItemLongClick(position)
+        // 设置点击和长按事件
+        if (mItemClickListener != null) {
+            holder.itemView.setOnClickListener {
+                mItemClickListener!!.onItemClick(position)
             }
-            false
         }
+        if (mItemLongClickListener != null) {
+            holder.itemView.setOnLongClickListener {
+                mItemLongClickListener!!.onItemLongClick(position)
+            }
+        }
+        convert(holder, mData[position], position)
 
     }
 

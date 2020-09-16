@@ -1,5 +1,7 @@
 package com.yxm.customview.enter
 
+import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
@@ -8,16 +10,19 @@ import com.google.android.flexbox.JustifyContent
 import com.yxm.customview.R
 import com.yxm.customview.activity.*
 import com.yxm.customview.basic.BaseActivity
+import com.yxm.customview.recyclerview.ItemClickListener
+import com.yxm.customview.showToast
 import com.yxm.customview.startActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 
-class MainActivity : BaseActivity(), EnterListAdapter.OnClickListener {
+class MainActivity : BaseActivity(){
 
     private lateinit var mRecyclerView: RecyclerView
-    private var mAdapter: EnterListAdapter? = null
     private val mList = ArrayList<ButtonBean>()
+    private lateinit var mCommonAdapter: EnterListAdapterV2
+
 
     override fun getLayoutId(): Int {
         return R.layout.activity_main
@@ -62,72 +67,76 @@ class MainActivity : BaseActivity(), EnterListAdapter.OnClickListener {
         mList.add(bean14)
         mList.add(bean15)
         mList.add(bean16)
-        mAdapter = EnterListAdapter(mList)
+
         val layoutManager = FlexboxLayoutManager(this)
         layoutManager.flexDirection = FlexDirection.ROW
         layoutManager.flexWrap = FlexWrap.WRAP
         layoutManager.justifyContent = JustifyContent.FLEX_START
         mRecyclerView.layoutManager = layoutManager
-        mRecyclerView.adapter = mAdapter
+        mCommonAdapter = EnterListAdapterV2(this, mList)
+
+        mCommonAdapter.setOnItemClickListener(object : ItemClickListener {
+            override fun onItemClick(position: Int) {
+                when (mList[position].tag) {
+                    "1" -> {
+                        startActivity<TextViewActivity> {}
+                    }
+                    "2" -> {
+                        startActivity<CheckViewActivity> {}
+                    }
+                    "3" -> {
+                        startActivity<CircleProgressViewActivity> {}
+                    }
+                    "4" -> {
+                        startActivity<LoadingView58Activity> {}
+                    }
+                    "5" -> {
+                        startActivity<ViewPagerActivity> {}
+                    }
+                    "6" -> {
+                        startActivity<PieViewActivity> {}
+                    }
+                    "7" -> {
+                        startActivity<QQStepViewActivity> {}
+                    }
+                    "8" -> {
+                        startActivity<RatingBarActivity> {}
+                    }
+                    "9" -> {
+                        startActivity<SmoothCheckBoxActivity> {}
+                    }
+                    "10" -> {
+                        startActivity<LetterSideBarActivity> {}
+                    }
+                    "11" -> {
+                        startActivity<KGMenuActivity> { }
+                    }
+                    "12" -> {
+                        startActivity<VerticalDragListViewActivity> {}
+                    }
+                    "13" -> {
+                        startActivity<ListDataScreenActivity> { }
+                    }
+                    "14" -> {
+                        startActivity<BouquetLoadingViewActivity> { }
+                    }
+                    "15" -> {
+                        startActivity<CTripLoadingViewActivity> { }
+                    }
+                    "16" -> {
+                        startActivity<CommonAdapterActivity> { }
+                    }
+                    "17" -> {
+                        startActivity<BezierActivity> { }
+                    }
+                }
+            }
+        })
+        mRecyclerView.adapter = mCommonAdapter
     }
 
     override fun initListener() {
-        mAdapter!!.setListener(this)
     }
 
-    override fun onClick(tag: String, position: Int) {
-        when (tag) {
-            "1" -> {
-                startActivity<TextViewActivity> {}
-            }
-            "2" -> {
-                startActivity<CheckViewActivity> {}
-            }
-            "3" -> {
-                startActivity<CircleProgressViewActivity> {}
-            }
-            "4" -> {
-                startActivity<LoadingView58Activity> {}
-            }
-            "5" -> {
-                startActivity<ViewPagerActivity> {}
-            }
-            "6" -> {
-                startActivity<PieViewActivity> {}
-            }
-            "7" -> {
-                startActivity<QQStepViewActivity> {}
-            }
-            "8" -> {
-                startActivity<RatingBarActivity> {}
-            }
-            "9" -> {
-                startActivity<SmoothCheckBoxActivity> {}
-            }
-            "10" -> {
-                startActivity<LetterSideBarActivity> {}
-            }
-            "11" -> {
-                startActivity<KGMenuActivity> { }
-            }
-            "12" -> {
-                startActivity<VerticalDragListViewActivity> {}
-            }
-            "13" -> {
-                startActivity<ListDataScreenActivity> { }
-            }
-            "14" -> {
-                startActivity<BouquetLoadingViewActivity> { }
-            }
-            "15" -> {
-                startActivity<CTripLoadingViewActivity> { }
-            }
-            "16" -> {
-                startActivity<CommonAdapterActivity> { }
-            }
-            "17" -> {
-                startActivity<BezierActivity> { }
-            }
-        }
-    }
+
 }

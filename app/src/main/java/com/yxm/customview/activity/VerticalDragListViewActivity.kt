@@ -56,7 +56,7 @@ class VerticalDragListViewActivity : BaseActivity() {
         mList.add(bean2)
         mList.add(bean3)
         mList.add(bean4)
-        mAdapter = EnterListAdapter(mList)
+        mAdapter = EnterListAdapter(this,mList)
         mRv.adapter = mAdapter
     }
 }
