@@ -16,7 +16,7 @@ import com.yxm.customview.showToast
  *@description
  */
 class EnterListAdapterV2(context: Context, data: List<ButtonBean>)
-    : CommonRecyclerAdapter<ButtonBean>(context, data, R.layout.item_enter) {
+    : CommonAdapter<ButtonBean>(context, R.layout.item_enter, data) {
 
     override fun convert(holder: ViewHolder, item: ButtonBean, position: Int) {
         val button = holder.getView<TextView>(R.id.enter_button)

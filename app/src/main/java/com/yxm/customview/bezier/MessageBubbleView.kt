@@ -1,10 +1,15 @@
 package com.yxm.customview.bezier
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
+import android.view.animation.OvershootInterpolator
 import com.yxm.customview.utils.Utils
 import kotlin.math.atan
 import kotlin.math.cos
@@ -19,6 +24,7 @@ import kotlin.math.sqrt
 class MessageBubbleView @JvmOverloads constructor(context: Context, attributes: AttributeSet? = null, defStyle: Int = 0)
     : View(context, attributes, defStyle) {
 
+    private var mBitmap: Bitmap? = null
     private val mPointPaint = Paint()
     private var mFixPoint: PointF? = null
     private var mDragPointF: PointF? = null
@@ -26,6 +32,12 @@ class MessageBubbleView @JvmOverloads constructor(context: Context, attributes: 
     private var mFixPointMinRadius = 3
     private var mFixPointRadius = 0
     private var mDragPointRadius = 10
+
+    private var mListener: MessageBubbleListener? = null
+
+    fun setMessageBubbleListener(listener: MessageBubbleListener) {
+        mListener = listener
+    }
 
     init {
         mPointPaint.isAntiAlias = true
@@ -46,16 +58,19 @@ class MessageBubbleView @JvmOverloads constructor(context: Context, attributes: 
         if (mFixPoint == null || mDragPointF == null) {
             return
         }
+
         //1.画固定的圆
         //2.固定的圆的半径会随着与拖动圆的距离慢慢变小，直到不见（不绘制）
         val bezierPath = getBezierPath()
         if (bezierPath != null) {
             canvas?.drawCircle(mFixPoint!!.x, mFixPoint!!.y, mFixPointRadius.toFloat(), mPointPaint)
-            canvas?.drawPath(bezierPath,mPointPaint)
+            canvas?.drawPath(bezierPath, mPointPaint)
         }
         //3.拖动圆，大小不变
         canvas?.drawCircle(mDragPointF!!.x, mDragPointF!!.y, mDragPointRadius.toFloat(), mPointPaint)
-        //4.画贝塞尔曲线
+        mBitmap?.let {
+            canvas?.drawBitmap(it, mDragPointF!!.x - it.width / 2, mDragPointF!!.y - it.height / 2, null)
+        }
     }
 
     /**
@@ -66,7 +81,7 @@ class MessageBubbleView @JvmOverloads constructor(context: Context, attributes: 
         val controlPoint = getControlPoint()
 
         val distance = getPointDistance(mFixPoint!!, mDragPointF!!)
-        mFixPointRadius = (mFixPointMaxRadius - distance.toInt() / 14)
+        mFixPointRadius = (mFixPointMaxRadius - distance.toInt() / 28)
         if (mFixPointRadius < mFixPointMinRadius) {
             return null
         }
@@ -94,44 +109,68 @@ class MessageBubbleView @JvmOverloads constructor(context: Context, attributes: 
         return bezierPath
     }
 
-    override fun onTouchEvent(event: MotionEvent?): Boolean {
-        when (event?.action) {
-            MotionEvent.ACTION_DOWN -> {
-                val downX = event.x
-                val downY = event.y
-                initPoint(downX, downY)
-            }
-            MotionEvent.ACTION_MOVE -> {
-                val moveX = event.x
-                val moveY = event.y
-                updateDragPoint(moveX, moveY)
-            }
-            MotionEvent.ACTION_UP -> {
-
-            }
-        }
-        invalidate()
-        return true
-    }
-
-    private fun initPoint(downX: Float, downY: Float) {
+    fun initPoint(downX: Float, downY: Float) {
         mFixPoint = PointF(downX, downY)
         mDragPointF = PointF(downX, downY)
     }
 
-    private fun updateDragPoint(moveX: Float, moveY: Float) {
+    fun updateDragPoint(moveX: Float, moveY: Float) {
         mDragPointF!!.x = moveX
         mDragPointF!!.y = moveY
+        invalidate()
     }
 
     /**
      * 获取控制点
      */
-    private fun getControlPoint(): PointF {
+    fun getControlPoint(): PointF {
         val controlPoint = PointF()
         controlPoint.x = (mDragPointF!!.x + mFixPoint!!.x) / 2
         controlPoint.y = (mDragPointF!!.y + mFixPoint!!.y) / 2
         return controlPoint
+    }
+
+    //处理手指松开
+    fun releaseBubbleView() {
+        if (mFixPointRadius >= mFixPointMinRadius) {
+            //回弹
+            val animator = ObjectAnimator.ofFloat(1f)
+            animator.duration = 350
+            val start = PointF(mDragPointF!!.x, mDragPointF!!.y)
+            val end = PointF(mFixPoint!!.x, mFixPoint!!.y)
+            animator.addUpdateListener {
+                val percent = it.animatedValue as Float
+                val point = Utils.getPointByPercent(start, end, percent)
+                updateDragPoint(point.x, point.y)
+            }
+            animator.interpolator = OvershootInterpolator()
+            animator.addListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator?) {
+                    mListener?.restore()
+                }
+            })
+            animator.start()
+            //通知TouchListener 移除当前view，显示原来的view
+        } else {
+            //爆炸
+            mListener?.dismiss(mDragPointF)
+        }
+    }
+
+    fun setBitmap(bitmap: Bitmap) {
+        mBitmap = bitmap
+    }
+
+    interface MessageBubbleListener {
+        fun restore()
+
+        fun dismiss(pointF: PointF?)
+    }
+
+    companion object {
+        fun attach(view: View, listener: BubbleViewTouchListener.BubbleDisappearListener) {
+            view.setOnTouchListener(BubbleViewTouchListener(view, view.context,listener))
+        }
     }
 
 }

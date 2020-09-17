@@ -1,7 +1,5 @@
 package com.yxm.customview.enter
 
-import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
@@ -11,7 +9,6 @@ import com.yxm.customview.R
 import com.yxm.customview.activity.*
 import com.yxm.customview.basic.BaseActivity
 import com.yxm.customview.recyclerview.ItemClickListener
-import com.yxm.customview.showToast
 import com.yxm.customview.startActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
@@ -75,7 +72,7 @@ class MainActivity : BaseActivity(){
         mRecyclerView.layoutManager = layoutManager
         mCommonAdapter = EnterListAdapterV2(this, mList)
 
-        mCommonAdapter.setOnItemClickListener(object : ItemClickListener {
+        mCommonAdapter.setItemClickListener(object : ItemClickListener {
             override fun onItemClick(position: Int) {
                 when (mList[position].tag) {
                     "1" -> {

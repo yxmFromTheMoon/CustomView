@@ -1,8 +1,11 @@
 package com.yxm.customview.activity
 
+import android.widget.TextView
 import com.yxm.customview.R
 import com.yxm.customview.basic.BaseActivity
+import com.yxm.customview.bezier.BubbleViewTouchListener
 import com.yxm.customview.bezier.MessageBubbleView
+import com.yxm.customview.showToast
 import kotlinx.android.synthetic.main.activity_bezier.*
 
 /**
@@ -10,19 +13,24 @@ import kotlinx.android.synthetic.main.activity_bezier.*
  *@time 2020/9/16 3:57 PM
  *@description 贝塞尔曲线
  */
-class BezierActivity:BaseActivity() {
+class BezierActivity : BaseActivity() {
 
-    private lateinit var mBezierView:MessageBubbleView
+    private lateinit var mTv: TextView
 
     override fun getLayoutId(): Int {
         return R.layout.activity_bezier
     }
 
     override fun initView() {
-        mBezierView = message_bubble_view
+        mTv = text_view
     }
 
     override fun initListener() {
+        MessageBubbleView.attach(mTv, object : BubbleViewTouchListener.BubbleDisappearListener {
+            override fun dismiss() {
+                "消失".showToast()
+            }
+        })
     }
 
     override fun initData() {
