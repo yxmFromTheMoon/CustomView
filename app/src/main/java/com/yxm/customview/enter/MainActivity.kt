@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 
-class MainActivity : BaseActivity(){
+class MainActivity : BaseActivity() {
 
     private lateinit var mRecyclerView: RecyclerView
     private val mList = ArrayList<ButtonBean>()
@@ -47,6 +47,7 @@ class MainActivity : BaseActivity(){
         val bean14 = ButtonBean("15", "CTripLoadingView")
         val bean15 = ButtonBean("16", "CommonAdapter")
         val bean16 = ButtonBean("17", "Bezier")
+        val bean17 = ButtonBean("18", "LoveLayout")
         mList.add(bean)
         mList.add(bean1)
         mList.add(bean2)
@@ -64,6 +65,7 @@ class MainActivity : BaseActivity(){
         mList.add(bean14)
         mList.add(bean15)
         mList.add(bean16)
+        mList.add(bean17)
 
         val layoutManager = FlexboxLayoutManager(this)
         layoutManager.flexDirection = FlexDirection.ROW
@@ -125,6 +127,9 @@ class MainActivity : BaseActivity(){
                     }
                     "17" -> {
                         startActivity<BezierActivity> { }
+                    }
+                    "18" -> {
+                        startActivity<LoveActivity> { }
                     }
                 }
             }

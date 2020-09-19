@@ -65,6 +65,8 @@
 
         <activity android:name=".activity.CommonAdapterActivity" />
 
+        <activity android:name=".activity.LoveActivity" />
+
     </application>
 
 </manifest>
