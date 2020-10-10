@@ -1,1 +1,3 @@
+include ':frameLibrary'
+include ':baseLibrary'
 include ':app'

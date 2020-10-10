@@ -36,7 +36,6 @@ class ListDataScreenView @JvmOverloads constructor(context: Context, attributeSe
     private var mAdapter: BaseMenuAdapter? = null
     private val mContext: Context = context
     private var mMenuContainerHeight = 0
-    private val ANIMATOR_DURATION = 300
 
     //没打开为-1
     private var mCurrentPosition = -1
@@ -150,11 +149,11 @@ class ListDataScreenView @JvmOverloads constructor(context: Context, attributeSe
         }
         val translationAnimator = ObjectAnimator.ofFloat(mMenuContainerView,
                 "translationY", 0f, -mMenuContainerHeight.toFloat())
-        translationAnimator.duration = ANIMATOR_DURATION.toLong()
+        translationAnimator.duration = Companion.ANIMATOR_DURATION.toLong()
         translationAnimator.start()
         val alphaAnimator = ObjectAnimator.ofFloat(mShadowView, "alpha",
                 1f, 0f)
-        alphaAnimator.duration = ANIMATOR_DURATION.toLong()
+        alphaAnimator.duration = Companion.ANIMATOR_DURATION.toLong()
         alphaAnimator.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator?) {
                 mMenuContainerView.getChildAt(mCurrentPosition).gone()
@@ -180,12 +179,12 @@ class ListDataScreenView @JvmOverloads constructor(context: Context, attributeSe
 
         val translationAnimator = ObjectAnimator.ofFloat(mMenuContainerView,
                 "translationY", -mMenuContainerHeight.toFloat(), 0f)
-        translationAnimator.duration = ANIMATOR_DURATION.toLong()
+        translationAnimator.duration = Companion.ANIMATOR_DURATION.toLong()
         translationAnimator.start()
 
         val alphaAnimator = ObjectAnimator.ofFloat(mShadowView, "alpha",
                 0f, 1f)
-        alphaAnimator.duration = ANIMATOR_DURATION.toLong()
+        alphaAnimator.duration = Companion.ANIMATOR_DURATION.toLong()
 
         alphaAnimator.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator?) {
@@ -213,5 +212,9 @@ class ListDataScreenView @JvmOverloads constructor(context: Context, attributeSe
             mMenuContainerView.layoutParams = params
             mMenuContainerView.translationY = -mMenuContainerHeight.toFloat()
         }
+    }
+
+    companion object {
+        private const val ANIMATOR_DURATION = 300
     }
 }

@@ -4,6 +4,7 @@ apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 29
+    buildToolsVersion "29.0.3"
     defaultConfig {
         applicationId "com.yxm.customview"
         minSdkVersion 19
@@ -37,6 +38,9 @@ dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+
+    api project(":baseLibrary")
+    api project(":frameLibrary")
 }
 repositories {
     mavenCentral()
