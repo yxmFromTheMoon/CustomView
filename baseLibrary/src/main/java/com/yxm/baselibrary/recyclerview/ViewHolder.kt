@@ -1,10 +1,10 @@
-package com.yxm.customview.recyclerview
+package com.yxm.baselibrary.recyclerview
 
 import android.util.SparseArray
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.yxm.customview.view.TextView
 
 /**
  * @author yxm
@@ -28,7 +28,7 @@ class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun setText(viewId: Int, text: String): ViewHolder {
         val textView = getView<TextView>(viewId)
-        textView.setText(text)
+        textView.text = text
         return this
     }
 

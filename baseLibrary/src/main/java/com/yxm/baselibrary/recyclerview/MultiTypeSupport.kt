@@ -1,4 +1,4 @@
-package com.yxm.customview.recyclerview
+package com.yxm.baselibrary.recyclerview
 
 /**
  * @author yxm

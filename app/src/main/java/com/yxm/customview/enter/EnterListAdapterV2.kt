@@ -1,14 +1,10 @@
 package com.yxm.customview.enter
 
 import android.content.Context
-import android.view.View
-import android.widget.Button
 import android.widget.TextView
 import com.yxm.customview.R
-import com.yxm.customview.recyclerview.CommonAdapter
-import com.yxm.customview.recyclerview.CommonRecyclerAdapter
-import com.yxm.customview.recyclerview.ViewHolder
-import com.yxm.customview.showToast
+import com.yxm.baselibrary.recyclerview.CommonAdapter
+import com.yxm.baselibrary.recyclerview.ViewHolder
 
 /**
  *@author yxm

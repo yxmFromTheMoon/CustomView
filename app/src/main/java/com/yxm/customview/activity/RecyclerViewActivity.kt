@@ -1,4 +1,4 @@
-package com.yxm.customview.recyclerview
+package com.yxm.customview.activity
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.yxm.customview.R
 import com.yxm.baselibrary.base.BaseActivity
+import com.yxm.baselibrary.recyclerview.GridItemDecoration
 import kotlinx.android.synthetic.main.activity_recyclerview.*
 
 /**
@@ -43,7 +44,7 @@ class RecyclerViewActivity : BaseActivity() {
         mAdapter = MyAdapter(this, mData)
         //mRv.layoutManager = LinearLayoutManager(this)
         mRv.layoutManager = GridLayoutManager(this,3)
-        mRv.addItemDecoration(GridItemDecoration(this,R.drawable.item_grid_decoration))
+        mRv.addItemDecoration(GridItemDecoration(this, R.drawable.item_grid_decoration))
         mRv.adapter = mAdapter
     }
 

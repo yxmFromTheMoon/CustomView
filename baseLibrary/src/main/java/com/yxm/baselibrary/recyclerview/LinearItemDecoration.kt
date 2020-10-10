@@ -1,12 +1,9 @@
-package com.yxm.customview.recyclerview
+package com.yxm.baselibrary.recyclerview
 
 import android.content.Context
 import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
 import android.graphics.Rect
 import android.graphics.drawable.Drawable
-import android.os.Build
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView

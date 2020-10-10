@@ -8,7 +8,7 @@ import com.google.android.flexbox.JustifyContent
 import com.yxm.customview.R
 import com.yxm.customview.activity.*
 import com.yxm.baselibrary.base.BaseActivity
-import com.yxm.customview.recyclerview.ItemClickListener
+import com.yxm.baselibrary.recyclerview.ItemClickListener
 import com.yxm.customview.startActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
