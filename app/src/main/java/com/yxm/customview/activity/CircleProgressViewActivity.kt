@@ -2,8 +2,7 @@ package com.yxm.customview.activity
 
 import android.animation.ValueAnimator
 import com.yxm.customview.R
-import com.yxm.customview.basic.BaseActivity
-import com.yxm.customview.showToast
+import com.yxm.baselibrary.base.BaseActivity
 import com.yxm.customview.utils.Utils
 import com.yxm.customview.view.CircleProgressView
 import kotlinx.android.synthetic.main.activity_circle_progress.*

@@ -2,7 +2,7 @@ package com.yxm.customview.activity
 
 import android.widget.TextView
 import com.yxm.customview.R
-import com.yxm.customview.basic.BaseActivity
+import com.yxm.baselibrary.base.BaseActivity
 import com.yxm.customview.gone
 import com.yxm.customview.view.LetterSideBar
 import com.yxm.customview.visible

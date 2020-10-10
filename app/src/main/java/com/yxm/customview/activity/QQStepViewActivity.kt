@@ -2,7 +2,7 @@ package com.yxm.customview.activity
 
 import android.animation.ValueAnimator
 import com.yxm.customview.R
-import com.yxm.customview.basic.BaseActivity
+import com.yxm.baselibrary.base.BaseActivity
 import com.yxm.customview.utils.Utils
 import com.yxm.customview.view.QQStepView
 import kotlinx.android.synthetic.main.activity_qq_step_view.*

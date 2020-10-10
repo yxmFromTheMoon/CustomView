@@ -1,7 +1,7 @@
 package com.yxm.customview.activity
 
 import com.yxm.customview.R
-import com.yxm.customview.basic.BaseActivity
+import com.yxm.baselibrary.base.BaseActivity
 import com.yxm.customview.view.ListDataScreenView
 import com.yxm.customview.view.ListMenuAdapter
 import kotlinx.android.synthetic.main.activity_list_data_screen.*

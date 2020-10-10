@@ -6,10 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.yxm.customview.R
-import com.yxm.customview.basic.BaseActivity
+import com.yxm.baselibrary.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_recyclerview.*
 
 /**

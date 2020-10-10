@@ -1,7 +1,7 @@
 package com.yxm.customview.activity
 
 import com.yxm.customview.R
-import com.yxm.customview.basic.BaseActivity
+import com.yxm.baselibrary.base.BaseActivity
 
 /**
  * @Author yxm

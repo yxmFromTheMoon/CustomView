@@ -1,6 +1,5 @@
 package com.yxm.customview.basic
 
-import android.database.DataSetObserver
 import android.view.View
 import android.view.ViewGroup
 import com.yxm.customview.observer.MenuObserver

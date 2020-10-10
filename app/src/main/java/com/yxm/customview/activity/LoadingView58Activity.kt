@@ -1,9 +1,8 @@
 package com.yxm.customview.activity
 
 import com.yxm.customview.R
-import com.yxm.customview.basic.BaseActivity
+import com.yxm.baselibrary.base.BaseActivity
 import com.yxm.customview.view.LoadingView
-import com.yxm.customview.view.ShapeView
 import kotlinx.android.synthetic.main.activity_loading_view_58.*
 
 /**

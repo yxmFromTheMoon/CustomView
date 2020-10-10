@@ -1,7 +1,7 @@
 package com.yxm.customview.activity
 
 import com.yxm.customview.R
-import com.yxm.customview.basic.BaseActivity
+import com.yxm.baselibrary.base.BaseActivity
 
 /**
  * @author yxm
@@ -9,7 +9,7 @@ import com.yxm.customview.basic.BaseActivity
  * 2020/9/1 20:36
  * @description
  */
-class CTripLoadingViewActivity:BaseActivity() {
+class CTripLoadingViewActivity: BaseActivity() {
 
     override fun getLayoutId(): Int {
         return R.layout.activity_ctrip_loading_view

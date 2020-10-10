@@ -1,8 +1,10 @@
-package com.yxm.customview.basic
+package com.yxm.baselibrary.base
 
 import android.content.Context
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.yxm.baselibrary.ioc.ViewUtils
 
 /**
  * @Author yxm
@@ -14,10 +16,11 @@ abstract class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mContext = this;
+        mContext = this
         if (getLayoutId() != 0) {
             setContentView(getLayoutId())
         }
+        ViewUtils.inject(this)
         initView()
         initData()
         initListener()
@@ -30,6 +33,14 @@ abstract class BaseActivity : AppCompatActivity() {
     abstract fun initListener()
 
     abstract fun initData()
+
+    /**
+     * findViewById
+     * @return View
+     */
+    protected open fun <T : View?> viewById(viewId: Int): T {
+        return findViewById<View>(viewId) as T
+    }
 
     companion object {
         lateinit var mContext: Context

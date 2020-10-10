@@ -4,7 +4,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.yxm.customview.R
-import com.yxm.customview.basic.BaseActivity
+import com.yxm.baselibrary.base.BaseActivity
 import com.yxm.customview.enter.ButtonBean
 import com.yxm.customview.enter.EnterListAdapter
 import com.yxm.customview.showToast
