@@ -1,6 +1,7 @@
 package com.yxm.customview.basic
 
 import android.app.Application
+import com.yxm.framelibrary.CrashExceptionHandler
 
 /**
  * @Author yxm
@@ -13,6 +14,7 @@ class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         INSTANCE = this
+        CrashExceptionHandler.init(this)
     }
 
     companion object {
