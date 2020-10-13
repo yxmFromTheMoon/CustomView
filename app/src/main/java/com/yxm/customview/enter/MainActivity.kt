@@ -8,6 +8,7 @@ import com.google.android.flexbox.JustifyContent
 import com.yxm.customview.R
 import com.yxm.customview.activity.*
 import com.yxm.baselibrary.base.BaseActivity
+import com.yxm.baselibrary.dialog.AlertDialog
 import com.yxm.baselibrary.recyclerview.ItemClickListener
 import com.yxm.customview.startActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -27,6 +28,14 @@ class MainActivity : BaseActivity() {
 
     override fun initView() {
         mRecyclerView = recycler_view
+        test_dialog.setOnClickListener {
+            val builder = AlertDialog.Builder(this)
+                    .setView(R.layout.dialog_test_view)
+                    .setCancelable(true)
+                    .setText(R.id.test_tv, "test")
+                    .create()
+                    .show()
+        }
     }
 
     override fun initData() {
