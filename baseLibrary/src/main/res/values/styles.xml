@@ -10,8 +10,13 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="defaultDialogAnimation" mce_bogus="1" parent="android:Animation">
+    <style name="fromBottomAnimation" mce_bogus="1" parent="android:Animation">
         <item name="android:windowEnterAnimation">@anim/dialog_enter_anim</item>
         <item name="android:windowExitAnimation">@anim/dialog_exit_anim</item>
+    </style>
+
+    <style name="dialog_default_anim" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/dialog_scale_anim_in</item>
+        <item name="android:windowExitAnimation">@anim/dialog_scale_anim_out</item>
     </style>
 </resources>

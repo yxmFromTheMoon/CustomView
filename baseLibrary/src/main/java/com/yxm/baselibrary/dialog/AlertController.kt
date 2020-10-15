@@ -4,10 +4,7 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.pm.ActivityInfo
 import android.util.SparseArray
-import android.view.View
-import android.view.ViewGroup
-import android.view.Window
-import android.view.WindowManager
+import android.view.*
 import com.yxm.baselibrary.R
 
 /**
@@ -17,6 +14,7 @@ import com.yxm.baselibrary.R
  * @description
  */
 class AlertController(dialog: AlertDialog, window: Window?) {
+    private var mDialogHelper: DialogViewHelper? = null
     private var mDialog = dialog
     private var mWindow = window
 
@@ -29,11 +27,29 @@ class AlertController(dialog: AlertDialog, window: Window?) {
         return mWindow
     }
 
+    fun setViewHelper(viewHelper: DialogViewHelper) {
+        mDialogHelper = viewHelper
+    }
+
+    fun setOnClickListener(viewId: Int, listener: View.OnClickListener) {
+        mDialogHelper?.setOnClickListener(viewId, listener)
+    }
+
+    fun setText(viewId: Int, text: CharSequence) {
+        mDialogHelper?.setText(viewId, text)
+    }
+
+    fun <T : View> getView(viewId: Int): T {
+        return mDialogHelper?.getView<T>(viewId) as T
+    }
+
+
     class AlertParams(context: Context, themesResId: Int) {
+        var mGravity: Int = Gravity.CENTER
         var mContext: Context = context
         var mThemeResId: Int = themesResId
         var mCancelable = true
-        var mOnCancelListener: DialogInterface.OnCancelListener? = null
+
         var mOnDismissListener: DialogInterface.OnDismissListener? = null
         var mOnKeyListener: DialogInterface.OnKeyListener? = null
 
@@ -56,7 +72,7 @@ class AlertController(dialog: AlertDialog, window: Window?) {
         var mWidth = WindowManager.LayoutParams.WRAP_CONTENT
         var mHeight = WindowManager.LayoutParams.WRAP_CONTENT
 
-        var mDefaultAnimationStyleId: Int = R.style.defaultDialogAnimation
+        var mDefaultAnimationStyleId: Int = 0
 
         fun apply(alert: AlertController) {
             //配置各种参数
@@ -68,14 +84,21 @@ class AlertController(dialog: AlertDialog, window: Window?) {
                 viewHelper = DialogViewHelper()
                 viewHelper.setContentView(mView)
             }
+            alert.setViewHelper(viewHelper!!)
 
             //给dialog设置布局
-            alert.getDialog().setContentView(viewHelper!!.getContentView())
-            val windowParams = alert.getWindow()?.attributes
+            alert.getDialog().setContentView(viewHelper.getContentView())
+
+            val window = alert.getWindow()
+            window?.setGravity(mGravity)
+            val windowParams = window?.attributes
             windowParams?.width = mWidth
             windowParams?.height = mHeight
+
             alert.getWindow()?.attributes = windowParams
-            alert.getWindow()?.setWindowAnimations(mDefaultAnimationStyleId)
+            if (mDefaultAnimationStyleId != 0) {
+                alert.getWindow()?.setWindowAnimations(mDefaultAnimationStyleId)
+            }
 
             //设置文本
             val textArraySize = mTextArray.size()

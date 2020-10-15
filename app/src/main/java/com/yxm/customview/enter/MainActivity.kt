@@ -32,17 +32,17 @@ class MainActivity : BaseActivity() {
     override fun initView() {
         mRecyclerView = recycler_view
         test_dialog.setOnClickListener {
-            AlertDialog.Builder(this)
+            val dialog = AlertDialog.Builder(this)
                     .setContentView(R.layout.dialog_test_view)
                     .setCancelable(true)
-                    .setText(R.id.test_tv, "test")
-                    .setOnClickListener(R.id.test_tv, View.OnClickListener {
-                        "Test".showToast()
-                    })
-                    .fromBottom(true)
+                    .addDefaultAnimation()
                     .fullWidth()
                     .create()
-                    .show()
+            dialog.show()
+            dialog.setText(R.id.test_tv, "Test")
+            dialog.setOnClickListener(R.id.test_tv) {
+                "Test".showToast()
+            }
         }
     }
 

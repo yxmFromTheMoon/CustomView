@@ -5,6 +5,7 @@ import android.util.SparseArray
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
+import java.lang.ref.WeakReference
 
 /**
  * @author yxm
@@ -15,7 +16,8 @@ import android.widget.TextView
 class DialogViewHelper() {
 
     var mContentView: View? = null
-    private val mViews = SparseArray<View?>()
+    //防止内存泄漏
+    private val mViews = SparseArray<WeakReference<View?>>()
 
     constructor(context: Context, viewLayoutId: Int) : this() {
         mContentView = LayoutInflater.from(context).inflate(viewLayoutId, null)
@@ -33,11 +35,17 @@ class DialogViewHelper() {
         getView<View>(viewId).setOnClickListener(onClickListener)
     }
 
-    private fun <T : View> getView(viewId: Int): T {
-        var view = mViews[viewId]
+    fun <T : View> getView(viewId: Int): T {
+        val weakReference = mViews[viewId]
+        var view: View? = null
+        if (weakReference != null) {
+            view = weakReference.get()
+        }
         if (view == null) {
             view = mContentView?.findViewById(viewId)
-            mViews.put(viewId, view)
+            if (view != null) {
+                mViews.put(viewId, WeakReference(view))
+            }
         }
         return view as T
     }
