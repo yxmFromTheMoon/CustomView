@@ -1,5 +1,7 @@
 package com.yxm.customview.enter
 
+import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
@@ -10,6 +12,7 @@ import com.yxm.customview.activity.*
 import com.yxm.baselibrary.base.BaseActivity
 import com.yxm.baselibrary.dialog.AlertDialog
 import com.yxm.baselibrary.recyclerview.ItemClickListener
+import com.yxm.customview.showToast
 import com.yxm.customview.startActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
@@ -29,10 +32,15 @@ class MainActivity : BaseActivity() {
     override fun initView() {
         mRecyclerView = recycler_view
         test_dialog.setOnClickListener {
-            val builder = AlertDialog.Builder(this)
-                    .setView(R.layout.dialog_test_view)
+            AlertDialog.Builder(this)
+                    .setContentView(R.layout.dialog_test_view)
                     .setCancelable(true)
                     .setText(R.id.test_tv, "test")
+                    .setOnClickListener(R.id.test_tv, View.OnClickListener {
+                        "Test".showToast()
+                    })
+                    .fromBottom(true)
+                    .fullWidth()
                     .create()
                     .show()
         }

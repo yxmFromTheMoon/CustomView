@@ -4,6 +4,8 @@ import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
 import android.view.View
+import android.view.ViewGroup
+import android.view.WindowManager
 import com.yxm.baselibrary.R
 
 /**
@@ -56,13 +58,13 @@ class AlertDialog(context: Context, themeResId: Int) : Dialog(context, themeResI
             return this
         }
 
-        fun setView(layoutResId: Int): Builder {
+        fun setContentView(layoutResId: Int): Builder {
             P!!.mView = null
             P!!.mViewLayoutResId = layoutResId
             return this
         }
 
-        fun setView(view: View): Builder {
+        fun setContentView(view: View): Builder {
             P!!.mView = view
             P!!.mViewLayoutResId = 0
             return this
@@ -81,6 +83,22 @@ class AlertDialog(context: Context, themeResId: Int) : Dialog(context, themeResI
         fun setCancelable(cancelable: Boolean): Builder {
             P!!.mCancelable = cancelable
             return this
+        }
+
+        fun fullWidth(): Builder {
+            P!!.mWidth = WindowManager.LayoutParams.MATCH_PARENT
+            return this
+        }
+
+        fun fromBottom(isFromBottom: Boolean): Builder {
+            if (isFromBottom) {
+                addDefaultAnimation()
+            }
+            return this
+        }
+
+        private fun addDefaultAnimation() {
+
         }
 
         fun create(): AlertDialog {
