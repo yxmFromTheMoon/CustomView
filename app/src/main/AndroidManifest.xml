@@ -69,6 +69,8 @@
 
         <activity android:name=".activity.LoveActivity" />
 
+        <activity android:name=".activity.DragItemAnimatorActivity"/>
+
     </application>
 
 </manifest>

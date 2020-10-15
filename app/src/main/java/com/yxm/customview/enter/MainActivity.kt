@@ -65,6 +65,7 @@ class MainActivity : BaseActivity() {
         val bean15 = ButtonBean("16", "CommonAdapter")
         val bean16 = ButtonBean("17", "Bezier")
         val bean17 = ButtonBean("18", "LoveLayout")
+        val bean18 = ButtonBean("19", "DragRv")
         mList.add(bean)
         mList.add(bean1)
         mList.add(bean2)
@@ -83,6 +84,7 @@ class MainActivity : BaseActivity() {
         mList.add(bean15)
         mList.add(bean16)
         mList.add(bean17)
+        mList.add(bean18)
 
         val layoutManager = FlexboxLayoutManager(this)
         layoutManager.flexDirection = FlexDirection.ROW
@@ -147,6 +149,9 @@ class MainActivity : BaseActivity() {
                     }
                     "18" -> {
                         startActivity<LoveActivity> { }
+                    }
+                    "19" -> {
+                        startActivity<DragItemAnimatorActivity> {}
                     }
                 }
             }
