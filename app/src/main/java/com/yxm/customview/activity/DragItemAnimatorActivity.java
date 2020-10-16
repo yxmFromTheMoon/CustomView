@@ -82,7 +82,7 @@ public class DragItemAnimatorActivity extends AppCompatActivity {
                 int fromPosition = viewHolder.getAbsoluteAdapterPosition();
                 // 得到目标的位置
                 int targetPosition = target.getAbsoluteAdapterPosition();
-                if (fromPosition > targetPosition) {
+                if (fromPosition < targetPosition) {
                     for (int i = fromPosition; i < targetPosition; i++) {
                         Collections.swap(mItems, i, i + 1);// 改变实际的数据集
                     }
