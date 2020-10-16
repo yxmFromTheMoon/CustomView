@@ -1,6 +1,9 @@
 package com.yxm.customview.basic
 
 import android.app.Application
+import androidx.multidex.MultiDex
+import com.yxm.baselibrary.imageloader.CoilImageLoader
+import com.yxm.baselibrary.imageloader.ImageLoaderUtils
 import com.yxm.framelibrary.CrashExceptionHandler
 
 /**
@@ -15,6 +18,9 @@ class MyApplication : Application() {
         super.onCreate()
         INSTANCE = this
         CrashExceptionHandler.init(this)
+        ImageLoaderUtils.init(this)
+        ImageLoaderUtils.setImageLoader(CoilImageLoader(this))
+        MultiDex.install(this)
     }
 
     companion object {

@@ -3,24 +3,22 @@ package com.yxm.customview.activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
+import com.yxm.baselibrary.imageloader.ImageLoaderUtils;
 import com.yxm.baselibrary.recyclerview.CommonRecyclerAdapter;
-import com.yxm.baselibrary.recyclerview.GlideImageLoader;
 import com.yxm.baselibrary.recyclerview.ViewHolder;
-import com.yxm.baselibrary.recyclerview.WrapRecyclerView;
 import com.yxm.customview.R;
 
 import java.util.ArrayList;
@@ -43,18 +41,12 @@ public class DragItemAnimatorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler_view);
-
         initData();
         mRecyclerView = findViewById(R.id.recycler_view);
-
-
         mAdapter = new HomeAdapter(this, mItems);
-
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 4));
         mRecyclerView.setAdapter(mAdapter);
-
         //mRecyclerView.addItemDecoration(new DividerGridItemDecoration(this));
-
         final DefaultItemAnimator itemAnimator = new DefaultItemAnimator();
         mRecyclerView.setItemAnimator(itemAnimator);
 
@@ -175,7 +167,7 @@ public class DragItemAnimatorActivity extends AppCompatActivity {
         return true;
     }
 
-    class HomeAdapter extends CommonRecyclerAdapter<ItemBean> {
+    static class HomeAdapter extends CommonRecyclerAdapter<ItemBean> {
 
         public HomeAdapter(Context context, List<ItemBean> data) {
             super(context, data, R.layout.item_drag_sort_delete);
@@ -185,12 +177,11 @@ public class DragItemAnimatorActivity extends AppCompatActivity {
         public void convert(ViewHolder holder, ItemBean item, int position) {
             holder.setText(R.id.item_text, item.text);
             ImageView imageView = holder.getView(R.id.item_img);
-            Glide.with(DragItemAnimatorActivity.this).load(item.icon).into(imageView);
-            //holder.setImageResource(R.id.item_img, item.icon);
+            ImageLoaderUtils.INSTANCE.displayImage(imageView, item.icon);
         }
     }
 
-    public class ItemBean {
+    public static class ItemBean {
         public int id;
         public String text;
         public int icon;

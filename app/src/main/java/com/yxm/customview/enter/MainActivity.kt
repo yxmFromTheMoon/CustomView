@@ -36,13 +36,16 @@ class MainActivity : BaseActivity() {
                     .setContentView(R.layout.dialog_test_view)
                     .setCancelable(true)
                     .addDefaultAnimation()
-                    .fullWidth()
+                    .setWidthAndHeight(300,300)
                     .create()
             dialog.show()
             dialog.setText(R.id.test_tv, "Test")
-            dialog.setOnClickListener(R.id.test_tv) {
+//            dialog.setOnClickListener(R.id.test_tv) {
+//                "Test".showToast()
+//            }
+            dialog.setOnClickListener(R.id.test_tv, View.OnClickListener {
                 "Test".showToast()
-            }
+            })
         }
     }
 

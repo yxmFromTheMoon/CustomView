@@ -10,7 +10,8 @@ android {
         minSdkVersion 19
         targetSdkVersion 29
         versionCode 1
-        versionName "1.0"
+        versionName "1.2"
+        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -23,17 +24,23 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    kotlinOptions{
+        jvmTarget = "1.8"
+    }
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
     implementation "androidx.viewpager2:viewpager2:1.1.0-alpha01"
     implementation 'com.google.android:flexbox:2.0.1'
 
+    implementation 'androidx.multidex:multidex:2.0.1'
 
+    //noinspection GradleDependency
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    //noinspection GradleDependency
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 
     api project(":baseLibrary")
