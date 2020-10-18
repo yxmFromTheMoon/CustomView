@@ -22,7 +22,7 @@ object ImageLoaderUtils {
         mContext = context
     }
 
-     fun getImageLoader(): BaseImageLoader {
+     private fun getImageLoader(): BaseImageLoader {
         if (mImageLoader != null) {
             return mImageLoader as BaseImageLoader
         }

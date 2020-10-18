@@ -43,7 +43,7 @@ dependencies {
     //noinspection GradleDependency
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 
-    api project(":baseLibrary")
+
     api project(":frameLibrary")
 }
 repositories {

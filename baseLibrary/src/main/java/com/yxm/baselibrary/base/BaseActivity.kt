@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.yxm.baselibrary.imageloader.ImageLoaderUtils
 import com.yxm.baselibrary.ioc.ViewUtils
 
 /**
@@ -24,6 +25,21 @@ abstract class BaseActivity : AppCompatActivity() {
         initView()
         initData()
         initListener()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        ImageLoaderUtils.resume(this)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        ImageLoaderUtils.pause(this)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        ImageLoaderUtils.pause(this)
     }
 
     abstract fun getLayoutId(): Int

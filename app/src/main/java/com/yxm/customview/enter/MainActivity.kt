@@ -14,6 +14,8 @@ import com.yxm.baselibrary.dialog.AlertDialog
 import com.yxm.baselibrary.recyclerview.ItemClickListener
 import com.yxm.customview.showToast
 import com.yxm.customview.startActivity
+import com.yxm.framelibrary.DefaultNavigationBar
+import com.yxm.framelibrary.DefaultNavigationBarJava
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
@@ -36,7 +38,7 @@ class MainActivity : BaseActivity() {
                     .setContentView(R.layout.dialog_test_view)
                     .setCancelable(true)
                     .addDefaultAnimation()
-                    .setWidthAndHeight(300,300)
+                    .setWidthAndHeight(300, 300)
                     .create()
             dialog.show()
             dialog.setText(R.id.test_tv, "Test")
@@ -47,6 +49,9 @@ class MainActivity : BaseActivity() {
                 "Test".showToast()
             })
         }
+        val a = DefaultNavigationBarJava.Builder(this, view_group)
+                .setTitle("测试测试")
+                .builder()
     }
 
     override fun initData() {
