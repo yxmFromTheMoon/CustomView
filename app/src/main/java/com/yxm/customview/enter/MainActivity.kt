@@ -52,6 +52,9 @@ class MainActivity : BaseActivity() {
         val a = DefaultNavigationBarJava.Builder(this, view_group)
                 .setTitle("测试测试")
                 .builder()
+        test_entry.setOnClickListener {
+            startActivity<TestActivity> { }
+        }
     }
 
     override fun initData() {

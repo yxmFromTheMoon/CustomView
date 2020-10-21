@@ -2,17 +2,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:id="@+id/view_group"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".enter.MainActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:overScrollMode="never" />
+        android:overScrollMode="never"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/test_dialog"
@@ -20,5 +20,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:text="测试" />
+
+    <Button
+        android:id="@+id/test_entry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:text="测试入口" />
 
 </RelativeLayout>

@@ -71,6 +71,8 @@
 
         <activity android:name=".activity.DragItemAnimatorActivity"/>
 
+        <activity android:name=".activity.TestActivity"/>
+
     </application>
 
 </manifest>
