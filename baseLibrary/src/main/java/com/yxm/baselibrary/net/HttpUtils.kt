@@ -1,5 +1,13 @@
 package com.yxm.baselibrary.net
 
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.lang.RuntimeException
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
+import kotlin.coroutines.suspendCoroutine
+
 /**
  * @author yxm
  * @email yxmbest@163.com
@@ -8,8 +16,26 @@ package com.yxm.baselibrary.net
  */
 object HttpUtils {
 
-    suspend fun getUser(name: String): User {
-        return RetrofitManager.create<ApiService>()
-                .getUser(name)
+    private val mService = RetrofitManager.create<ApiService>()
+
+    suspend fun getUser(name: String) = mService.getUser(name).await()
+
+    private suspend fun <T> Call<T>.await(): T {
+        return suspendCoroutine { continuation ->
+            enqueue(object : Callback<T> {
+                override fun onFailure(call: Call<T>, t: Throwable) {
+                    continuation.resumeWithException(t)
+                }
+
+                override fun onResponse(call: Call<T>, response: Response<T>) {
+                    val body = response.body()
+                    if (body != null) {
+                        continuation.resume(body)
+                    } else {
+                        continuation.resumeWithException(RuntimeException("数据为空"))
+                    }
+                }
+            })
+        }
     }
 }

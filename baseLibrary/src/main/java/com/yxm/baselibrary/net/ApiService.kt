@@ -1,6 +1,5 @@
 package com.yxm.baselibrary.net
 
-import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -13,5 +12,5 @@ import retrofit2.http.Path
  */
 interface ApiService {
     @GET("users/{login}")
-    suspend fun getUser(@Path("login") name: String): User
+    fun getUser(@Path("login") name: String): Call<User>
 }
