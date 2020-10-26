@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.liveData
 import kotlinx.coroutines.Dispatchers
 import java.lang.Exception
-import java.lang.RuntimeException
+import kotlin.coroutines.CoroutineContext
 
 /**
  * @author yxm
@@ -14,13 +14,17 @@ import java.lang.RuntimeException
  */
 object Repository {
 
-    fun getUserName(name: String) = liveData<Result<User>>(Dispatchers.Main) {
+    fun getUserName(name: String) = fire(Dispatchers.IO) {
+        val user = HttpUtils.getUser(name)
+        Result.success(user)
+    }
+
+    private fun <T> fire(context: CoroutineContext, block: suspend () -> Result<T>) = liveData<Result<T>>(context) {
         val result = try {
-            val user = HttpUtils.getUser(name)
-            Result.success(user)
+            block()
         } catch (e: Exception) {
-            Log.d("Test1", e.message)
-            Result.failure(RuntimeException("response is empty"))
+            Log.d("test", e.message)
+            Result.failure(e)
         }
         emit(result)
     }

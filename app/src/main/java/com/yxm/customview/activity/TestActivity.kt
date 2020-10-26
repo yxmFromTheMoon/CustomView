@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import com.yxm.baselibrary.net.HttpUtils
 import com.yxm.customview.R
 import com.yxm.customview.showToast
@@ -21,15 +22,16 @@ import kotlinx.coroutines.*
  */
 class TestActivity : AppCompatActivity() {
 
-    private val mJob = Job()
-    private val mCoroutineScope = CoroutineScope(mJob)
-
     private val mViewModel by viewModels<UserViewModel>()
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test)
+//        lifecycleScope.launch {
+//            val user = HttpUtils.getUser("yxmFromTheMoon")
+//            test_tv.text = user.name
+//        }
 
         mViewModel.liveData.observe(this, { result ->
             val user = result.getOrNull()
@@ -44,13 +46,6 @@ class TestActivity : AppCompatActivity() {
 
         test_tv.setOnClickListener {
             mViewModel.getUser("yxmFromTheMoon")
-        }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        if (mCoroutineScope.isActive) {
-            mCoroutineScope.cancel()
         }
     }
 }
