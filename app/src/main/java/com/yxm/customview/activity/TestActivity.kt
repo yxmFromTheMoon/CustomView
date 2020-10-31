@@ -2,17 +2,14 @@ package com.yxm.customview.activity
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
-import androidx.lifecycle.lifecycleScope
 import com.yxm.baselibrary.net.HttpUtils
+import com.yxm.baselibrary.net.RetrofitCallback
+import com.yxm.baselibrary.net.User
 import com.yxm.customview.R
-import com.yxm.customview.showToast
 import com.yxm.customview.viewmodel.UserViewModel
-import kotlinx.android.synthetic.main.activity_test.*
-import kotlinx.coroutines.*
+import com.yxm.framelibrary.database.DaoSupportFactory
 
 /**
  * @author yxm
@@ -28,24 +25,20 @@ class TestActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test)
-//        lifecycleScope.launch {
-//            val user = HttpUtils.getUser("yxmFromTheMoon")
-//            test_tv.text = user.name
-//        }
+        val db = DaoSupportFactory.getDao(User::class.java)
+        db.insert(User("", ",", ""))
 
-        mViewModel.liveData.observe(this, { result ->
-            val user = result.getOrNull()
-            if(user != null){
-                mViewModel.user = user
-                test_tv.text = user.name
-            }else{
-                "数据为空".showToast()
+
+        HttpUtils.getUser1("yxmFromTheMoon").enqueue(object : RetrofitCallback<User>() {
+
+            override fun onFailure(msg: String, code: Int) {
+
             }
 
+            override fun onSuccess(result: User?) {
+
+            }
         })
 
-        test_tv.setOnClickListener {
-            mViewModel.getUser("yxmFromTheMoon")
-        }
     }
 }
