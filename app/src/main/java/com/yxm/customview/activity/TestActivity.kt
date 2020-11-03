@@ -24,6 +24,6 @@ class TestActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test)
         val db = DaoSupportFactory.getDao(User::class.java)
-        db.insert(User("", ",", ""))
+        db.insert(User("1", "2", "3"))
     }
 }

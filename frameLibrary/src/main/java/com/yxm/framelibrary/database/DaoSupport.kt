@@ -28,9 +28,9 @@ class DaoSupport<T> : IDaoSupport<T> {
         mClazz = clazz
         //创建表
         val sb = StringBuffer()
-        val sql = sb.append("create table if not exists")
+        val sql = sb.append("create table if not exists ")
                 .append(mClazz.simpleName)
-                .append("(id integer primary key autoincrement, ")
+                .append("(idkey integer primary key autoincrement, ")
 
         //获取该类的所有属性
         val fields = mClazz.declaredFields
@@ -53,7 +53,7 @@ class DaoSupport<T> : IDaoSupport<T> {
      */
     override fun insert(data: T): Long {
         val contentValues = contentValueByObj(data)
-        return mSqlSQLiteDatabase.insert(mClazz.simpleName, null, contentValues)
+        return mSqlSQLiteDatabase.insert(DaoUtils.getTableName(mClazz), null, contentValues)
     }
 
 

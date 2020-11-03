@@ -1,20 +1,25 @@
 package com.yxm.customview.enter
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
+import android.util.Log
 import android.view.View
-import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
-import com.yxm.customview.R
-import com.yxm.customview.activity.*
 import com.yxm.baselibrary.base.BaseActivity
 import com.yxm.baselibrary.dialog.AlertDialog
 import com.yxm.baselibrary.recyclerview.ItemClickListener
+import com.yxm.customview.R
+import com.yxm.customview.activity.*
 import com.yxm.customview.showToast
 import com.yxm.customview.startActivity
-import com.yxm.framelibrary.DefaultNavigationBar
 import com.yxm.framelibrary.DefaultNavigationBarJava
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
@@ -25,12 +30,14 @@ class MainActivity : BaseActivity() {
     private lateinit var mRecyclerView: RecyclerView
     private val mList = ArrayList<ButtonBean>()
     private lateinit var mCommonAdapter: EnterListAdapterV2
-
+    private val permissions = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE)
 
     override fun getLayoutId(): Int {
         return R.layout.activity_main
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun initView() {
         mRecyclerView = recycler_view
         test_dialog.setOnClickListener {
@@ -55,6 +62,56 @@ class MainActivity : BaseActivity() {
         test_entry.setOnClickListener {
             startActivity<TestActivity> { }
         }
+        val isAllGranted = checkPermissionAllGranted(permissions);
+        if (isAllGranted) {
+            //Log.e("err","所有权限已经授权！");
+            "Got permission".showToast()
+            return;
+        }
+        // 一次请求多个权限, 如果其他有权限是已经授予的将会自动忽略掉
+        ActivityCompat.requestPermissions(this,
+                permissions, 1);
+    }
+
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            1 -> {
+                var isAllGranted = true
+                // 判断是否所有的权限都已经授予了
+                for (grant in grantResults) {
+                    if (grant != PackageManager.PERMISSION_GRANTED) {
+                        isAllGranted = false
+                        break
+                    }
+                }
+                if (isAllGranted) {
+                    // 所有的权限都授予了
+                    Log.e("err", "权限都授权了");
+                    "权限都有".showToast()
+                }
+            }
+            else -> {
+                // 弹出对话框告诉用户需要权限的原因, 并引导用户去应用权限管理中手动打开权限按钮
+                //容易判断错
+                //MyDialog("提示", "某些权限未开启,请手动开启", 1) ;
+            }
+        }
+    }
+
+    /**
+     * 检查是否拥有指定的所有权限
+     */
+    private fun checkPermissionAllGranted(permissions: Array<String>): Boolean {
+        for (permission in permissions) {
+            if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+                // 只要有一个权限没有被授予, 则直接返回 false
+                //Log.e("err","权限"+permission+"没有授权");
+                return false
+            }
+        }
+        return true
     }
 
     override fun initData() {
