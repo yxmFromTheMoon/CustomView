@@ -37,8 +37,8 @@ class MainActivity : BaseActivity() {
             val dialog = AlertDialog.Builder(this)
                     .setContentView(R.layout.dialog_test_view)
                     .setCancelable(true)
-                    .addDefaultAnimation()
-                    .setWidthAndHeight(300, 300)
+                    .fullWidth()
+                    .fromBottom(true)
                     .create()
             dialog.show()
             dialog.setText(R.id.test_tv, "Test")
@@ -48,12 +48,6 @@ class MainActivity : BaseActivity() {
             dialog.setOnClickListener(R.id.test_tv, View.OnClickListener {
                 "Test".showToast()
             })
-        }
-        val a = DefaultNavigationBarJava.Builder(this, view_group)
-                .setTitle("测试测试")
-                .builder()
-        test_entry.setOnClickListener {
-            startActivity<TestActivity> { }
         }
     }
 

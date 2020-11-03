@@ -60,7 +60,7 @@ abstract class RetrofitCallback<T> : Callback<BaseResponse<T>> {
         }
     }
 
-    abstract fun onSuccess(result: T?)
+    abstract fun onSuccess(result: T)
 
     abstract fun onFailure(msg: String, code: Int)
 }

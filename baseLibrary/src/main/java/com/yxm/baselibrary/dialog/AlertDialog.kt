@@ -121,6 +121,11 @@ class AlertDialog(context: Context, themeResId: Int) : Dialog(context, themeResI
             return this
         }
 
+        fun fullHeight(): Builder {
+            P!!.mHeight = WindowManager.LayoutParams.MATCH_PARENT
+            return this
+        }
+
         /**
          * 设置宽高
          * @param width
