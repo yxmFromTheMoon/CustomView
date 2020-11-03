@@ -24,7 +24,7 @@ object Repository {
             block()
         } catch (e: Exception) {
             Log.d("test", e.message)
-            Result.failure(e)
+            Result.failure<T>(e)
         }
         emit(result)
     }
