@@ -10,7 +10,17 @@ import android.database.sqlite.SQLiteDatabase
  */
 interface IDaoSupport<T> {
 
-    fun insert(data: T):Int
+    fun insert(data: T): Long
 
-    fun init(sqlSQLiteDatabase: SQLiteDatabase,clazz: Class<T>)
+    fun init(sqlSQLiteDatabase: SQLiteDatabase, clazz: Class<T>)
+
+    fun insert(datas: List<T>)
+
+    fun delete(whereClause: String, whereArgs: Array<String>): Int
+
+    fun update(obj: T, whereClause: String, vararg whereArgs: String): Int
+
+    fun query(): List<T>
+
+    fun query(columns: Array<String>, whereClause: String, whereArgs: Array<String>): List<T>
 }

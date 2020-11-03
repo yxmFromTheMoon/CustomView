@@ -2,6 +2,7 @@ package com.yxm.framelibrary.database
 
 import android.database.sqlite.SQLiteDatabase
 import android.os.Environment
+import com.yxm.baselibrary.net.User
 import java.io.File
 
 /**
@@ -17,9 +18,9 @@ object DaoSupportFactory {
     init {
         //别忘了动态申请读取权限
         val dbRoot = File(Environment.getExternalStorageDirectory()
-                .absolutePath + File.separator + "testdb" + File.separator + "database")
+                .absolutePath + File.separator + "test" + File.separator + "database")
         if (!dbRoot.exists()) {
-            dbRoot.mkdir()
+            dbRoot.mkdirs()
         }
         val dbFile = File(dbRoot, "test.db")
         //打开数据库
@@ -28,7 +29,7 @@ object DaoSupportFactory {
 
     fun <T> getDao(clazz: Class<T>): IDaoSupport<T> {
         val dao = DaoSupport<T>()
-        dao.init(mSqlSQLiteDatabase,clazz)
+        dao.init(mSqlSQLiteDatabase, clazz)
         return DaoSupport()
     }
 }

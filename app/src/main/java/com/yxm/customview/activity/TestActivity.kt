@@ -4,8 +4,6 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.yxm.baselibrary.net.HttpUtils
-import com.yxm.baselibrary.net.RetrofitCallback
 import com.yxm.baselibrary.net.User
 import com.yxm.customview.R
 import com.yxm.customview.viewmodel.UserViewModel
@@ -26,19 +24,6 @@ class TestActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test)
         val db = DaoSupportFactory.getDao(User::class.java)
-        db.insert(User("", ",", ""))
-
-
-        HttpUtils.getUser1("yxmFromTheMoon").enqueue(object : RetrofitCallback<User>() {
-
-            override fun onFailure(msg: String, code: Int) {
-
-            }
-
-            override fun onSuccess(result: User?) {
-
-            }
-        })
-
+        db.insert(User("1", "2", "3"))
     }
 }
