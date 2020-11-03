@@ -5,6 +5,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import androidx.collection.ArrayMap
 import androidx.collection.arrayMapOf
+import com.yxm.framelibrary.database.curd.QuerySupport
 import java.lang.reflect.Method
 import java.util.*
 import kotlin.collections.ArrayList
@@ -20,6 +21,7 @@ class DaoSupport<T> : IDaoSupport<T> {
     private lateinit var mSqlSQLiteDatabase: SQLiteDatabase
     private lateinit var mClazz: Class<T>
     private val mPutMethodArgs = arrayOfNulls<Any>(2)
+    private var mQuerySupport: QuerySupport<T>? = null
 
     private var mPutMethods: ArrayMap<String, Method?> = arrayMapOf()
 
@@ -30,7 +32,7 @@ class DaoSupport<T> : IDaoSupport<T> {
         val sb = StringBuffer()
         val sql = sb.append("create table if not exists ")
                 .append(mClazz.simpleName)
-                .append("(idkey integer primary key autoincrement, ")
+                .append("(id integer primary key autoincrement, ")
 
         //获取该类的所有属性
         val fields = mClazz.declaredFields
@@ -86,85 +88,11 @@ class DaoSupport<T> : IDaoSupport<T> {
                 values, whereClause, whereArgs)
     }
 
-    /**
-     * 查询所有
-     */
-    override fun query(): List<T> {
-        val cursor: Cursor = mSqlSQLiteDatabase.query(DaoUtils.getTableName(mClazz),
-                null, null, null, null, null, null)
-        return cursorToList(cursor)
-    }
-
-    /**
-     * 按条件查询，后续还可以增加多个重载方法
-     * todo
-     */
-    override fun query(columns: Array<String>, whereClause: String, whereArgs: Array<String>): List<T> {
-        val cursor = mSqlSQLiteDatabase.query(mClazz.simpleName, columns,
-                whereClause, whereArgs, null, null, null, null)
-        return cursorToList(cursor)
-    }
-
-    private fun cursorToList(cursor: Cursor?): List<T> {
-        val list = ArrayList<T>()
-        if (cursor != null && cursor.moveToFirst()) {
-            // 不断的从游标里面获取数据
-            do {
-                try {
-                    val instance = mClazz.newInstance()
-                    val fields = mClazz.declaredFields
-                    for (field in fields) {
-                        // 遍历属性
-                        field.isAccessible = true
-                        val name = field.name
-                        // 获取角标  获取在第几列
-                        val index = cursor.getColumnIndex(name)
-                        if (index == -1) {
-                            continue
-                        }
-                        // 通过反射获取 游标的方法  field.getType() -> 获取的类型
-                        val cursorMethod = cursorMethod(field.type)
-                        if (cursorMethod != null) {
-                            // 通过反射获取了 value
-                            var value: Any? = cursorMethod.invoke(cursor, index) ?: continue
-
-                            // 处理一些特殊的部分
-                            if (field.type === Boolean::class.javaPrimitiveType || field.type === Boolean::class.java) {
-                                if ("0" == value.toString()) {
-                                    value = false
-                                } else if ("1" == value.toString()) {
-                                    value = true
-                                }
-                            } else if (field.type === Char::class.javaPrimitiveType || field.type === Char::class.java) {
-                                value = (value as String)[0]
-                            } else if (field.type === Date::class.java) {
-                                val date = value as Long
-                                if (date <= 0) {
-                                    value = null
-                                } else {
-                                    value = Date(date)
-                                }
-                            }
-                            // 通过反射注入
-                            field.set(instance, value)
-                        }
-                    }
-                    // 加入集合
-                    list.add(instance);
-                } catch (e: java.lang.Exception) {
-                    e.printStackTrace()
-                }
-            } while (cursor.moveToNext())
+    override fun querySupport(): QuerySupport<T> {
+        if (mQuerySupport == null) {
+            mQuerySupport = QuerySupport(mSqlSQLiteDatabase, mClazz)
         }
-        return list
-    }
-
-    // 获取游标的方法
-    @Throws(java.lang.Exception::class)
-    private fun cursorMethod(type: Class<*>): Method? {
-        val methodName = getColumnMethodName(type)
-        // type String getString(index); int getInt; boolean getBoolean
-        return Cursor::class.java.getMethod(methodName!!, Int::class.javaPrimitiveType)
+        return mQuerySupport as QuerySupport<T>
     }
 
     //obj转成contentValues
@@ -206,27 +134,5 @@ class DaoSupport<T> : IDaoSupport<T> {
             }
         }
         return values
-    }
-
-    /**
-     * 获取游标方法名
-     */
-    private fun getColumnMethodName(fieldType: Class<*>): String? {
-        val typeName = if (fieldType.isPrimitive) {
-            DaoUtils.capitalize(fieldType.name)
-        } else {
-            fieldType.simpleName
-        }
-        var methodName = "get$typeName"
-        if ("getBoolean" == methodName) {
-            methodName = "getInt"
-        } else if ("getChar" == methodName || "getCharacter" == methodName) {
-            methodName = "getString"
-        } else if ("getDate" == methodName) {
-            methodName = "getLong"
-        } else if ("getInteger" == methodName) {
-            methodName = "getInt"
-        }
-        return methodName
     }
 }

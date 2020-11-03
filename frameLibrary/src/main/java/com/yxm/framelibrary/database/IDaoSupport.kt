@@ -1,6 +1,7 @@
 package com.yxm.framelibrary.database
 
 import android.database.sqlite.SQLiteDatabase
+import com.yxm.framelibrary.database.curd.QuerySupport
 
 /**
  * @author yxm
@@ -20,7 +21,6 @@ interface IDaoSupport<T> {
 
     fun update(obj: T, whereClause: String, vararg whereArgs: String): Int
 
-    fun query(): List<T>
-
-    fun query(columns: Array<String>, whereClause: String, whereArgs: Array<String>): List<T>
+    //获取查询帮助类
+    fun querySupport(): QuerySupport<T>
 }

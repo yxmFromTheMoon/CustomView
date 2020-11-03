@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.yxm.baselibrary.net.User
 import com.yxm.customview.R
 import com.yxm.customview.viewmodel.UserViewModel
+import com.yxm.framelibrary.Person
 import com.yxm.framelibrary.database.DaoSupportFactory
 
 /**
@@ -23,7 +24,9 @@ class TestActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test)
-        val db = DaoSupportFactory.getDao(User::class.java)
-        db.insert(User("1", "2", "3"))
+        val person = Person("1", 18)
+        val list = DaoSupportFactory.getDao(Person::class.java).querySupport()
+                .selection("age=?").selectionArgs("18").query()
+
     }
 }

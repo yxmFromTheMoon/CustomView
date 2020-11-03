@@ -30,6 +30,6 @@ object DaoSupportFactory {
     fun <T> getDao(clazz: Class<T>): IDaoSupport<T> {
         val dao = DaoSupport<T>()
         dao.init(mSqlSQLiteDatabase, clazz)
-        return DaoSupport()
+        return dao
     }
 }
