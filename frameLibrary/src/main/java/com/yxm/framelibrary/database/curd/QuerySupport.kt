@@ -58,8 +58,20 @@ class QuerySupport<T>(private val sqlSQLiteDatabase: SQLiteDatabase, private val
     }
 
     fun query(): List<T> {
-        return cursorToList(sqlSQLiteDatabase.query(mClazz.simpleName, mColumns, mSelection,
-                mSelectionArgs, mGroupBy, mHaving, mOrderBy, mLimit))
+        val cursor = sqlSQLiteDatabase.query(mClazz.simpleName, mColumns, mSelection,
+                mSelectionArgs, mGroupBy, mHaving, mOrderBy, mLimit)
+        clearQueryParams()
+        return cursorToList(cursor)
+    }
+
+    private fun clearQueryParams() {
+        mColumns = null
+        mSelection = null
+        mSelectionArgs = null
+        mGroupBy = null
+        mHaving = null
+        mOrderBy = null
+        mLimit = null
     }
 
     private fun cursorToList(cursor: Cursor?): List<T> {
@@ -107,7 +119,7 @@ class QuerySupport<T>(private val sqlSQLiteDatabase: SQLiteDatabase, private val
                         }
                     }
                     // 加入集合
-                    list.add(instance);
+                    list.add(instance)
                 } catch (e: java.lang.Exception) {
                     e.printStackTrace()
                 }

@@ -4,11 +4,16 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import com.yxm.baselibrary.net.HttpUtils
 import com.yxm.baselibrary.net.User
 import com.yxm.customview.R
 import com.yxm.customview.viewmodel.UserViewModel
 import com.yxm.framelibrary.Person
+import com.yxm.framelibrary.database.DaoSupport
 import com.yxm.framelibrary.database.DaoSupportFactory
+import com.yxm.framelibrary.database.IDaoSupport
+import kotlinx.coroutines.launch
 
 /**
  * @author yxm
@@ -19,14 +24,16 @@ import com.yxm.framelibrary.database.DaoSupportFactory
 class TestActivity : AppCompatActivity() {
 
     private val mViewModel by viewModels<UserViewModel>()
+    private lateinit var mDaoSupport: IDaoSupport<User>
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test)
-        val person = Person("1", 18)
-        val list = DaoSupportFactory.getDao(Person::class.java).querySupport()
-                .selection("age=?").selectionArgs("18").query()
+        mDaoSupport = DaoSupportFactory.getDao(User::class.java)
+        lifecycleScope.launch {
+            val user = HttpUtils.getUser("yxmFromTheMoon")
 
+        }
     }
 }
