@@ -2,6 +2,7 @@ package com.yxm.customview.activity
 
 import com.yxm.customview.R
 import com.yxm.baselibrary.base.BaseActivity
+import com.yxm.framelibrary.BaseSkinActivity
 
 /**
  * @Author yxm
@@ -9,7 +10,7 @@ import com.yxm.baselibrary.base.BaseActivity
  * 2020/6/27 13:06
  * @Description
  */
-class RatingBarActivity: BaseActivity() {
+class RatingBarActivity: BaseSkinActivity() {
 
     override fun getLayoutId(): Int {
         return R.layout.activity_rating_bar

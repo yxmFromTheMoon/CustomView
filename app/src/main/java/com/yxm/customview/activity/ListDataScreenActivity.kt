@@ -4,6 +4,7 @@ import com.yxm.customview.R
 import com.yxm.baselibrary.base.BaseActivity
 import com.yxm.customview.view.ListDataScreenView
 import com.yxm.customview.view.ListMenuAdapter
+import com.yxm.framelibrary.BaseSkinActivity
 import kotlinx.android.synthetic.main.activity_list_data_screen.*
 
 /**
@@ -12,7 +13,7 @@ import kotlinx.android.synthetic.main.activity_list_data_screen.*
  * 2020/8/30 16:34
  * @description
  */
-class ListDataScreenActivity : BaseActivity() {
+class ListDataScreenActivity : BaseSkinActivity() {
 
     private lateinit var mListDataView: ListDataScreenView
 

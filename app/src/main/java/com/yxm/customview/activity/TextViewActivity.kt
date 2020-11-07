@@ -7,6 +7,7 @@ import com.yxm.baselibrary.ioc.OnClick
 import com.yxm.baselibrary.ioc.ViewById
 import com.yxm.customview.showToast
 import com.yxm.customview.view.TextView
+import com.yxm.framelibrary.BaseSkinActivity
 import kotlinx.android.synthetic.main.activity_text_view.*
 
 /**
@@ -15,7 +16,7 @@ import kotlinx.android.synthetic.main.activity_text_view.*
  * 2020/6/27 13:04
  * @Description
  */
-class TextViewActivity : BaseActivity() {
+class TextViewActivity : BaseSkinActivity() {
 
     @ViewById(R.id.text_view)
     private lateinit var mTextView:TextView

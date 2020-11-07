@@ -5,6 +5,7 @@ import com.yxm.customview.R
 import com.yxm.baselibrary.base.BaseActivity
 import com.yxm.customview.utils.Utils
 import com.yxm.customview.view.CircleProgressView
+import com.yxm.framelibrary.BaseSkinActivity
 import kotlinx.android.synthetic.main.activity_circle_progress.*
 
 /**
@@ -13,7 +14,7 @@ import kotlinx.android.synthetic.main.activity_circle_progress.*
  * 2020/6/27 13:57
  * @Description
  */
-class CircleProgressViewActivity: BaseActivity() {
+class CircleProgressViewActivity: BaseSkinActivity() {
 
     private lateinit var circleProgressView:CircleProgressView
 

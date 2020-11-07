@@ -10,4 +10,10 @@
         android:layout_centerInParent="true"
         android:text="测试" />
 
+    <ImageView
+        android:id="@+id/test_iv"
+        android:src="@drawable/ic_back_pressed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
 </RelativeLayout>

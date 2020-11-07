@@ -4,6 +4,7 @@ import android.widget.Button
 import com.yxm.customview.R
 import com.yxm.baselibrary.base.BaseActivity
 import com.yxm.customview.view.CheckView
+import com.yxm.framelibrary.BaseSkinActivity
 import kotlinx.android.synthetic.main.activity_check_view.*
 
 /**
@@ -12,7 +13,7 @@ import kotlinx.android.synthetic.main.activity_check_view.*
  * 2020/6/27 13:04
  * @Description
  */
-class CheckViewActivity: BaseActivity() {
+class CheckViewActivity: BaseSkinActivity() {
 
     private lateinit var checkView:CheckView
     private lateinit var testButton: Button

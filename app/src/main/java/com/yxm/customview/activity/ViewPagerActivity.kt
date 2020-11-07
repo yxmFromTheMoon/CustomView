@@ -11,6 +11,7 @@ import androidx.viewpager.widget.ViewPager
 import com.yxm.customview.fragment.ItemFragment
 import com.yxm.customview.R
 import com.yxm.customview.view.ColorTrackTextView
+import com.yxm.framelibrary.BaseSkinActivity
 import kotlinx.android.synthetic.main.activity_view_pager.*
 import java.lang.Exception
 
@@ -20,18 +21,27 @@ import java.lang.Exception
  * 2020/6/20 14:02
  * @Description
  */
-class ViewPagerActivity : AppCompatActivity() {
+class ViewPagerActivity : BaseSkinActivity() {
 
     private val titles = arrayOf("直播", "搞笑", "音乐", "影视", "图片")
     private lateinit var viewPager: ViewPager
     private lateinit var mIndicatorsContainer: LinearLayout
     private var mIndicators: MutableList<ColorTrackTextView> = ArrayList()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_view_pager)
+    override fun getLayoutId(): Int {
+        return R.layout.activity_view_pager
+    }
+
+    override fun initView() {
         viewPager = view_pager
         mIndicatorsContainer = indicator_view
+    }
+
+    override fun initListener() {
+
+    }
+
+    override fun initData() {
         initIndicator()
         initAdapter()
     }

@@ -8,6 +8,7 @@ import com.yxm.baselibrary.base.BaseActivity
 import com.yxm.customview.enter.ButtonBean
 import com.yxm.customview.enter.EnterListAdapter
 import com.yxm.customview.showToast
+import com.yxm.framelibrary.BaseSkinActivity
 import kotlinx.android.synthetic.main.activity_vertical_drag_list_view.*
 import java.util.ArrayList
 
@@ -17,7 +18,7 @@ import java.util.ArrayList
  * 2020/7/18 18:23
  * @description
  */
-class VerticalDragListViewActivity : BaseActivity() {
+class VerticalDragListViewActivity : BaseSkinActivity() {
 
     private lateinit var mRv: RecyclerView
     private var mAdapter: EnterListAdapter? = null

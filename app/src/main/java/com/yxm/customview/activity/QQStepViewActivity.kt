@@ -5,6 +5,7 @@ import com.yxm.customview.R
 import com.yxm.baselibrary.base.BaseActivity
 import com.yxm.customview.utils.Utils
 import com.yxm.customview.view.QQStepView
+import com.yxm.framelibrary.BaseSkinActivity
 import kotlinx.android.synthetic.main.activity_qq_step_view.*
 
 /**
@@ -13,7 +14,7 @@ import kotlinx.android.synthetic.main.activity_qq_step_view.*
  * 2020/6/27 13:06
  * @Description
  */
-class QQStepViewActivity: BaseActivity() {
+class QQStepViewActivity: BaseSkinActivity() {
 
     private lateinit var qqStepView: QQStepView
 

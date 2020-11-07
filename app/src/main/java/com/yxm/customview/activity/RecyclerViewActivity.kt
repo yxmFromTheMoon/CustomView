@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.yxm.customview.R
 import com.yxm.baselibrary.base.BaseActivity
 import com.yxm.baselibrary.recyclerview.GridItemDecoration
+import com.yxm.framelibrary.BaseSkinActivity
 import kotlinx.android.synthetic.main.activity_recyclerview.*
 
 /**
@@ -18,7 +19,7 @@ import kotlinx.android.synthetic.main.activity_recyclerview.*
  * 2020/9/9 20:31
  * @description
  */
-class RecyclerViewActivity : BaseActivity() {
+class RecyclerViewActivity : BaseSkinActivity() {
 
     private lateinit var mRv: RecyclerView
     private lateinit var mData: ArrayList<String>

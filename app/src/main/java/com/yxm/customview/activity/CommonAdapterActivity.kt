@@ -3,6 +3,7 @@ package com.yxm.customview.activity
 import androidx.recyclerview.widget.RecyclerView
 import com.yxm.customview.R
 import com.yxm.baselibrary.base.BaseActivity
+import com.yxm.framelibrary.BaseSkinActivity
 import kotlinx.android.synthetic.main.activity_common_adapter.*
 
 /**
@@ -10,7 +11,7 @@ import kotlinx.android.synthetic.main.activity_common_adapter.*
  *@time 2020/9/16 3:56 PM
  *@description 万能adapter测试
  */
-class CommonAdapterActivity: BaseActivity() {
+class CommonAdapterActivity: BaseSkinActivity() {
 
     private lateinit var mRv:RecyclerView
 

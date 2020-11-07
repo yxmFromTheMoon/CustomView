@@ -7,6 +7,7 @@ import com.yxm.baselibrary.ioc.OnClick
 import com.yxm.customview.bezier.BubbleViewTouchListener
 import com.yxm.customview.bezier.MessageBubbleView
 import com.yxm.customview.showToast
+import com.yxm.framelibrary.BaseSkinActivity
 import kotlinx.android.synthetic.main.activity_bezier.*
 
 /**
@@ -14,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_bezier.*
  *@time 2020/9/16 3:57 PM
  *@description 贝塞尔曲线
  */
-class BezierActivity : BaseActivity() {
+class BezierActivity : BaseSkinActivity() {
 
     private lateinit var mTv: TextView
 

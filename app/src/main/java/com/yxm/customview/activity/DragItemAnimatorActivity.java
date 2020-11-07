@@ -20,6 +20,7 @@ import com.yxm.baselibrary.imageloader.ImageLoaderUtils;
 import com.yxm.baselibrary.recyclerview.CommonRecyclerAdapter;
 import com.yxm.baselibrary.recyclerview.ViewHolder;
 import com.yxm.customview.R;
+import com.yxm.framelibrary.BaseSkinActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -31,18 +32,25 @@ import java.util.List;
  * Description:  列表条目拖动排序和删除
  */
 
-public class DragItemAnimatorActivity extends AppCompatActivity {
+public class DragItemAnimatorActivity extends BaseSkinActivity {
     private RecyclerView mRecyclerView;
     private HomeAdapter mAdapter;
 
     private List<ItemBean> mItems = new ArrayList<ItemBean>();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recycler_view);
-        initData();
-        mRecyclerView = findViewById(R.id.recycler_view);
+    public void initData() {
+        for (int i = 0; i < 3; i++) {
+            mItems.add(new ItemBean(i * 8, "收款", R.drawable.takeout_ic_category_brand));
+            mItems.add(new ItemBean(i * 8 + 1, "转账", R.drawable.takeout_ic_category_flower));
+            mItems.add(new ItemBean(i * 8 + 2, "余额宝", R.drawable.takeout_ic_category_fruit));
+            mItems.add(new ItemBean(i * 8 + 3, "手机充值", R.drawable.takeout_ic_category_medicine));
+            mItems.add(new ItemBean(i * 8 + 4, "医疗", R.drawable.takeout_ic_category_motorcycle));
+            mItems.add(new ItemBean(i * 8 + 5, "彩票", R.drawable.takeout_ic_category_public));
+            mItems.add(new ItemBean(i * 8 + 6, "电影", R.drawable.takeout_ic_category_store));
+            mItems.add(new ItemBean(i * 8 + 7, "游戏", R.drawable.takeout_ic_category_sweet));
+        }
+
         mAdapter = new HomeAdapter(this, mItems);
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 4));
         mRecyclerView.setAdapter(mAdapter);
@@ -119,7 +127,6 @@ public class DragItemAnimatorActivity extends AppCompatActivity {
                 }
             }
 
-
             /**
              * 回到正常状态的时候回调
              */
@@ -132,20 +139,6 @@ public class DragItemAnimatorActivity extends AppCompatActivity {
         });
         // 这个就不多解释了，就这么attach
         itemTouchHelper.attachToRecyclerView(mRecyclerView);
-    }
-
-    protected void initData() {
-        for (int i = 0; i < 3; i++) {
-            mItems.add(new ItemBean(i * 8, "收款", R.drawable.takeout_ic_category_brand));
-            mItems.add(new ItemBean(i * 8 + 1, "转账", R.drawable.takeout_ic_category_flower));
-            mItems.add(new ItemBean(i * 8 + 2, "余额宝", R.drawable.takeout_ic_category_fruit));
-            mItems.add(new ItemBean(i * 8 + 3, "手机充值", R.drawable.takeout_ic_category_medicine));
-            mItems.add(new ItemBean(i * 8 + 4, "医疗", R.drawable.takeout_ic_category_motorcycle));
-            mItems.add(new ItemBean(i * 8 + 5, "彩票", R.drawable.takeout_ic_category_public));
-            mItems.add(new ItemBean(i * 8 + 6, "电影", R.drawable.takeout_ic_category_store));
-            mItems.add(new ItemBean(i * 8 + 7, "游戏", R.drawable.takeout_ic_category_sweet));
-        }
-        //mItems.add(new ItemBean(mItems.size(), "更多", R.drawable.takeout_ic_more));
     }
 
     @Override
@@ -165,6 +158,21 @@ public class DragItemAnimatorActivity extends AppCompatActivity {
                 break;
         }
         return true;
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_recycler_view;
+    }
+
+    @Override
+    public void initView() {
+        mRecyclerView = findViewById(R.id.recycler_view);
+    }
+
+    @Override
+    public void initListener() {
+
     }
 
     static class HomeAdapter extends CommonRecyclerAdapter<ItemBean> {

@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.yxm.customview.R;
+import com.yxm.framelibrary.BaseSkinActivity;
 
 import java.lang.ref.WeakReference;
 
@@ -21,12 +22,12 @@ import java.lang.ref.WeakReference;
  *
  * @function
  */
-public class HandlerActivity extends AppCompatActivity {
+public class HandlerActivity extends BaseSkinActivity {
 
     private MyHandler mHandler = new MyHandler(this);
 
 
-    private Handler handler = new Handler(){
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
@@ -55,14 +56,14 @@ public class HandlerActivity extends AppCompatActivity {
 
     private Handler handler1;
 
-    private void createHandlerInWorkThread(){
-        new Thread(() ->{
+    private void createHandlerInWorkThread() {
+        new Thread(() -> {
             Looper.prepare();
-            Handler handler1 = new Handler(){
+            Handler handler1 = new Handler() {
                 @Override
                 public void handleMessage(Message msg) {
                     super.handleMessage(msg);
-                    Toast.makeText(HandlerActivity.this, (String)msg.obj, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(HandlerActivity.this, (String) msg.obj, Toast.LENGTH_SHORT).show();
                 }
             };
         }).start();
@@ -85,10 +86,22 @@ public class HandlerActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_handler_test);
+    public int getLayoutId() {
+        return R.layout.activity_handler_test;
+    }
+
+    @Override
+    public void initView() {
         mTextView = findViewById(R.id.text);
+    }
+
+    @Override
+    public void initListener() {
+
+    }
+
+    @Override
+    public void initData() {
         createHandlerInWorkThread();
     }
 

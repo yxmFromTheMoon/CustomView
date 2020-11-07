@@ -20,12 +20,13 @@ import com.yxm.customview.R
 import com.yxm.customview.activity.*
 import com.yxm.customview.showToast
 import com.yxm.customview.startActivity
+import com.yxm.framelibrary.BaseSkinActivity
 import com.yxm.framelibrary.DefaultNavigationBarJava
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 
-class MainActivity : BaseActivity() {
+class MainActivity : BaseSkinActivity() {
 
     private lateinit var mRecyclerView: RecyclerView
     private val mList = ArrayList<ButtonBean>()
@@ -40,32 +41,29 @@ class MainActivity : BaseActivity() {
     @RequiresApi(Build.VERSION_CODES.M)
     override fun initView() {
         mRecyclerView = recycler_view
-        test_dialog.setOnClickListener {
-            val dialog = AlertDialog.Builder(this)
-                    .setContentView(R.layout.dialog_test_view)
-                    .setCancelable(true)
-                    .addDefaultAnimation()
-                    .setWidthAndHeight(300, 300)
-                    .create()
-            dialog.show()
-            dialog.setText(R.id.test_tv, "Test")
-//            dialog.setOnClickListener(R.id.test_tv) {
+//        test_dialog.setOnClickListener {
+//            val dialog = AlertDialog.Builder(this)
+//                    .setContentView(R.layout.dialog_test_view)
+//                    .setCancelable(true)
+//                    .addDefaultAnimation()
+//                    .setWidthAndHeight(300, 300)
+//                    .create()
+//            dialog.show()
+//            dialog.setText(R.id.test_tv, "Test")
+//
+//            dialog.setOnClickListener(R.id.test_tv, View.OnClickListener {
 //                "Test".showToast()
-//            }
-            dialog.setOnClickListener(R.id.test_tv, View.OnClickListener {
-                "Test".showToast()
-            })
-        }
+//            })
+//        }
         val a = DefaultNavigationBarJava.Builder(this, view_group)
                 .setTitle("测试测试")
                 .builder()
-        test_entry.setOnClickListener {
-            startActivity<TestActivity> { }
-        }
+//        test_entry.setOnClickListener {
+//            startActivity<TestActivity> { }
+//        }
         val isAllGranted = checkPermissionAllGranted(permissions);
         if (isAllGranted) {
             //Log.e("err","所有权限已经授权！");
-            "Got permission".showToast()
             return;
         }
         // 一次请求多个权限, 如果其他有权限是已经授予的将会自动忽略掉

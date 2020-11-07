@@ -4,6 +4,7 @@ import com.yxm.customview.R
 import com.yxm.baselibrary.base.BaseActivity
 import com.yxm.customview.data.PieData
 import com.yxm.customview.view.PieView
+import com.yxm.framelibrary.BaseSkinActivity
 import kotlinx.android.synthetic.main.activity_pie_view.*
 
 /**
@@ -12,7 +13,7 @@ import kotlinx.android.synthetic.main.activity_pie_view.*
  * 2020/6/27 13:06
  * @Description
  */
-class PieViewActivity : BaseActivity(){
+class PieViewActivity : BaseSkinActivity(){
 
     private lateinit var pieView:PieView
 

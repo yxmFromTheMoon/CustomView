@@ -6,6 +6,7 @@ import com.yxm.baselibrary.base.BaseActivity
 import com.yxm.customview.gone
 import com.yxm.customview.view.LetterSideBar
 import com.yxm.customview.visible
+import com.yxm.framelibrary.BaseSkinActivity
 import kotlinx.android.synthetic.main.activity_letter_side_bar.*
 
 /**
@@ -14,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_letter_side_bar.*
  * 2020/7/4 16:13
  * @description
  */
-class LetterSideBarActivity : BaseActivity() {
+class LetterSideBarActivity : BaseSkinActivity() {
 
     private lateinit var mLetterTv:TextView
     private lateinit var mLetterSideBar: LetterSideBar
