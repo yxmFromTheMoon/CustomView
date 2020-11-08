@@ -45,6 +45,8 @@ abstract class BaseSkinActivity : BaseActivity(), LayoutInflater.Factory2 {
             val skinView = SkinView(view, skinAttrs)
             //3.统一交给SkinManager处理
             managerSkinView(skinView)
+            //4.要不要换肤
+            SkinManager.checkChangeSkin(skinView)
         }
 
         Log.d("SkinView", "${view}")
