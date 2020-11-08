@@ -41,36 +41,14 @@ class MainActivity : BaseSkinActivity() {
     @RequiresApi(Build.VERSION_CODES.M)
     override fun initView() {
         mRecyclerView = recycler_view
-//        test_dialog.setOnClickListener {
-//            val dialog = AlertDialog.Builder(this)
-//                    .setContentView(R.layout.dialog_test_view)
-//                    .setCancelable(true)
-//                    .addDefaultAnimation()
-//                    .setWidthAndHeight(300, 300)
-//                    .create()
-//            dialog.show()
-//            dialog.setText(R.id.test_tv, "Test")
-//
-//            dialog.setOnClickListener(R.id.test_tv, View.OnClickListener {
-//                "Test".showToast()
-//            })
-//        }
-        val a = DefaultNavigationBarJava.Builder(this, view_group)
-                .setTitle("测试测试")
-                .builder()
-//        test_entry.setOnClickListener {
-//            startActivity<TestActivity> { }
-//        }
-        val isAllGranted = checkPermissionAllGranted(permissions);
+        val isAllGranted = checkPermissionAllGranted(permissions)
         if (isAllGranted) {
-            //Log.e("err","所有权限已经授权！");
-            return;
+            return
         }
         // 一次请求多个权限, 如果其他有权限是已经授予的将会自动忽略掉
         ActivityCompat.requestPermissions(this,
-                permissions, 1);
+                permissions, 1)
     }
-
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)

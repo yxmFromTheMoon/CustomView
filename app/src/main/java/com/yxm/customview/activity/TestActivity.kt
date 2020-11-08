@@ -14,6 +14,7 @@ import com.yxm.baselibrary.net.HttpUtils
 import com.yxm.baselibrary.net.User
 import com.yxm.customview.R
 import com.yxm.customview.viewmodel.UserViewModel
+import com.yxm.framelibrary.BaseSkinActivity
 import com.yxm.framelibrary.Person
 import com.yxm.framelibrary.database.DaoSupport
 import com.yxm.framelibrary.database.DaoSupportFactory
@@ -29,23 +30,22 @@ import java.lang.Exception
  * 2020/10/21 20:33
  * @description
  */
-class TestActivity : AppCompatActivity() {
+class TestActivity : BaseSkinActivity() {
 
-    private val mViewModel by viewModels<UserViewModel>()
-    private lateinit var mDaoSupport: IDaoSupport<User>
+    override fun getLayoutId(): Int {
+        return R.layout.activity_test
+    }
 
-    @SuppressLint("SetTextI18n")
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_test)
+    override fun initView() {
 
-        var view = View.inflate(this,R.layout.activity_main,null)
-        view = LayoutInflater.from(this).inflate(R.layout.activity_main,null)
-        view = LayoutInflater.from(this).inflate(R.layout.activity_main,null,false)
+    }
 
-        test_tv.setOnClickListener {
-            changeResource()
-        }
+    override fun initListener() {
+
+    }
+
+    override fun initData() {
+
     }
 
     @SuppressLint("UseCompatLoadingForDrawables", "DiscouragedPrivateApi")

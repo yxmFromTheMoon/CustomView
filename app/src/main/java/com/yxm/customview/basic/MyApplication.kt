@@ -5,6 +5,7 @@ import androidx.multidex.MultiDex
 import com.yxm.baselibrary.imageloader.CoilImageLoader
 import com.yxm.baselibrary.imageloader.ImageLoaderUtils
 import com.yxm.framelibrary.CrashExceptionHandler
+import com.yxm.framelibrary.skin.SkinManager
 
 /**
  * @Author yxm
@@ -18,6 +19,7 @@ class MyApplication : Application() {
         super.onCreate()
         INSTANCE = this
         CrashExceptionHandler.init(this)
+        SkinManager.init(this)
         ImageLoaderUtils.init(this)
         ImageLoaderUtils.setImageLoader(CoilImageLoader(this))
         MultiDex.install(this)
