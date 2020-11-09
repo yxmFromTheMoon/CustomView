@@ -17,7 +17,7 @@ import java.io.File
 object SkinManager {
 
     private lateinit var mContext: Context
-    private var mSkinViews: ArrayMap<Activity, MutableList<SkinView>> = ArrayMap()
+    private var mSkinViews: ArrayMap<ISkinChangeCallback, MutableList<SkinView>> = ArrayMap()
     private var mSkinResource: SkinResource? = null
 
     /**
@@ -117,8 +117,8 @@ object SkinManager {
      * @param activity Activity
      * @return List<SkinView>?
      */
-    fun getSkinViews(activity: Activity): MutableList<SkinView>? {
-        return mSkinViews[activity]
+    fun getSkinViews(skinChangeCallback: ISkinChangeCallback): MutableList<SkinView>? {
+        return mSkinViews[skinChangeCallback]
     }
 
     /**
@@ -126,8 +126,16 @@ object SkinManager {
      * @param activity Activity
      * @param skinViews MutableList<SkinView>
      */
-    fun register(activity: Activity, skinViews: MutableList<SkinView>) {
-        mSkinViews[activity] = skinViews
+    fun register(skinChangeCallback: ISkinChangeCallback, skinViews: MutableList<SkinView>) {
+        mSkinViews[skinChangeCallback] = skinViews
+    }
+
+    /**
+     * 防止类内泄漏
+     * @param skinChangeCallback ISkinChangeCallback
+     */
+    fun unregister(skinChangeCallback: ISkinChangeCallback) {
+        mSkinViews.remove(skinChangeCallback)
     }
 
     fun checkChangeSkin(skinView: SkinView) {

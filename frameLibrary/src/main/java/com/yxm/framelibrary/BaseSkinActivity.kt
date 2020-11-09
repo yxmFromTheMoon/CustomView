@@ -12,8 +12,10 @@ import android.view.ViewParent
 import androidx.core.view.LayoutInflaterCompat
 import androidx.core.view.ViewCompat
 import com.yxm.baselibrary.base.BaseActivity
+import com.yxm.framelibrary.skin.ISkinChangeCallback
 import com.yxm.framelibrary.skin.SkinAttrSupport
 import com.yxm.framelibrary.skin.SkinManager
+import com.yxm.framelibrary.skin.SkinResource
 import com.yxm.framelibrary.skin.attr.SkinAttr
 import com.yxm.framelibrary.skin.attr.SkinView
 import com.yxm.framelibrary.skin.support.SkinAppCompatViewInflater
@@ -24,7 +26,7 @@ import com.yxm.framelibrary.skin.support.SkinAppCompatViewInflater
  * 2020/11/4 21:35
  * @description
  */
-abstract class BaseSkinActivity : BaseActivity(), LayoutInflater.Factory2 {
+abstract class BaseSkinActivity : BaseActivity(), LayoutInflater.Factory2, ISkinChangeCallback {
 
     private var mSkinAppCompatViewInflater: SkinAppCompatViewInflater? = null
 
@@ -119,6 +121,16 @@ abstract class BaseSkinActivity : BaseActivity(), LayoutInflater.Factory2 {
             }
             parent = parent.getParent()
         }
+    }
+
+    //兼容第三方的自定义view，自己去处理一些属性，自己在用到自定义view的地方复写该方法
+    override fun onSkinChange(skinResource: SkinResource) {
+
+    }
+
+    override fun onDestroy() {
+        SkinManager.unregister(this)
+        super.onDestroy()
     }
 
 }

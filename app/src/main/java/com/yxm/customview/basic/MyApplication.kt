@@ -20,8 +20,8 @@ class MyApplication : Application() {
         super.onCreate()
         INSTANCE = this
         CrashExceptionHandler.init(this)
-        SkinManager.init(this)
         SkinPreUtils.init(this)
+        SkinManager.init(this)
         ImageLoaderUtils.init(this)
         ImageLoaderUtils.setImageLoader(CoilImageLoader(this))
         MultiDex.install(this)
