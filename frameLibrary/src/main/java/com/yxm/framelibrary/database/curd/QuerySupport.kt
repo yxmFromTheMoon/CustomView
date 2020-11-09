@@ -6,6 +6,7 @@ import com.yxm.framelibrary.database.DaoUtils
 import java.lang.reflect.Method
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.jvm.Throws
 
 /**
  * @author yxm
