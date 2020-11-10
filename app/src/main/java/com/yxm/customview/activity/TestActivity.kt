@@ -1,6 +1,7 @@
 package com.yxm.customview.activity
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.res.AssetManager
 import android.content.res.Resources
 import android.os.Bundle
@@ -20,6 +21,7 @@ import com.yxm.framelibrary.database.DaoSupport
 import com.yxm.framelibrary.database.DaoSupportFactory
 import com.yxm.framelibrary.database.IDaoSupport
 import com.yxm.framelibrary.pullalive.AliveJobService
+import com.yxm.framelibrary.pullalive.MessageService
 import kotlinx.android.synthetic.main.activity_test.*
 import kotlinx.coroutines.launch
 import java.io.File
@@ -35,7 +37,8 @@ class TestActivity : BaseSkinActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        AliveJobService.start(this)
+        //AliveJobService.start(this)
+        startService(Intent(this,MessageService::class.java))
     }
 
     override fun getLayoutId(): Int {

@@ -89,6 +89,15 @@
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
 
+        <service android:name="com.yxm.framelibrary.pullalive.GuardService"
+            android:process=":guardService"/>
+
+        <service android:name="com.yxm.framelibrary.pullalive.MessageService">
+            <intent-filter>
+                <action android:name="com.yxm.customview.message"/>
+            </intent-filter>
+        </service>
+
     </application>
 
 </manifest>
