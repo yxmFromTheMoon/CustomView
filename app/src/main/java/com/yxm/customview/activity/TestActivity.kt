@@ -19,6 +19,7 @@ import com.yxm.framelibrary.Person
 import com.yxm.framelibrary.database.DaoSupport
 import com.yxm.framelibrary.database.DaoSupportFactory
 import com.yxm.framelibrary.database.IDaoSupport
+import com.yxm.framelibrary.pullalive.AliveJobService
 import kotlinx.android.synthetic.main.activity_test.*
 import kotlinx.coroutines.launch
 import java.io.File
@@ -31,6 +32,11 @@ import java.lang.Exception
  * @description
  */
 class TestActivity : BaseSkinActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        AliveJobService.start(this)
+    }
 
     override fun getLayoutId(): Int {
         return R.layout.activity_test
