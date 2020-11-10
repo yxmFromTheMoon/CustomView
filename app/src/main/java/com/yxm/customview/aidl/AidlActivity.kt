@@ -1,4 +1,4 @@
-package com.yxm.customview.activity
+package com.yxm.customview.aidl
 
 import com.yxm.customview.R
 import com.yxm.framelibrary.BaseSkinActivity
@@ -6,13 +6,13 @@ import com.yxm.framelibrary.BaseSkinActivity
 /**
  * @author yxm
  * @email yxmbest@163.com
- * 2020/10/21 20:33
+ * 2020/11/9 20:18
  * @description
  */
-class TestActivity : BaseSkinActivity() {
+class AidlActivity:BaseSkinActivity() {
 
     override fun getLayoutId(): Int {
-        return R.layout.activity_test
+        return R.layout.activity_aidl
     }
 
     override fun initView() {
@@ -26,5 +26,4 @@ class TestActivity : BaseSkinActivity() {
     override fun initData() {
 
     }
-
 }
