@@ -27,17 +27,18 @@ class TestActivity : BaseSkinActivity() {
     }
 
     override fun initView() {
-        banner_vp.setAdapter(object : BannerAdapter() {
+        banner_view.setAdapter(object : BannerAdapter() {
             override fun getCount(): Int {
                 return mImageUrls.size
             }
 
             override fun getView(position: Int): View {
                 val imageView = ImageView(this@TestActivity)
+                imageView.scaleType = ImageView.ScaleType.FIT_XY
                 ImageLoaderUtils.displayImage(imageView, mImageUrls[position])
                 return imageView
             }
-        }).setInterpolator(AccelerateDecelerateInterpolator())
+        }).setInterpolator(AccelerateInterpolator())
                 .start()
 
     }

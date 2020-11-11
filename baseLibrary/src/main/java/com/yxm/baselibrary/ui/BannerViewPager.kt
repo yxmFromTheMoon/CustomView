@@ -32,7 +32,6 @@ class BannerViewPager @JvmOverloads constructor(context: Context, attributeSet: 
     private var mDuration = DEFAULT_SCROLL_DURATION
     private var mAutoPlay = true
     private var mInterpolator: Interpolator? = null
-    private val mContext = context
     private var mFirstLayout: Boolean = true
 
     init {
@@ -96,7 +95,7 @@ class BannerViewPager @JvmOverloads constructor(context: Context, attributeSet: 
      * 设置滚动时的差值器
      * @param interpolator Interpolator
      */
-    fun setInterpolator(interpolator: Interpolator):BannerViewPager {
+    fun setInterpolator(interpolator: Interpolator): BannerViewPager {
         mInterpolator = interpolator
         return this
     }
@@ -124,6 +123,10 @@ class BannerViewPager @JvmOverloads constructor(context: Context, attributeSet: 
             mHandler?.removeMessages(SCROLL_MESSAGE)
             mHandler?.sendEmptyMessageDelayed(SCROLL_MESSAGE, mDuration)
         }
+    }
+
+    fun getDuration(): Long {
+        return mDuration
     }
 
     /**
@@ -166,7 +169,7 @@ class BannerViewPager @JvmOverloads constructor(context: Context, attributeSet: 
         override fun instantiateItem(container: ViewGroup, position: Int): Any {
             //adapter设计模式让用户自定义
             //添加到viewpager里
-            val view = mBannerAdapter.getView(getRealPosition(true,position,mBannerAdapter.getCount()))
+            val view = mBannerAdapter.getView(getRealPosition(true, position, mBannerAdapter.getCount()))
             container.addView(view)
             return view
         }

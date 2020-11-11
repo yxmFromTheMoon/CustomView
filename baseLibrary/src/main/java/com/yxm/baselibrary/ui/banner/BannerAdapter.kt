@@ -12,5 +12,9 @@ abstract class BannerAdapter {
 
     abstract fun getView(position: Int): View
 
-    abstract fun getCount():Int
+    abstract fun getCount(): Int
+
+    open fun getBannerDesc(position: Int): String{
+        return ""
+    }
 }

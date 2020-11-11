@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="BannerView">
+        <attr name="indicatorGravity" format="enum">
+            <enum name="start" value="0" />
+            <enum name="center" value="1" />
+            <enum name="end" value="2" />
+        </attr>
+
+        <attr name="selectIndicatorDrawable" format="integer|reference" />
+        <attr name="normalIndicatorDrawable" format="integer|reference" />
+        <attr name="descTextColor" format="color" />
+        <attr name="descTextSize" format="dimension" />
+        <attr name="bottomBackground" format="color" />
+        <attr name="dotSize" format="dimension"/>
+        <attr name="dotDistance" format="dimension"/>
+    </declare-styleable>
+</resources>
