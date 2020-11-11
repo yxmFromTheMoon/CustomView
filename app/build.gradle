@@ -45,6 +45,7 @@ dependencies {
 
 
     api project(":frameLibrary")
+    implementation 'androidx.preference:preference:1.1.0'
 }
 repositories {
     mavenCentral()
