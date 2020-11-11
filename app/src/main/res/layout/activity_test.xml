@@ -4,15 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/user_pwd_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Password" />
-
-    <Button
-        android:id="@+id/user_name_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="UserName" />
+    <com.yxm.baselibrary.ui.BannerViewPager
+        android:id="@+id/banner_vp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>

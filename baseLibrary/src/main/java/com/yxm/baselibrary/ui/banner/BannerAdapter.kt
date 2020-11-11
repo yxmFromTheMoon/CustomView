@@ -1,4 +1,4 @@
-package com.yxm.baselibrary.ui
+package com.yxm.baselibrary.ui.banner
 
 import android.view.View
 
@@ -11,4 +11,6 @@ import android.view.View
 abstract class BannerAdapter {
 
     abstract fun getView(position: Int): View
+
+    abstract fun getCount():Int
 }
