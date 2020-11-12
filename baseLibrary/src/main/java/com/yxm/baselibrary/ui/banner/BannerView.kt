@@ -14,7 +14,6 @@ import android.widget.TextView
 import androidx.viewpager.widget.ViewPager
 import com.yxm.baselibrary.R
 import com.yxm.baselibrary.Utils
-import com.yxm.baselibrary.ui.BannerViewPager
 
 /**
  * @author yxm

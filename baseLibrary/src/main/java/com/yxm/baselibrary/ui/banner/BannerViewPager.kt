@@ -1,9 +1,7 @@
-package com.yxm.baselibrary.ui
+package com.yxm.baselibrary.ui.banner
 
 import android.app.Activity
-import android.app.Application
 import android.content.Context
-import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.os.Message
@@ -15,8 +13,6 @@ import android.view.animation.Interpolator
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.yxm.baselibrary.SimpleLifeCycleCallbacks
-import com.yxm.baselibrary.ui.banner.BannerAdapter
-import com.yxm.baselibrary.ui.banner.BannerScroll
 
 /**
  * @author yxm

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.yxm.baselibrary.ui.BannerViewPager
+    <com.yxm.baselibrary.ui.banner.BannerViewPager
         android:id="@+id/banner_vp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
