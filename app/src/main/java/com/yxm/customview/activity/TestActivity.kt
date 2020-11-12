@@ -1,5 +1,6 @@
 package com.yxm.customview.activity
 
+import android.media.Image
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.AccelerateInterpolator
@@ -32,9 +33,15 @@ class TestActivity : BaseSkinActivity() {
                 return mImageUrls.size
             }
 
-            override fun getView(position: Int): View {
-                val imageView = ImageView(this@TestActivity)
-                imageView.scaleType = ImageView.ScaleType.FIT_XY
+            override fun getView(position: Int, convertView: View?): View {
+                val imageView: ImageView?
+                if (convertView == null) {
+                    imageView = ImageView(this@TestActivity)
+                    imageView.scaleType = ImageView.ScaleType.FIT_XY
+                } else {
+                    imageView = convertView as ImageView
+                }
+
                 ImageLoaderUtils.displayImage(imageView, mImageUrls[position])
                 return imageView
             }

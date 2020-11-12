@@ -1,15 +1,20 @@
 package com.yxm.baselibrary.ui
 
+import android.app.Activity
+import android.app.Application
 import android.content.Context
+import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.os.Message
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Interpolator
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
+import com.yxm.baselibrary.SimpleLifeCycleCallbacks
 import com.yxm.baselibrary.ui.banner.BannerAdapter
 import com.yxm.baselibrary.ui.banner.BannerScroll
 
@@ -33,6 +38,7 @@ class BannerViewPager @JvmOverloads constructor(context: Context, attributeSet: 
     private var mAutoPlay = true
     private var mInterpolator: Interpolator? = null
     private var mFirstLayout: Boolean = true
+    private val mConvertViews = mutableListOf<View>()
 
     init {
         hookScroller()
@@ -77,6 +83,7 @@ class BannerViewPager @JvmOverloads constructor(context: Context, attributeSet: 
             if (msg.what == SCROLL_MESSAGE) {
                 currentItem += 1
                 start()
+                Log.d("test_scroll","scroll")
             }
         }
     }
@@ -109,15 +116,6 @@ class BannerViewPager @JvmOverloads constructor(context: Context, attributeSet: 
         return this
     }
 
-    /**
-     * 设置数据源
-     * @param datas List<String>
-     */
-    fun setData(datas: List<String>): BannerViewPager {
-        mData = datas
-        return this
-    }
-
     fun start() {
         if (mAutoPlay) {
             mHandler?.removeMessages(SCROLL_MESSAGE)
@@ -143,16 +141,31 @@ class BannerViewPager @JvmOverloads constructor(context: Context, attributeSet: 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
         hookFirstLayout()
+        (context as Activity).application.registerActivityLifecycleCallbacks(lifeCycleCallbacks)
     }
 
     override fun onDetachedFromWindow() {
-        super.onDetachedFromWindow()
         mHandler?.removeMessages(SCROLL_MESSAGE)
         mHandler = null
+        (context as Activity).application.unregisterActivityLifecycleCallbacks(lifeCycleCallbacks)
+        super.onDetachedFromWindow()
     }
 
     fun getRealPosition(isCanLoop: Boolean, position: Int, pageSize: Int): Int {
         return if (isCanLoop) (position - 1 + pageSize) % pageSize else (position + pageSize) % pageSize
+    }
+
+    /**
+     * view复用
+     * @return View?
+     */
+    fun getConvertView(): View? {
+        for (convertView in mConvertViews) {
+            if (convertView.parent == null) {
+                return convertView
+            }
+        }
+        return null
     }
 
     inner class BannerPagerAdapter : PagerAdapter() {
@@ -169,7 +182,7 @@ class BannerViewPager @JvmOverloads constructor(context: Context, attributeSet: 
         override fun instantiateItem(container: ViewGroup, position: Int): Any {
             //adapter设计模式让用户自定义
             //添加到viewpager里
-            val view = mBannerAdapter.getView(getRealPosition(true, position, mBannerAdapter.getCount()))
+            val view = mBannerAdapter.getView(getRealPosition(true, position, mBannerAdapter.getCount()), getConvertView())
             container.addView(view)
             return view
         }
@@ -177,6 +190,18 @@ class BannerViewPager @JvmOverloads constructor(context: Context, attributeSet: 
         //销毁条目调用的方法
         override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
             container.removeView(`object` as View)
+            mConvertViews.add(`object`)
+        }
+    }
+
+    private val lifeCycleCallbacks = object : SimpleLifeCycleCallbacks() {
+
+        override fun onActivityResumed(activity: Activity) {
+            mHandler?.sendEmptyMessageDelayed(SCROLL_MESSAGE, DEFAULT_SCROLL_DURATION)
+        }
+
+        override fun onActivityPaused(activity: Activity) {
+            mHandler?.removeMessages(SCROLL_MESSAGE)
         }
     }
 }

@@ -10,7 +10,7 @@ import android.view.View
  */
 abstract class BannerAdapter {
 
-    abstract fun getView(position: Int): View
+    abstract fun getView(position: Int,convertView: View?): View
 
     abstract fun getCount(): Int
 
