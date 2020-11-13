@@ -38,7 +38,15 @@
         <activity android:name=".activity.CheckViewActivity" />
         <activity android:name=".activity.CircleProgressViewActivity" />
         <activity android:name=".activity.LoadingView58Activity" />
-        <activity android:name=".activity.ViewPagerActivity" />
+        <activity android:name=".activity.ViewPagerActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
+
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".activity.ColorTrackTextViewActivity" />
         <activity android:name=".activity.QQStepViewActivity" />
         <activity android:name=".activity.PieViewActivity" />
@@ -63,13 +71,7 @@
 <!--            </intent-filter>-->
         </activity>
         <activity android:name=".activity.TestActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.intent.action.VIEW" />
 
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <service

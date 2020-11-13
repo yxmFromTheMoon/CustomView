@@ -1,4 +1,4 @@
-package com.yxm.customview.view
+package com.yxm.baselibrary.view
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -17,12 +17,12 @@ import com.yxm.customview.R
  */
 class ColorTrackTextView
 @JvmOverloads constructor(context: Context, attr: AttributeSet? = null, defStyle: Int = 0)
-    :AppCompatTextView(context, attr, defStyle) {
+    : AppCompatTextView(context, attr, defStyle) {
 
     private var mOriginColor:Int = Color.BLACK
     private var mChangeColor:Int = Color.RED
-    private  var mOriginPaint:Paint
-    private  var mChangePaint:Paint
+    private  var mOriginPaint: Paint
+    private  var mChangePaint: Paint
     //1.当前的进度
     private var mCurrentProgress:Float = 0f
     //2.实现不同的朝向
@@ -32,7 +32,7 @@ class ColorTrackTextView
     private var mDirection:Direction = Direction.LEFT_TO_RIGHT
 
     init {
-        val typedArray = context.obtainStyledAttributes(attr,R.styleable.ColorTrackTextView)
+        val typedArray = context.obtainStyledAttributes(attr, R.styleable.ColorTrackTextView)
         mOriginColor = typedArray.getColor(R.styleable.ColorTrackTextView_originColor,mOriginColor)
         mChangeColor = typedArray.getColor(R.styleable.ColorTrackTextView_changeColor,mChangeColor)
         typedArray.recycle()
@@ -75,7 +75,7 @@ class ColorTrackTextView
     }
 
 
-    private fun getPaintByColor(color:Int):Paint{
+    private fun getPaintByColor(color:Int): Paint {
         val paint = Paint()
         paint.color = color
         paint.isAntiAlias = true
@@ -84,9 +84,9 @@ class ColorTrackTextView
         return paint
     }
 
-    private fun drawText(canvas: Canvas?,paint: Paint,start:Int,end:Int){
+    private fun drawText(canvas: Canvas?, paint: Paint, start:Int, end:Int){
         canvas?.save()
-        val rect = Rect(start,0,end,height)
+        val rect = Rect(start, 0, end, height)
         canvas?.clipRect(rect) //裁剪区域
         val text = text.toString()
         //获取字体的宽度

@@ -2,15 +2,18 @@ package com.yxm.customview.activity
 
 import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
+import com.yxm.baselibrary.ui.indicator.IndicatorAdapter
+import com.yxm.baselibrary.ui.indicator.TrackIndicator
 import com.yxm.customview.fragment.ItemFragment
 import com.yxm.customview.R
-import com.yxm.customview.view.ColorTrackTextView
+import com.yxm.baselibrary.view.ColorTrackTextView
 import com.yxm.framelibrary.BaseSkinActivity
 import kotlinx.android.synthetic.main.activity_view_pager.*
 import java.lang.Exception
@@ -23,9 +26,9 @@ import java.lang.Exception
  */
 class ViewPagerActivity : BaseSkinActivity() {
 
-    private val titles = arrayOf("直播", "搞笑", "音乐", "影视", "图片")
+    private val titles = arrayOf("直播", "搞笑","段友秀", "音乐", "影视", "图片","游戏","创意","萌宠","艺术")
     private lateinit var viewPager: ViewPager
-    private lateinit var mIndicatorsContainer: LinearLayout
+    private lateinit var mIndicatorsContainer: TrackIndicator
     private var mIndicators: MutableList<ColorTrackTextView> = ArrayList()
 
     override fun getLayoutId(): Int {
@@ -85,18 +88,24 @@ class ViewPagerActivity : BaseSkinActivity() {
     }
 
     private fun initIndicator() {
-        titles.forEach {
-            //动态添加颜色跟踪的TextView
-            val params = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT)
-            params.weight = 1f
-            val colorTrackTextView = ColorTrackTextView(this)
-            colorTrackTextView.textSize = 20f
-            colorTrackTextView.setChangeColor(Color.RED)
-            colorTrackTextView.text = it
-            colorTrackTextView.layoutParams = params
-            mIndicatorsContainer.addView(colorTrackTextView)
-            mIndicators.add(colorTrackTextView)
-        }
+        mIndicatorsContainer.setAdapter(object : IndicatorAdapter() {
+            override fun getCount(): Int {
+                return titles.size
+            }
+
+            override fun getView(position: Int, parent: ViewGroup): View {
+                //动态添加颜色跟踪的TextView
+                val params = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT)
+                params.weight = 1f
+                val colorTrackTextView = ColorTrackTextView(this@ViewPagerActivity)
+                colorTrackTextView.textSize = 20f
+                colorTrackTextView.setChangeColor(Color.RED)
+                colorTrackTextView.text = titles[position]
+                colorTrackTextView.layoutParams = params
+                mIndicators.add(colorTrackTextView)
+                return colorTrackTextView
+            }
+        })
     }
 }
