@@ -12,4 +12,12 @@ abstract class IndicatorAdapter {
     abstract fun getCount(): Int
 
     abstract fun getView(position: Int, parent: ViewGroup): View
+
+    //选中tab高亮
+    open fun highLightTab(position: Int,view: View){
+
+    }
+
+    //为选中tab变为默认
+    open fun restoreTab(position: Int,view: View){}
 }

@@ -100,12 +100,23 @@ class ViewPagerActivity : BaseSkinActivity() {
                 params.weight = 1f
                 val colorTrackTextView = TextView(this@ViewPagerActivity)
                 colorTrackTextView.textSize = 20f
+                colorTrackTextView.setTextColor(Color.BLACK)
                 //colorTrackTextView.setChangeColor(Color.RED)
                 colorTrackTextView.gravity = Gravity.CENTER
                 colorTrackTextView.text = titles[position]
                 colorTrackTextView.layoutParams = params
                 mIndicators.add(colorTrackTextView)
                 return colorTrackTextView
+            }
+
+            override fun highLightTab(position: Int,view: View) {
+                view as TextView
+                view.setTextColor(Color.RED)
+            }
+
+            override fun restoreTab(position: Int,view: View) {
+                view as TextView
+                view.setTextColor(Color.BLACK)
             }
         },viewPager)
     }

@@ -23,5 +23,7 @@
 
     <declare-styleable name="TrackIndicator">
         <attr name="tabVisibleNum" format="integer"/>
+        <attr name="selectTabColor" format="color"/>
+        <attr name="normalTabColor" format="color"/>
     </declare-styleable>
 </resources>

@@ -1,6 +1,7 @@
 package com.yxm.baselibrary.ui.indicator
 
 import android.content.Context
+import android.graphics.Color
 import android.util.AttributeSet
 import android.view.View
 import android.widget.HorizontalScrollView
@@ -18,12 +19,15 @@ import kotlin.math.max
 class TrackIndicator @JvmOverloads constructor(context: Context, attributeSet: AttributeSet? = null, defStyle: Int = 0)
     : HorizontalScrollView(context, attributeSet, defStyle), ViewPager.OnPageChangeListener {
     private var mCurrentPosition: Int = 0
+    private var mLastPosition: Int = 0
     private var mIndicatorContainer: LinearLayout = LinearLayout(context)
     private lateinit var mAdapter: IndicatorAdapter
     private var mItemWidth: Int = 0
     private var mTabVisibleNum = 0
     private var mViewPager: ViewPager? = null
     private var mContext: Context = context
+    private var mSelectTabColor = Color.RED
+    private var mNormalTabColor = Color.BLACK
 
     init {
         addView(mIndicatorContainer)
@@ -37,6 +41,8 @@ class TrackIndicator @JvmOverloads constructor(context: Context, attributeSet: A
     private fun initAttribute(attributeSet: AttributeSet?) {
         val tp = mContext.obtainStyledAttributes(attributeSet, R.styleable.TrackIndicator)
         mTabVisibleNum = tp.getInt(R.styleable.TrackIndicator_tabVisibleNum, 0)
+        mSelectTabColor = tp.getColor(R.styleable.TrackIndicator_selectTabColor,mSelectTabColor)
+        mNormalTabColor = tp.getColor(R.styleable.TrackIndicator_normalTabColor,mNormalTabColor)
         tp.recycle()
     }
 
@@ -103,6 +109,7 @@ class TrackIndicator @JvmOverloads constructor(context: Context, attributeSet: A
                 setItemClick(view, i)
             }
         }
+        mAdapter.highLightTab(mCurrentPosition,mIndicatorContainer.getChildAt(mCurrentPosition))
     }
 
     private fun setItemClick(view: View, position: Int) {
@@ -132,7 +139,11 @@ class TrackIndicator @JvmOverloads constructor(context: Context, attributeSet: A
     }
 
     override fun onPageSelected(position: Int) {
+        //将前一个位置变为默认
+        mLastPosition = mCurrentPosition
+        mAdapter.restoreTab(mLastPosition,mIndicatorContainer.getChildAt(mLastPosition))
         mCurrentPosition = position
+        mAdapter.highLightTab(mCurrentPosition,mIndicatorContainer.getChildAt(mCurrentPosition))
     }
 
 }
