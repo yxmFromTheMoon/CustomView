@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.yxm.baselibrary.view.ColorTrackTextView
+    <com.yxm.baselibrary.ui.indicator.ColorTrackTextView
         android:id="@+id/colorTrackTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -3,10 +3,9 @@ package com.yxm.customview.activity
 import android.animation.ValueAnimator
 import android.widget.Button
 import com.yxm.customview.R
-import com.yxm.baselibrary.base.BaseActivity
 import com.yxm.customview.fragment.ItemFragment
 import com.yxm.customview.utils.Utils
-import com.yxm.baselibrary.view.ColorTrackTextView
+import com.yxm.baselibrary.ui.indicator.ColorTrackTextView
 import com.yxm.framelibrary.BaseSkinActivity
 import kotlinx.android.synthetic.main.activity_color_track_view.*
 

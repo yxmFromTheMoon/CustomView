@@ -20,7 +20,8 @@ import kotlinx.android.synthetic.main.activity_test.*
 class TestActivity : BaseSkinActivity() {
 
     private val mImageUrls = listOf("http://gank.io/images/cfb4028bfead41e8b6e34057364969d1",
-            "https://pic.downk.cc/item/5e7b64fd504f4bcb040fae8f")
+            "https://pic.downk.cc/item/5e7b64fd504f4bcb040fae8f","http://gank.io/images/cfb4028bfead41e8b6e34057364969d1"
+    ,"http://gank.io/images/cfb4028bfead41e8b6e34057364969d1","http://gank.io/images/cfb4028bfead41e8b6e34057364969d1")
 
 
     override fun getLayoutId(): Int {

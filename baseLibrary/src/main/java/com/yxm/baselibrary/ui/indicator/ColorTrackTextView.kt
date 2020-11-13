@@ -1,4 +1,4 @@
-package com.yxm.baselibrary.view
+package com.yxm.baselibrary.ui.indicator
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -8,7 +8,7 @@ import android.graphics.Paint
 import android.graphics.Rect
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatTextView
-import com.yxm.customview.R
+import com.yxm.baselibrary.R
 
 /**
  * @author yxm
@@ -29,7 +29,7 @@ class ColorTrackTextView
     enum class Direction{
         LEFT_TO_RIGHT,RIGHT_TO_LEFT
     }
-    private var mDirection:Direction = Direction.LEFT_TO_RIGHT
+    private var mDirection: Direction = Direction.LEFT_TO_RIGHT
 
     init {
         val typedArray = context.obtainStyledAttributes(attr, R.styleable.ColorTrackTextView)
