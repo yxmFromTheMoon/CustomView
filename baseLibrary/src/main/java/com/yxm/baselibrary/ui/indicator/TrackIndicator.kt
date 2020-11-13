@@ -20,7 +20,7 @@ class TrackIndicator @JvmOverloads constructor(context: Context, attributeSet: A
     : HorizontalScrollView(context, attributeSet, defStyle), ViewPager.OnPageChangeListener {
     private var mCurrentPosition: Int = 0
     private var mLastPosition: Int = 0
-    private var mIndicatorContainer: LinearLayout = LinearLayout(context)
+    private var mIndicatorContainer  = IndicatorContainerGroup(context)
     private lateinit var mAdapter: IndicatorAdapter
     private var mItemWidth: Int = 0
     private var mTabVisibleNum = 0
@@ -50,10 +50,10 @@ class TrackIndicator @JvmOverloads constructor(context: Context, attributeSet: A
         super.onLayout(changed, l, t, r, b)
         if (changed) {
             mItemWidth = getItemWidth()
-            for (i in 0 until mIndicatorContainer.childCount) {
-                val lp = mIndicatorContainer.getChildAt(i).layoutParams
+            for (i in 0 until mIndicatorContainer.itemCount) {
+                val lp = mIndicatorContainer.getItemView(i).layoutParams
                 lp.width = mItemWidth
-                mIndicatorContainer.getChildAt(i).layoutParams = lp
+                mIndicatorContainer.getItemView(i).layoutParams = lp
             }
         }
     }
@@ -70,8 +70,8 @@ class TrackIndicator @JvmOverloads constructor(context: Context, attributeSet: A
         if (mTabVisibleNum != 0) {
             return parentWidth / mTabVisibleNum
         }
-        for (i in 0 until mIndicatorContainer.childCount) {
-            val currentItemWidth = mIndicatorContainer.getChildAt(i).width
+        for (i in 0 until mIndicatorContainer.itemCount) {
+            val currentItemWidth = mIndicatorContainer.getItemView(i).width
             maxWidth = max(currentItemWidth, maxWidth)
         }
         itemWidth = maxWidth
@@ -104,12 +104,13 @@ class TrackIndicator @JvmOverloads constructor(context: Context, attributeSet: A
         val count = mAdapter.getCount()
         for (i in 0 until count) {
             val view = mAdapter.getView(i, this)
-            mIndicatorContainer.addView(view)
+            mIndicatorContainer.addItemView(view)
             if (mViewPager != null) {
                 setItemClick(view, i)
             }
         }
-        mAdapter.highLightTab(mCurrentPosition,mIndicatorContainer.getChildAt(mCurrentPosition))
+        mAdapter.highLightTab(mCurrentPosition,mIndicatorContainer.getItemView(mCurrentPosition))
+        mIndicatorContainer.addBottomTrackView(mAdapter.getBottomTrackView())
     }
 
     private fun setItemClick(view: View, position: Int) {
@@ -141,9 +142,9 @@ class TrackIndicator @JvmOverloads constructor(context: Context, attributeSet: A
     override fun onPageSelected(position: Int) {
         //将前一个位置变为默认
         mLastPosition = mCurrentPosition
-        mAdapter.restoreTab(mLastPosition,mIndicatorContainer.getChildAt(mLastPosition))
+        mAdapter.restoreTab(mLastPosition,mIndicatorContainer.getItemView(mLastPosition))
         mCurrentPosition = position
-        mAdapter.highLightTab(mCurrentPosition,mIndicatorContainer.getChildAt(mCurrentPosition))
+        mAdapter.highLightTab(mCurrentPosition,mIndicatorContainer.getItemView(mCurrentPosition))
     }
 
 }

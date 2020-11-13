@@ -10,8 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:tabVisibleNum="5"
-        android:padding="10dp" />
+        app:tabVisibleNum="5" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager"

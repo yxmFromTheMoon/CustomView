@@ -14,10 +14,14 @@ abstract class IndicatorAdapter {
     abstract fun getView(position: Int, parent: ViewGroup): View
 
     //选中tab高亮
-    open fun highLightTab(position: Int,view: View){
+    open fun highLightTab(position: Int, view: View) {
 
     }
 
     //为选中tab变为默认
-    open fun restoreTab(position: Int,view: View){}
+    open fun restoreTab(position: Int, view: View) {}
+
+    open fun getBottomTrackView(): View? {
+        return null
+    }
 }

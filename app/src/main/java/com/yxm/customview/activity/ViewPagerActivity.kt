@@ -4,10 +4,12 @@ import android.graphics.Color
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.yxm.baselibrary.ui.indicator.IndicatorAdapter
 import com.yxm.baselibrary.ui.indicator.TrackIndicator
@@ -26,7 +28,7 @@ import java.lang.Exception
  */
 class ViewPagerActivity : BaseSkinActivity() {
 
-    private val titles = arrayOf("直播", "搞笑","段友秀", "音乐", "影视", "图片","游戏","创意","萌宠","艺术")
+    private val titles = arrayOf("直播", "搞笑", "段友秀", "音乐", "影视", "图片", "游戏", "创意", "萌宠", "艺术")
     private lateinit var viewPager: ViewPager
     private lateinit var mIndicatorsContainer: TrackIndicator
     private var mIndicators: MutableList<TextView> = ArrayList()
@@ -109,15 +111,23 @@ class ViewPagerActivity : BaseSkinActivity() {
                 return colorTrackTextView
             }
 
-            override fun highLightTab(position: Int,view: View) {
+            override fun highLightTab(position: Int, view: View) {
                 view as TextView
                 view.setTextColor(Color.RED)
             }
 
-            override fun restoreTab(position: Int,view: View) {
+            override fun restoreTab(position: Int, view: View) {
                 view as TextView
                 view.setTextColor(Color.BLACK)
             }
-        },viewPager)
+
+            override fun getBottomTrackView(): View? {
+                val view = View(this@ViewPagerActivity)
+                view.setBackgroundColor(Color.RED)
+                val params = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, 10)
+                view.layoutParams = params
+                return view
+            }
+        }, viewPager)
     }
 }
