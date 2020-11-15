@@ -24,28 +24,26 @@
         android:usesCleartextTraffic="true">
 
         <activity android:name=".enter.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
 
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-            <!-- <action android:name="android.intent.action.VIEW" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".activity.HandlerActivity" />
         <activity android:name=".activity.TextViewActivity" />
         <activity android:name=".activity.CheckViewActivity" />
         <activity android:name=".activity.CircleProgressViewActivity" />
         <activity android:name=".activity.LoadingView58Activity" />
-        <activity android:name=".activity.ViewPagerActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.intent.action.VIEW" />
+        <activity android:name=".activity.ViewPagerActivity">
+            <!--            <intent-filter>-->
+            <!--                <action android:name="android.intent.action.MAIN" />-->
+            <!--                <action android:name="android.intent.action.VIEW" />-->
 
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
+            <!--            </intent-filter>-->
         </activity>
         <activity android:name=".activity.ColorTrackTextViewActivity" />
         <activity android:name=".activity.QQStepViewActivity" />
@@ -63,12 +61,7 @@
         <activity android:name=".activity.LoveActivity" />
         <activity android:name=".activity.DragItemAnimatorActivity" />
         <activity android:name=".aidl.AidlActivity">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-<!--                <action android:name="android.intent.action.VIEW" />-->
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
         </activity>
         <activity android:name=".activity.TestActivity">
 
@@ -87,6 +80,10 @@
                 <action android:name="com.yxm.customview.message" />
             </intent-filter>
         </service>
+
+        <activity
+            android:name="com.yxm.framelibrary.imagepicker.SelectPictureActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

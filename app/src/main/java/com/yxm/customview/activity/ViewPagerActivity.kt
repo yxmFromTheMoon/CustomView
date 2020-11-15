@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
+import com.yxm.baselibrary.Utils
 import com.yxm.baselibrary.ui.indicator.IndicatorAdapter
 import com.yxm.baselibrary.ui.indicator.TrackIndicator
 import com.yxm.customview.fragment.ItemFragment
@@ -31,7 +32,7 @@ class ViewPagerActivity : BaseSkinActivity() {
     private val titles = arrayOf("直播", "搞笑", "段友秀", "音乐", "影视", "图片", "游戏", "创意", "萌宠", "艺术")
     private lateinit var viewPager: ViewPager
     private lateinit var mIndicatorsContainer: TrackIndicator
-    private var mIndicators: MutableList<TextView> = ArrayList()
+    private var mIndicators: MutableList<ColorTrackTextView> = ArrayList()
 
     override fun getLayoutId(): Int {
         return R.layout.activity_view_pager
@@ -61,15 +62,15 @@ class ViewPagerActivity : BaseSkinActivity() {
                 return titles.size
             }
         }
-
-        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-            override fun onPageScrollStateChanged(state: Int) {
-            }
-
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-                //position 代表当前的位置
-                //positionOffset 代表滚动的 0 -1 的值(百分比)
-                //1.左边 位置position
+//
+//        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+//            override fun onPageScrollStateChanged(state: Int) {
+//            }
+//
+//            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+//                //position 代表当前的位置
+//                //positionOffset 代表滚动的 0 -1 的值(百分比)
+//                //1.左边 位置position
 //                val left = mIndicators[position]
 //                left.setDirection(ColorTrackTextView.Direction.RIGHT_TO_LEFT)
 //                left.setProgress(1 - positionOffset)
@@ -81,12 +82,12 @@ class ViewPagerActivity : BaseSkinActivity() {
 //                } catch (e: Exception) {
 //
 //                }
-
-            }
-
-            override fun onPageSelected(position: Int) {
-            }
-        })
+//
+//            }
+//
+//            override fun onPageSelected(position: Int) {
+//            }
+//        })
     }
 
     private fun initIndicator() {
@@ -95,39 +96,35 @@ class ViewPagerActivity : BaseSkinActivity() {
                 return titles.size
             }
 
-            override fun getView(position: Int, parent: ViewGroup): View {
+            override fun getView(position: Int, parent: ViewGroup): ColorTrackTextView {
                 //动态添加颜色跟踪的TextView
-                val params = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                        ViewGroup.LayoutParams.WRAP_CONTENT)
-                params.weight = 1f
-                val colorTrackTextView = TextView(this@ViewPagerActivity)
+                val colorTrackTextView = ColorTrackTextView(this@ViewPagerActivity)
                 colorTrackTextView.textSize = 20f
-                colorTrackTextView.setTextColor(Color.BLACK)
-                //colorTrackTextView.setChangeColor(Color.RED)
-                colorTrackTextView.gravity = Gravity.CENTER
+                colorTrackTextView.setChangeColor(Color.RED)
                 colorTrackTextView.text = titles[position]
-                colorTrackTextView.layoutParams = params
-                mIndicators.add(colorTrackTextView)
+                //mIndicators.add(colorTrackTextView)
                 return colorTrackTextView
             }
 
             override fun highLightTab(position: Int, view: View) {
-                view as TextView
-                view.setTextColor(Color.RED)
+                view as ColorTrackTextView
+                view.setDirection(ColorTrackTextView.Direction.RIGHT_TO_LEFT)
+                view.setProgress(1f)
             }
 
             override fun restoreTab(position: Int, view: View) {
-                view as TextView
-                view.setTextColor(Color.BLACK)
+                view as ColorTrackTextView
+                view.setDirection(ColorTrackTextView.Direction.RIGHT_TO_LEFT)
+                view.setProgress(0f)
             }
 
             override fun getBottomTrackView(): View? {
                 val view = View(this@ViewPagerActivity)
                 view.setBackgroundColor(Color.RED)
-                val params = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, 10)
+                val params = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 10)
                 view.layoutParams = params
                 return view
             }
-        }, viewPager)
+        }, viewPager,false)
     }
 }

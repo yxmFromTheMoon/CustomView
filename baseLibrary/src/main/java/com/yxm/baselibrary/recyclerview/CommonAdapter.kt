@@ -99,7 +99,7 @@ abstract class CommonAdapter<T>(context: Context, layoutResId: Int, data: List<T
         // 设置点击和长按事件
         if (mItemClickListener != null) {
             holder.itemView.setOnClickListener {
-                mItemClickListener!!.onItemClick(position)
+                mItemClickListener!!.onItemClick(holder,position)
             }
         }
         if (mItemLongClickListener != null) {

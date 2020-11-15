@@ -37,11 +37,6 @@ abstract class BaseActivity : AppCompatActivity() {
         ImageLoaderUtils.pause(this)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        ImageLoaderUtils.pause(this)
-    }
-
     abstract fun getLayoutId(): Int
 
     abstract fun initView()

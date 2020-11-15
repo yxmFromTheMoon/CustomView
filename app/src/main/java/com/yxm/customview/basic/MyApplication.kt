@@ -3,6 +3,7 @@ package com.yxm.customview.basic
 import android.app.Application
 import androidx.multidex.MultiDex
 import com.yxm.baselibrary.imageloader.CoilImageLoader
+import com.yxm.baselibrary.imageloader.GlideImageLoader
 import com.yxm.baselibrary.imageloader.ImageLoaderUtils
 import com.yxm.framelibrary.CrashExceptionHandler
 import com.yxm.framelibrary.skin.SkinManager
@@ -23,7 +24,7 @@ class MyApplication : Application() {
         SkinPreUtils.init(this)
         SkinManager.init(this)
         ImageLoaderUtils.init(this)
-        ImageLoaderUtils.setImageLoader(CoilImageLoader(this))
+        ImageLoaderUtils.setImageLoader(GlideImageLoader(this))
         MultiDex.install(this)
     }
 

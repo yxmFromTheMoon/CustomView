@@ -3,9 +3,9 @@ package com.yxm.baselibrary.ui.indicator
 import android.content.Context
 import android.graphics.Color
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import android.widget.HorizontalScrollView
-import android.widget.LinearLayout
 import androidx.viewpager.widget.ViewPager
 import com.yxm.baselibrary.R
 import java.lang.IllegalArgumentException
@@ -20,14 +20,16 @@ class TrackIndicator @JvmOverloads constructor(context: Context, attributeSet: A
     : HorizontalScrollView(context, attributeSet, defStyle), ViewPager.OnPageChangeListener {
     private var mCurrentPosition: Int = 0
     private var mLastPosition: Int = 0
-    private var mIndicatorContainer  = IndicatorContainerGroup(context)
+    private var mIndicatorContainer = IndicatorContainerGroup(context)
     private lateinit var mAdapter: IndicatorAdapter
     private var mItemWidth: Int = 0
     private var mTabVisibleNum = 0
     private var mViewPager: ViewPager? = null
     private var mContext: Context = context
-    private var mSelectTabColor = Color.RED
-    private var mNormalTabColor = Color.BLACK
+    //private var mSelectTabColor = Color.RED
+    //private var mNormalTabColor = Color.BLACK
+    private var mIsClickTab = true
+    private var mIsSmoothScroll = true
 
     init {
         addView(mIndicatorContainer)
@@ -41,8 +43,8 @@ class TrackIndicator @JvmOverloads constructor(context: Context, attributeSet: A
     private fun initAttribute(attributeSet: AttributeSet?) {
         val tp = mContext.obtainStyledAttributes(attributeSet, R.styleable.TrackIndicator)
         mTabVisibleNum = tp.getInt(R.styleable.TrackIndicator_tabVisibleNum, 0)
-        mSelectTabColor = tp.getColor(R.styleable.TrackIndicator_selectTabColor,mSelectTabColor)
-        mNormalTabColor = tp.getColor(R.styleable.TrackIndicator_normalTabColor,mNormalTabColor)
+        //mSelectTabColor = tp.getColor(R.styleable.TrackIndicator_selectTabColor, mSelectTabColor)
+        //mNormalTabColor = tp.getColor(R.styleable.TrackIndicator_normalTabColor, mNormalTabColor)
         tp.recycle()
     }
 
@@ -55,6 +57,7 @@ class TrackIndicator @JvmOverloads constructor(context: Context, attributeSet: A
                 lp.width = mItemWidth
                 mIndicatorContainer.getItemView(i).layoutParams = lp
             }
+            mIndicatorContainer.addBottomTrackView(mAdapter.getBottomTrackView(), mItemWidth)
         }
     }
 
@@ -82,15 +85,12 @@ class TrackIndicator @JvmOverloads constructor(context: Context, attributeSet: A
         return itemWidth
     }
 
-    fun setAdapter(adapter: IndicatorAdapter?) {
-        if (adapter == null) {
-            throw IllegalArgumentException("adapter is null")
-        }
-        mAdapter = adapter
-        initIndicator()
+    fun setAdapter(adapter: IndicatorAdapter?,viewPager: ViewPager) {
+        setAdapter(adapter, viewPager, true)
     }
 
-    fun setAdapter(adapter: IndicatorAdapter?, viewPager: ViewPager) {
+    fun setAdapter(adapter: IndicatorAdapter?, viewPager: ViewPager, isSmoothScroll: Boolean) {
+        mIsSmoothScroll = isSmoothScroll
         if (adapter == null) {
             throw IllegalArgumentException("adapter is null")
         }
@@ -109,14 +109,23 @@ class TrackIndicator @JvmOverloads constructor(context: Context, attributeSet: A
                 setItemClick(view, i)
             }
         }
-        mAdapter.highLightTab(mCurrentPosition,mIndicatorContainer.getItemView(mCurrentPosition))
-        mIndicatorContainer.addBottomTrackView(mAdapter.getBottomTrackView())
+        mAdapter.highLightTab(mCurrentPosition, mIndicatorContainer.getItemView(mCurrentPosition))
+
     }
 
     private fun setItemClick(view: View, position: Int) {
         view.setOnClickListener {
-            mViewPager?.currentItem = position
+            mViewPager?.setCurrentItem(position, mIsSmoothScroll)
+            smoothScrollIndicator(position)
+            mIndicatorContainer.smoothBottomTrackView(position)
         }
+    }
+
+    private fun smoothScrollIndicator(position: Int) {
+        val totalScroll = (position) * mItemWidth
+        val offsetScroll = (width - mItemWidth) / 2
+        val finalScroll = totalScroll - offsetScroll
+        smoothScrollTo(finalScroll, 0)
     }
 
     /**
@@ -133,18 +142,34 @@ class TrackIndicator @JvmOverloads constructor(context: Context, attributeSet: A
 
     override fun onPageScrollStateChanged(state: Int) {
 
+        //state
+        //SCROLL_STATE_IDLE  0  静止
+        //SCROLL_STATE_DRAGGING  1 拖动中
+        // SCROLL_STATE_SETTLING  2 滑动完成
+        if (state == 1) {
+            mIsClickTab = true
+        }
+        if (state == 0) {
+            mIsClickTab = false
+        }
+        Log.d("test-state", "${state}")
+
     }
 
     override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-        scrollToCenter(position, positionOffset)
+        //如果是点击，不执行此方法
+        if (mIsClickTab) {
+            scrollToCenter(position, positionOffset)
+            mIndicatorContainer.scrollBottomTrackView(position, positionOffset)
+        }
     }
 
     override fun onPageSelected(position: Int) {
         //将前一个位置变为默认
         mLastPosition = mCurrentPosition
-        mAdapter.restoreTab(mLastPosition,mIndicatorContainer.getItemView(mLastPosition))
+        mAdapter.restoreTab(mLastPosition, mIndicatorContainer.getItemView(mLastPosition))
         mCurrentPosition = position
-        mAdapter.highLightTab(mCurrentPosition,mIndicatorContainer.getItemView(mCurrentPosition))
+        mAdapter.highLightTab(mCurrentPosition, mIndicatorContainer.getItemView(mCurrentPosition))
     }
 
 }

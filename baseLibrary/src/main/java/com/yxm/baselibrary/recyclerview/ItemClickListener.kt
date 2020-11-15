@@ -7,5 +7,5 @@ package com.yxm.baselibrary.recyclerview
  * @description
  */
 interface ItemClickListener {
-    fun onItemClick(position:Int)
+    fun onItemClick(holder: ViewHolder,position:Int)
 }

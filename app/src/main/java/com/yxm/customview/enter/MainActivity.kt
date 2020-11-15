@@ -16,6 +16,7 @@ import com.google.android.flexbox.JustifyContent
 import com.yxm.baselibrary.base.BaseActivity
 import com.yxm.baselibrary.dialog.AlertDialog
 import com.yxm.baselibrary.recyclerview.ItemClickListener
+import com.yxm.baselibrary.recyclerview.ViewHolder
 import com.yxm.customview.R
 import com.yxm.customview.activity.*
 import com.yxm.customview.showToast
@@ -138,7 +139,7 @@ class MainActivity : BaseSkinActivity() {
         mCommonAdapter = EnterListAdapterV2(this, mList)
 
         mCommonAdapter.setItemClickListener(object : ItemClickListener {
-            override fun onItemClick(position: Int) {
+            override fun onItemClick(holder: ViewHolder,position: Int) {
                 when (mList[position].tag) {
                     "1" -> {
                         startActivity<TextViewActivity> {}
@@ -204,6 +205,9 @@ class MainActivity : BaseSkinActivity() {
     }
 
     override fun initListener() {
+        test_entry.setOnClickListener {
+            startActivity<TestActivity> { }
+        }
     }
 
 
