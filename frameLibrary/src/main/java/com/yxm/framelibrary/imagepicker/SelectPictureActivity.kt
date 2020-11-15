@@ -52,6 +52,7 @@ class SelectPictureActivity : BaseSkinActivity() {
 
     //选择的图片集合
     private var mSelectedPictureList: ArrayList<String>? = ArrayList()
+    private var isFirstResume = true
 
     /**
      * UI
@@ -89,46 +90,47 @@ class SelectPictureActivity : BaseSkinActivity() {
         }
     }
 
+    private val mLoaderCallback = object : LoaderManager.LoaderCallbacks<Cursor> {
+        val IMAGE_PROJECTION = arrayOf(
+                MediaStore.Images.Media.DATA,
+                MediaStore.Images.Media.DISPLAY_NAME,
+                MediaStore.Images.Media.DATE_ADDED,
+                MediaStore.Images.Media.MIME_TYPE,
+                MediaStore.Images.Media.SIZE,
+                MediaStore.Images.Media._ID)
+
+        override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
+            // 查询数据库一样 语句
+
+            return CursorLoader(this@SelectPictureActivity,
+                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI, IMAGE_PROJECTION,
+                    "${IMAGE_PROJECTION[4]} >0 AND ${IMAGE_PROJECTION[3]}=? OR ${IMAGE_PROJECTION[3]}=?",
+                    arrayOf("image/jpeg", "image/png"), "${IMAGE_PROJECTION[2]} DESC")
+        }
+
+        override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor?) {
+            if (data != null && data.count > 0) {
+                val images = mutableListOf<String>()
+                //如果需要显示拍照
+                if (mIsShowCamera) {
+                    images.add("")
+                }
+                while (data.moveToNext()) {
+                    val path = data.getString(data.getColumnIndexOrThrow(IMAGE_PROJECTION[0]))
+                    images.add(path)
+                }
+                showImageList(images)
+            }
+        }
+
+        override fun onLoaderReset(loader: Loader<Cursor>) {
+
+        }
+    }
+
     override fun initData() {
         LoaderManager.getInstance(this).initLoader(LOADER_TYPE, null,
-                object : LoaderManager.LoaderCallbacks<Cursor> {
-                    val IMAGE_PROJECTION = arrayOf(
-                            MediaStore.Images.Media.DATA,
-                            MediaStore.Images.Media.DISPLAY_NAME,
-                            MediaStore.Images.Media.DATE_ADDED,
-                            MediaStore.Images.Media.MIME_TYPE,
-                            MediaStore.Images.Media.SIZE,
-                            MediaStore.Images.Media._ID)
-
-                    override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
-
-                        // 查询数据库一样 语句
-
-                        return CursorLoader(this@SelectPictureActivity,
-                                MediaStore.Images.Media.EXTERNAL_CONTENT_URI, IMAGE_PROJECTION,
-                                "${IMAGE_PROJECTION[4]} >0 AND ${IMAGE_PROJECTION[3]}=? OR ${IMAGE_PROJECTION[3]}=?",
-                                arrayOf("image/jpeg", "image/png"), "${IMAGE_PROJECTION[2]} DESC")
-                    }
-
-                    override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor?) {
-                        if (data != null && data.count > 0) {
-                            val images = mutableListOf<String>()
-                            //如果需要显示拍照
-                            if (mIsShowCamera) {
-                                images.add("")
-                            }
-                            while (data.moveToNext()) {
-                                val path = data.getString(data.getColumnIndexOrThrow(IMAGE_PROJECTION[0]))
-                                images.add(path)
-                            }
-                            showImageList(images)
-                        }
-                    }
-
-                    override fun onLoaderReset(loader: Loader<Cursor>) {
-
-                    }
-                })
+                mLoaderCallback)
     }
 
     private fun showImageList(images: MutableList<String>) {
@@ -165,6 +167,20 @@ class SelectPictureActivity : BaseSkinActivity() {
                 mask.visibility = View.VISIBLE
             }
         })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (isFirstResume) {
+            isFirstResume = false
+        } else {
+            LoaderManager.getInstance(this).restartLoader(LOADER_TYPE, null, mLoaderCallback)
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        LoaderManager.getInstance(this).destroyLoader(LOADER_TYPE)
     }
 
 }
