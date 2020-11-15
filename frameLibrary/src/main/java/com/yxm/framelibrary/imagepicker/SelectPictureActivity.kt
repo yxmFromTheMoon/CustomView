@@ -11,7 +11,6 @@ import androidx.loader.app.LoaderManager
 import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.yxm.baselibrary.imageloader.ImageLoaderUtils
 import com.yxm.baselibrary.recyclerview.CommonAdapter
@@ -104,16 +103,11 @@ class SelectPictureActivity : BaseSkinActivity() {
                     override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
 
                         // 查询数据库一样 语句
+
                         return CursorLoader(this@SelectPictureActivity,
                                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI, IMAGE_PROJECTION,
-                                IMAGE_PROJECTION[4] + ">0 AND " + IMAGE_PROJECTION[3] + "=? OR "
-                                        + IMAGE_PROJECTION[3] + "=? ", arrayOf("image/jpeg", "image/png"),
-                                IMAGE_PROJECTION[2] + " DESC")
-
-//                        return CursorLoader(this@SelectPictureActivity,
-//                                MediaStore.Images.Media.EXTERNAL_CONTENT_URI, IMAGE_PROJECTION,
-//                                "${IMAGE_PROJECTION[4]} >0 AND ${IMAGE_PROJECTION[3]}=? OR ${IMAGE_PROJECTION[3]}=?",
-//                                arrayOf("image/jpeg", "image/png"), "${IMAGE_PROJECTION[2]} DESC")
+                                "${IMAGE_PROJECTION[4]} >0 AND ${IMAGE_PROJECTION[3]}=? OR ${IMAGE_PROJECTION[3]}=?",
+                                arrayOf("image/jpeg", "image/png"), "${IMAGE_PROJECTION[2]} DESC")
                     }
 
                     override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor?) {
