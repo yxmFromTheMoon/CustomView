@@ -1,24 +1,22 @@
 package com.yxm.framelibrary.imagepicker
 
+import android.content.Intent
 import android.database.Cursor
+import android.graphics.Color
 import android.os.Bundle
 import android.provider.MediaStore
-import android.view.View
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.yxm.baselibrary.imageloader.ImageLoaderUtils
-import com.yxm.baselibrary.recyclerview.CommonAdapter
 import com.yxm.baselibrary.recyclerview.ItemClickListener
 import com.yxm.baselibrary.recyclerview.ViewHolder
 import com.yxm.framelibrary.BaseSkinActivity
 import com.yxm.framelibrary.R
-import com.yxm.framelibrary.SquareImageView
 import kotlinx.android.synthetic.main.activity_select_picture.*
 
 /**
@@ -33,6 +31,7 @@ class SelectPictureActivity : BaseSkinActivity() {
         const val IS_SHOW_CAMERA_KEY = "is_show_camera"
         const val SELECTED_PICTURE_LIST_KEY = "selected_picture_list"
         const val MAX_SELECT_KEY = "max_select"
+        const val RESULT_LIST_KEY = "result_list_key"
 
         //单选或者多选
         const val SINGLE_SELECT_MODE = 0
@@ -51,7 +50,7 @@ class SelectPictureActivity : BaseSkinActivity() {
     private var mMaxPictureSize = 9
 
     //选择的图片集合
-    private var mSelectedPictureList: ArrayList<String>? = ArrayList()
+    private var mSelectedPictureList: ArrayList<String> = ArrayList()
     private var isFirstResume = true
 
     /**
@@ -60,7 +59,7 @@ class SelectPictureActivity : BaseSkinActivity() {
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var mBackIv: ImageView
     private lateinit var mConfirmTv: TextView
-    private lateinit var mAdapter: CommonAdapter<String>
+    private lateinit var mAdapter: SelectPictureAdapter
 
 
     override fun getLayoutId(): Int {
@@ -74,11 +73,12 @@ class SelectPictureActivity : BaseSkinActivity() {
 
         mSelectMode = intent.getIntExtra(SELECT_MODE_KEY, mSelectMode)
         mIsShowCamera = intent.getBooleanExtra(IS_SHOW_CAMERA_KEY, mIsShowCamera)
-        mMaxPictureSize = intent.getIntExtra(MAX_SELECT_KEY, mMaxPictureSize)
+        mMaxPictureSize = if (mSelectMode == MULTI_SELECT_MODE) intent.getIntExtra(MAX_SELECT_KEY, mMaxPictureSize) else 1
         mSelectedPictureList = intent.getStringArrayListExtra(SELECTED_PICTURE_LIST_KEY)
         if (mSelectedPictureList == null) {
             mSelectedPictureList = ArrayList()
         }
+        updateSelectPictureCount()
     }
 
     override fun initListener() {
@@ -86,7 +86,12 @@ class SelectPictureActivity : BaseSkinActivity() {
             finish()
         }
         mConfirmTv.setOnClickListener {
-
+            Toast.makeText(this@SelectPictureActivity,
+                    "选了${mSelectedPictureList.size}张图片", Toast.LENGTH_SHORT).show()
+            setResult(RESULT_OK, Intent().apply {
+                putStringArrayListExtra(RESULT_LIST_KEY, mSelectedPictureList)
+            })
+            finish()
         }
     }
 
@@ -134,39 +139,48 @@ class SelectPictureActivity : BaseSkinActivity() {
     }
 
     private fun showImageList(images: MutableList<String>) {
-        mAdapter = object : CommonAdapter<String>(this, R.layout.item_select_picture, images) {
-            override fun convert(holder: ViewHolder, item: String, position: Int) {
-                val selectedIndicator = holder.getView<ImageView>(R.id.media_selected_indicator)
-                val cameraLayout = holder.getView<LinearLayout>(R.id.camera_ll)
-                val image = holder.getView<SquareImageView>(R.id.image)
-                val mask = holder.getView<View>(R.id.mask)
-                if (item == "") {
-                    //拍照
-                    mask.visibility = View.VISIBLE
-                    cameraLayout.visibility = View.VISIBLE
-                    selectedIndicator.visibility = View.GONE
-                    image.visibility = View.GONE
-                } else {
-                    mask.visibility = View.GONE
-                    image.visibility = View.VISIBLE
-                    cameraLayout.visibility = View.GONE
-                    selectedIndicator.visibility = View.VISIBLE
-                    ImageLoaderUtils.displayImage(image, item)
-                }
-            }
-        }
+        mAdapter = SelectPictureAdapter(this, images, mSelectedPictureList)
+
         mRecyclerView.apply {
             adapter = mAdapter
             layoutManager = GridLayoutManager(this@SelectPictureActivity, 4)
         }
+
         mAdapter.setItemClickListener(object : ItemClickListener {
             override fun onItemClick(holder: ViewHolder, position: Int) {
-                val selectedIndicator = holder.getView<ImageView>(R.id.media_selected_indicator)
-                val mask = holder.getView<View>(R.id.mask)
-                selectedIndicator.isSelected = true
-                mask.visibility = View.VISIBLE
+                if (position == 0) {
+                    //要申请拍照权限
+                    Toast.makeText(this@SelectPictureActivity,
+                            "点击拍照", Toast.LENGTH_SHORT).show()
+                    return
+                }
+                if (mSelectedPictureList.size >= mMaxPictureSize) {
+                    Toast.makeText(this@SelectPictureActivity,
+                            "最多只能选${mMaxPictureSize}张图片", Toast.LENGTH_SHORT).show()
+                    return
+                }
+                if (mSelectedPictureList.contains(images[position])) {
+                    mSelectedPictureList.remove(images[position])
+                } else {
+                    mSelectedPictureList.add(images[position])
+                }
+                mAdapter.notifyDataSetChanged()
+                updateSelectPictureCount()
             }
         })
+
+    }
+
+    private fun updateSelectPictureCount() {
+        if (mSelectedPictureList.size > 0) {
+            mConfirmTv.isEnabled = true
+            mConfirmTv.setTextColor(Color.BLACK)
+            mConfirmTv.text = "确定(${mSelectedPictureList.size}/${mMaxPictureSize})"
+        } else {
+            mConfirmTv.setTextColor(Color.GRAY)
+            mConfirmTv.text = "确定"
+            mConfirmTv.isEnabled = false
+        }
     }
 
     override fun onResume() {

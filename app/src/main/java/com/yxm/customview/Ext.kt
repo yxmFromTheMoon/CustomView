@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.view.View
 import android.widget.Toast
+import androidx.fragment.app.FragmentActivity
 import com.yxm.customview.basic.MyApplication
 
 /**
@@ -25,7 +26,7 @@ fun View.visible() {
     this.visibility = View.VISIBLE
 }
 
-fun View.invisible(){
+fun View.invisible() {
     this.visibility = View.INVISIBLE
 }
 
@@ -33,4 +34,10 @@ inline fun <reified T> Context.startActivity(block: Intent.() -> Unit) {
     val intent = Intent(this, T::class.java)
     intent.block()
     this.startActivity(intent)
+}
+
+inline fun <reified T> FragmentActivity.startActivityForResult(requestCode: Int, block: Intent.() -> Unit) {
+    val intent = Intent(this, T::class.java)
+    intent.block()
+    this.startActivityForResult(intent, requestCode)
 }
