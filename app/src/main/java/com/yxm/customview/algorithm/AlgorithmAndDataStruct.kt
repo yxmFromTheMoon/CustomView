@@ -1,5 +1,7 @@
 package com.yxm.customview.algorithm
 
+import android.util.Log
+
 /**
  * Created by Myron at 2020/11/14 21:47
  * @email yxmbest@163.com
@@ -7,7 +9,22 @@ package com.yxm.customview.algorithm
  */
 
 fun main() {
-    println(reverseString2("abcdeefg"))
+    //println(countLetterCurrency("There"))
+    val linkedList = LinkedList<Int>()
+    linkedList.push(1)
+    linkedList.push(2)
+    linkedList.push(3)
+    linkedList.insert(1, 4)
+    linkedList.remove(1)
+    for (i in 0 until linkedList.size()) {
+        println(linkedList.get(i))
+    }
+    val start = System.currentTimeMillis()
+//    for (i in 0 until 50000) {
+//        linkedList.remove(i)
+//    }
+    val end = System.currentTimeMillis()
+    //println(end - start)
 }
 
 /**
@@ -28,7 +45,7 @@ fun reverseString(s: String): CharArray {
     return value
 }
 
-fun reverseString2(s: String):CharArray {
+fun reverseString2(s: String): CharArray {
     val n = s.length
     val value = s.toCharArray()
     for (i in 0 until n / 2) {
@@ -39,4 +56,18 @@ fun reverseString2(s: String):CharArray {
         value[k] = ci
     }
     return value
+}
+
+/**
+ * 统计英文文档中每个字符出现的次数
+ */
+fun countLetterCurrency(str: String) {
+    val ascii = IntArray(123) { 0 }
+    for (i in str.indices) {
+        val char = str[i]
+        ascii[char.toInt()]++
+    }
+    ascii.forEachIndexed { index, i ->
+        println("${index.toChar()}->${i}")
+    }
 }
