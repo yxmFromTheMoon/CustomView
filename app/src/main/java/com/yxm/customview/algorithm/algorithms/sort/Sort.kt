@@ -15,9 +15,14 @@ fun swap(array: IntArray, i: Int, j: Int) {
 fun bubbleSort(array: IntArray) {
     val length = array.size
     for (i in 0 until length - 1) {
+        var isExchange = false
         for (j in 0 until length - i - 1) {
             if (array[j] > array[j + 1]) {
+                isExchange = true
                 swap(array, j, j + 1)
+            }
+            if (!isExchange) {
+                break
             }
         }
     }
