@@ -5,13 +5,22 @@ package com.yxm.customview.algorithm.algorithms.sort
  *@time: 2020/11/17
  *@description:
  */
-
+/**
+ * 交换数组中的数据
+ * @param array IntArray
+ * @param i Int
+ * @param j Int
+ */
 fun swap(array: IntArray, i: Int, j: Int) {
     val iValue = array[i]
     array[i] = array[j]
     array[j] = iValue
 }
 
+/**
+ * 冒泡排序，思想：相邻的两个不断比较
+ * @param array IntArray
+ */
 fun bubbleSort(array: IntArray) {
     val length = array.size
     for (i in 0 until length - 1) {
@@ -31,6 +40,10 @@ fun bubbleSort(array: IntArray) {
     }
 }
 
+/**
+ * 选择排序，不断的选择数组中最小的数与第一个数进行交换
+ * @param array IntArray
+ */
 fun selectSort(array: IntArray) {
     val length = array.size
     for (i in 0 until length) {
@@ -41,6 +54,74 @@ fun selectSort(array: IntArray) {
             }
         }
         swap(array, i, minIndex)
+    }
+    array.forEach {
+        println(it)
+    }
+}
+
+/**
+ * 插入排序 最基础版
+ * @param array IntArray
+ */
+fun insertSort(array: IntArray) {
+    for (i in 1 until array.size) {
+        for (j in i downTo 1) {
+            if (array[j] < array[j - 1]) {
+                swap(array, j, j - 1)
+            } else {
+                break
+            }
+        }
+    }
+    array.forEach {
+        println(it)
+    }
+}
+
+/**
+ * 插入排序 优化版 属于稳定排序，对数据部分有序时效率较高
+ * @param array IntArray
+ */
+fun insertSort2(array: IntArray) {
+    if (array.isEmpty()) {
+        return
+    }
+    val size = array.size
+    for (i in 1 until size) {
+        val holder = array[i]
+        var j = i
+        while (j > 0 && array[j - 1] > holder) {
+            array[j] = array[j - 1]
+            j--
+        }
+        array[j] = holder
+    }
+    array.forEach {
+        println(it)
+    }
+}
+
+/**
+ * 希尔排序，插入排序的变种，利用gap步长来分组进行插入排序
+ * @param array IntArray
+ */
+fun shellSort(array: IntArray) {
+    val length = array.size
+    var gap = length / 2
+    while (gap > 0) {
+        for (i in 0 until gap) {
+            for (j in (i + gap) until length step gap) {
+                var k = j
+                val holder = array[j]
+                while (k - gap >= 0 && array[k - gap] > holder) {
+                    array[k] = array[k - gap]
+                    k -= gap
+                }
+                array[k] = holder
+            }
+        }
+        gap /= 2
     }
     array.forEach {
         println(it)
