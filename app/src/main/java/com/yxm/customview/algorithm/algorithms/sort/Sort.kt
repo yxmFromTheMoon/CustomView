@@ -6,6 +6,12 @@ package com.yxm.customview.algorithm.algorithms.sort
  *@description:
  */
 
+fun swap(array: IntArray, i: Int, j: Int) {
+    val iValue = array[i]
+    array[i] = array[j]
+    array[j] = iValue
+}
+
 fun bubbleSort(array: IntArray) {
     val length = array.size
     for (i in 0 until length - 1) {
@@ -20,8 +26,19 @@ fun bubbleSort(array: IntArray) {
     }
 }
 
-fun swap(array: IntArray, i: Int, j: Int) {
-    val iValue = array[i]
-    array[i] = array[j]
-    array[j] = iValue
+fun selectSort(array: IntArray) {
+    val length = array.size
+    for (i in 0 until length) {
+        var minIndex = i
+        for (j in i + 1 until length) {
+            if (array[j] < array[minIndex]) {
+                minIndex = j
+            }
+        }
+        swap(array, i, minIndex)
+    }
+    array.forEach {
+        println(it)
+    }
 }
+

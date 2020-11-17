@@ -1,6 +1,7 @@
 package com.yxm.customview.algorithm.algorithms
 
 import com.yxm.customview.algorithm.algorithms.sort.bubbleSort
+import com.yxm.customview.algorithm.algorithms.sort.selectSort
 import com.yxm.customview.algorithm.algorithms.string.countLetterCurrency
 import com.yxm.customview.algorithm.datastruct.LinkedList
 
@@ -12,5 +13,5 @@ import com.yxm.customview.algorithm.datastruct.LinkedList
 
 fun main() {
     val array = intArrayOf(1,2,-3,38,12)
-    bubbleSort(array)
+    selectSort(array)
 }
