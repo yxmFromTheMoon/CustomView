@@ -1,5 +1,6 @@
 package com.yxm.customview.algorithm.algorithms
 
+import com.yxm.customview.algorithm.algorithms.sort.bubbleSort
 import com.yxm.customview.algorithm.algorithms.string.countLetterCurrency
 import com.yxm.customview.algorithm.datastruct.LinkedList
 
@@ -10,11 +11,6 @@ import com.yxm.customview.algorithm.datastruct.LinkedList
  */
 
 fun main() {
-    println(countLetterCurrency("There"))
-    val linkedList = LinkedList<Int>()
-    linkedList.push(1)
-    linkedList.push(2)
-    linkedList.push(3)
-    linkedList.insert(1, 4)
-    println(linkedList.get(2))
+    val array = intArrayOf(1,2,-3,38,12)
+    bubbleSort(array)
 }
