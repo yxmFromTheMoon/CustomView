@@ -3,7 +3,7 @@ package com.yxm.customview.algorithm
 /**
  * Created by Myron at 2020/11/16 20:27
  * @email yxmbest@163.com
- * @description
+ * @description 手写LinkedList
  */
 class LinkedList<E> {
 
