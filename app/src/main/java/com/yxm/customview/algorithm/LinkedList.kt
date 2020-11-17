@@ -21,6 +21,7 @@ class LinkedList<E> {
      */
     fun push(value: E) {
         linkTail(value)
+        //单向链表的操作
 //        val newNode = Node(value, null,null)
 //        if (head == null) {
 //            head = newNode
@@ -38,7 +39,7 @@ class LinkedList<E> {
      * 和尾节点相连
      * @param value E
      */
-    fun linkTail(value: E) {
+    private fun linkTail(value: E) {
         val t = tail
         val newNode = Node(value, tail, null)
         tail = newNode
@@ -53,7 +54,7 @@ class LinkedList<E> {
      * 和前一个节点相连
      * @param value E
      */
-    fun linkBefore(currentNode: Node<E>?, value: E) {
+    private fun linkBefore(currentNode: Node<E>?, value: E) {
         val preNode = currentNode?.pre
         val newNode = Node(value, preNode, currentNode)
 
@@ -62,16 +63,28 @@ class LinkedList<E> {
             head = newNode
         } else {
             preNode.next = newNode
-            newNode.next = currentNode
         }
+        currentNode?.pre = newNode
     }
 
-    fun unlink(currentNode: Node<E>?): E? {
+    private fun unlink(currentNode: Node<E>?): E? {
         //左右两个节点
         val preNode = currentNode?.pre
         val nextNode = currentNode?.next
         val value = currentNode?.value
 
+        /**
+         * 当前节点不是头节点
+         * 移除当前节点时，要把当前节点的前一个节点的next指向当前节点的next，
+         * 把当前节点的下一个节点的pre指向当前节点的pre
+         *
+         * 当移除的节点是头节点时，直接把当前节点的next赋值给头节点，
+         *
+         * 如果当前节点的next为空，
+         * 有两种情况 1.只有一个头节点 2.当前节点是最后一个节点
+         * 对于第一种情况，直接将head和tail置为空就行了，
+         * 对于第二种情况，要把当前节点的pre赋值给tail
+         */
         if (preNode != null) {
             preNode.next = nextNode
         } else {
@@ -112,7 +125,7 @@ class LinkedList<E> {
         if (index < 0 || index >= len) {
             throw IndexOutOfBoundsException("数组越界")
         }
-        //移除头节点
+        //移除头节点，单向链表的操作
 //        if (index == 0) {
 //            val h = head
 //            head = h?.next
@@ -140,7 +153,7 @@ class LinkedList<E> {
         } else {
             linkBefore(findNode(index), value)
         }
-
+        //单向链表的操作
 //        val newNode = Node(value, null)
 //        if (index == 0) {
 //            val h = head
@@ -157,6 +170,7 @@ class LinkedList<E> {
 
     /**
      * 找到指定位置的node节点
+     * 可以用二分查找优化
      * @param index Int
      */
     private fun findNode(index: Int): Node<E>? {

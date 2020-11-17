@@ -15,10 +15,10 @@ fun main() {
     linkedList.push(2)
     linkedList.push(3)
     linkedList.insert(1, 4)
-    linkedList.remove(1)
-    for (i in 0 until linkedList.size()) {
-        println(linkedList.get(i))
-    }
+    println(linkedList.get(2))
+//    for (i in 0 until linkedList.size()) {
+//        println(linkedList.get(i))
+//    }
     val start = System.currentTimeMillis()
 //    for (i in 0 until 50000) {
 //        linkedList.remove(i)
@@ -60,6 +60,7 @@ fun reverseString2(s: String): CharArray {
 
 /**
  * 统计英文文档中每个字符出现的次数
+ * 类似题目，查找1~2000每个数字出现的次数
  */
 fun countLetterCurrency(str: String) {
     val ascii = IntArray(123) { 0 }
