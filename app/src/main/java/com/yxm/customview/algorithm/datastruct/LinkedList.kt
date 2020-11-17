@@ -1,4 +1,4 @@
-package com.yxm.customview.algorithm
+package com.yxm.customview.algorithm.datastruct
 
 /**
  * Created by Myron at 2020/11/16 20:27

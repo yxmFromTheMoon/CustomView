@@ -1,29 +1,10 @@
-package com.yxm.customview.algorithm
+package com.yxm.customview.algorithm.algorithms.string
 
 /**
- * Created by Myron at 2020/11/14 21:47
- * @email yxmbest@163.com
- * @description 算法和数据结构
+ *@author: yxm
+ *@time: 2020/11/17
+ *@description:字符串相关算法
  */
-
-fun main() {
-    //println(countLetterCurrency("There"))
-    val linkedList = LinkedList<Int>()
-    linkedList.push(1)
-    linkedList.push(2)
-    linkedList.push(3)
-    linkedList.insert(1, 4)
-    println(linkedList.get(2))
-//    for (i in 0 until linkedList.size()) {
-//        println(linkedList.get(i))
-//    }
-    val start = System.currentTimeMillis()
-//    for (i in 0 until 50000) {
-//        linkedList.remove(i)
-//    }
-    val end = System.currentTimeMillis()
-    //println(end - start)
-}
 
 /**
  * 反转字符串，源码算法
