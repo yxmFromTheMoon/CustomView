@@ -128,3 +128,33 @@ fun shellSort(array: IntArray) {
     }
 }
 
+/**
+ * 二分查找，必须是有序数组
+ * @param array IntArray
+ */
+fun binarySearch(array: IntArray, target: Int): Int {
+    //[l...r]区间查找
+    var l = 0
+    var r = array.size - 1
+
+    while (l <= r) {
+        val mid = (l + r) / 2
+        if (array[mid] == target) {
+            return mid
+        } else if (array[mid] > target) {
+            //在左边查找
+            r = mid - 1
+        } else {
+            l = mid + 1
+        }
+    }
+    return -1
+}
+
+/**
+ * 可以递归实现
+ */
+fun binarySearch(){
+
+}
+
