@@ -154,7 +154,18 @@ fun binarySearch(array: IntArray, target: Int): Int {
 /**
  * 可以递归实现
  */
-fun binarySearch(){
-
+fun binarySearch(array: IntArray, l: Int, r: Int, target: Int): Int {
+    if (l > r) {
+        return -1
+    }
+    val mid = (l + r) / 2
+    if (array[mid] == target) {
+        return mid
+    } else if (array[mid] > target) {
+        //在左边查找
+        return binarySearch(array, 0, mid - 1, target)
+    } else {
+        return binarySearch(array, mid + 1, r, target)
+    }
 }
 

@@ -1,8 +1,6 @@
 package com.yxm.customview.algorithm.algorithms
 
-import com.yxm.customview.algorithm.algorithms.sort.*
-import com.yxm.customview.algorithm.algorithms.string.countLetterCurrency
-import com.yxm.customview.algorithm.datastruct.LinkedList
+import com.yxm.customview.algorithm.algorithms.array.twoSum
 
 /**
  * Created by Myron at 2020/11/14 21:47
@@ -11,8 +9,9 @@ import com.yxm.customview.algorithm.datastruct.LinkedList
  */
 
 fun main() {
-    val array = intArrayOf(1,2,3,4,5,8,10,24,45,65,367)
-    //shellSort(array)
-    val index = binarySearch(array,8)
-    println(index)
+    val array = intArrayOf(1,3,4,5,12)
+    val result = twoSum(array,9)
+    result.forEach {
+        println(it)
+    }
 }
