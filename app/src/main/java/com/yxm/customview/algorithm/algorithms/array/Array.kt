@@ -42,3 +42,14 @@ fun twoSum(array: IntArray, sum: Int): IntArray {
     }
     return result
 }
+
+fun twoSum1(array: IntArray, target: Int): IntArray? {
+    val map = HashMap<Int, Int>()
+    for (i in array.indices) {
+        if (map.containsKey(array[i])) {
+            return intArrayOf(map[array[i]]!!,i)
+        }
+        map[target - array[i]] = i
+    }
+    return null
+}
