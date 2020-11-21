@@ -3,6 +3,9 @@ package com.yxm.customview.enter
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
+import android.os.Handler
+import android.os.Looper
+import android.os.Message
 import android.util.Log
 import android.view.View
 import androidx.annotation.RequiresApi
@@ -42,6 +45,7 @@ class MainActivity : BaseSkinActivity() {
     @RequiresApi(Build.VERSION_CODES.M)
     override fun initView() {
         mRecyclerView = recycler_view
+
         val isAllGranted = checkPermissionAllGranted(permissions)
         if (isAllGranted) {
             return
