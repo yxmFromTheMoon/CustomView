@@ -1,5 +1,8 @@
 package com.yxm.customview.algorithm.algorithms.string
 
+import androidx.collection.ArrayMap
+import androidx.collection.arrayMapOf
+
 /**
  *@author: yxm
  *@time: 2020/11/17
@@ -127,4 +130,32 @@ fun countLetterCurrency(str: String) {
     ascii.forEachIndexed { index, i ->
         println("${index.toChar()}->${i}")
     }
+}
+
+/**
+ * 罗马数转整数
+ * @param s String
+ * @return Int
+ */
+fun romanToInt(s: String): Int {
+    val map = ArrayMap<Char,Int>()
+    map['I'] = 1
+    map['V'] = 5
+    map['X'] = 10
+    map['L'] = 50
+    map['C'] = 100
+    map['D'] = 500
+    map['M'] = 1000
+    //从左到右遍历，如果右边的大于左边的，则-去，反之加上
+    val chars = s.toCharArray()
+    var result = 0
+    for (i in 0 until chars.size - 1) {
+        val k = i + 1
+        if (map[chars[k]]!! > map[chars[i]]!!) {
+            result -= map[chars[i]]!!
+        } else {
+            result += map[chars[i]]!!
+        }
+    }
+    return result
 }

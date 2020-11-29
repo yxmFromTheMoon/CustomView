@@ -11,7 +11,6 @@ import java.util.concurrent.TimeUnit
  */
 object OkHttpClientManager {
 
-
     fun getOkHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
                 .connectTimeout(30L, TimeUnit.SECONDS)
@@ -19,7 +18,7 @@ object OkHttpClientManager {
                 .readTimeout(30L, TimeUnit.SECONDS)
                 .writeTimeout(30L, TimeUnit.SECONDS)
                 .followRedirects(true)
-                .followSslRedirects(false)
+                .followSslRedirects(true)
                 .build()
     }
 }

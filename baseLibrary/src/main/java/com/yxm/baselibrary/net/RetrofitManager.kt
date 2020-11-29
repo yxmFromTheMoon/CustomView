@@ -1,6 +1,7 @@
 package com.yxm.baselibrary.net
 
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 /**
@@ -15,6 +16,8 @@ object RetrofitManager {
             .baseUrl("https://api.github.com")
             .client(OkHttpClientManager.getOkHttpClient())
             .addConverterFactory(GsonConverterFactory.create())
+            //.addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
             .build()
 
     fun <T> create(serviceClass: Class<T>): T = mRetrofit.create(serviceClass)

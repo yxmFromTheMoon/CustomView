@@ -1,20 +1,29 @@
 package com.yxm.customview.algorithm.algorithms
 
-import com.yxm.customview.algorithm.algorithms.array.twoSum
-import com.yxm.customview.algorithm.algorithms.array.twoSum1
+import com.yxm.customview.algorithm.datastruct.LinkStack
 
 /**
  * Created by Myron at 2020/11/14 21:47
  * @email yxmbest@163.com
- * @description
+ * @description 算法和数据结构
  */
 
 fun main() {
-    val array = intArrayOf(1, 3, 4, 5, 12)
-    val result = twoSum1(array, 9)
-    Hanoi(3,'a','b','c')
+    val stack = LinkStack<Int>()
+
+    for (i in 0 until 2) {
+        stack.push(i)
+    }
+    println(stack.pop())
 }
 
+/**
+ * 汉诺塔问题
+ * @param n Int
+ * @param a Char
+ * @param b Char
+ * @param c Char
+ */
 fun Hanoi(n: Int, a: Char = 'a', b: Char = 'b', c: Char = 'c') {
 
     if (n == 1) {
