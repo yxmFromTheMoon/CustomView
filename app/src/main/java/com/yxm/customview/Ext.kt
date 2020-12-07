@@ -2,6 +2,9 @@ package com.yxm.customview
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
+import android.content.res.Resources.getSystem
+import android.util.TypedValue
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
@@ -41,3 +44,7 @@ inline fun <reified T> FragmentActivity.startActivityForResult(requestCode: Int,
     intent.block()
     this.startActivityForResult(intent, requestCode)
 }
+
+val Float.px: Float
+    get() = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+            this, getSystem().displayMetrics)

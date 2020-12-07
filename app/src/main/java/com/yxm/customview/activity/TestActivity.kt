@@ -1,5 +1,6 @@
 package com.yxm.customview.activity
 
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.media.Image
 import android.os.Debug
@@ -7,6 +8,8 @@ import android.util.Log
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.AccelerateInterpolator
+import android.view.animation.DecelerateInterpolator
+import android.view.animation.OvershootInterpolator
 import android.widget.ImageView
 import com.yxm.baselibrary.imageloader.ImageLoaderUtils
 import com.yxm.baselibrary.ui.banner.BannerAdapter
@@ -26,48 +29,22 @@ import kotlinx.android.synthetic.main.activity_test.*
  */
 class TestActivity : BaseSkinActivity() {
 
-    private val mImageUrls = listOf("http://gank.io/images/cfb4028bfead41e8b6e34057364969d1",
-            "https://pic.downk.cc/item/5e7b64fd504f4bcb040fae8f", "http://gank.io/images/cfb4028bfead41e8b6e34057364969d1", "http://gank.io/images/cfb4028bfead41e8b6e34057364969d1", "http://gank.io/images/cfb4028bfead41e8b6e34057364969d1")
-
-
     override fun getLayoutId(): Int {
         return R.layout.activity_test
     }
 
     override fun initView() {
-//        banner_view.setAdapter(object : BannerAdapter() {
-//            override fun getCount(): Int {
-//                return mImageUrls.size
-//            }
-//
-//            override fun getView(position: Int, convertView: View?): View {
-//                val imageView: ImageView?
-//                if (convertView == null) {
-//                    imageView = ImageView(this@TestActivity)
-//                    imageView.scaleType = ImageView.ScaleType.FIT_XY
-//                } else {
-//                    imageView = convertView as ImageView
-//                }
-//
-//                ImageLoaderUtils.displayImage(imageView, mImageUrls[position])
-//                return imageView
-//            }
-//        }).setInterpolator(AccelerateInterpolator())
-//                .start()
-
+        val animator = ObjectAnimator.ofInt(0,20)
+        animator.addUpdateListener {
+            val value = it.animatedValue as Int
+            dash_view.setPointerPosition(value)
+        }
+        animator.duration = 1500
+        animator.interpolator = DecelerateInterpolator()
+        animator.start()
     }
 
     override fun initListener() {
-        val images = arrayListOf("/storage/emulated/0/DCIM/Camera/IMG_20201115_094851_1.jpg",
-                "/storage/emulated/0/DCIM/Camera/IMG_20201115_094858.jpg", "/storage/emulated/0/DCIM/Camera/IMG_20201115_094854.jpg")
-        test_tv.setOnClickListener {
-            ImageSelector.create()
-                    .max(9)
-                    .multi()
-                    .showCamera()
-                    .originData(arrayListOf())
-                    .start(this, 111)
-        }
 
     }
 
@@ -75,14 +52,4 @@ class TestActivity : BaseSkinActivity() {
 
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == RESULT_OK) {
-            if (requestCode == 111) {
-                data?.let {
-                    Log.d("test_paths", it.getStringArrayListExtra(SelectPictureActivity.RESULT_LIST_KEY).toString())
-                }
-            }
-        }
-    }
 }

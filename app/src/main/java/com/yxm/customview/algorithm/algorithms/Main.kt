@@ -3,7 +3,7 @@ package com.yxm.customview.algorithm.algorithms
 import com.yxm.customview.algorithm.datastruct.LinkStack
 
 /**
- * Created by Myron at 2020/11/14 21:47
+ * Created by Myron at 2020/11/14 21:47s
  * @email yxmbest@163.com
  * @description 算法和数据结构
  */

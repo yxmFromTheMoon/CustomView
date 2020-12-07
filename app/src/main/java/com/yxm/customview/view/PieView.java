@@ -1,14 +1,17 @@
 package com.yxm.customview.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 
 import com.yxm.customview.data.PieData;
+import com.yxm.customview.utils.Utils;
 
 import java.util.ArrayList;
 
@@ -26,6 +29,7 @@ public class PieView extends View {
     private float mStartAngle = 0;
     private int mWidth;
     private int mHeight;
+    private int mOffsetLength = Utils.dp2px(getContext(), 20);
 
     public PieView(Context context) {
         this(context, null);
@@ -51,18 +55,26 @@ public class PieView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-        if(null == mData)
+        if (null == mData)
             return;
         float currentAngle = mStartAngle;
-        canvas.translate(mWidth/2 ,mHeight / 2);
-        float radius = (float)(Math.min(mWidth,mHeight) / 2 * 0.8);
-        RectF rectF = new RectF(-radius,-radius,radius,radius);
+        canvas.translate(mWidth / 2, mHeight / 2);
+        float radius = (float) (Math.min(getWidth(), getHeight()) / 2 * 0.8);
 
-        for (PieData item: mData){
+        RectF rectF = new RectF(-radius, -radius, radius, radius);
+
+        for (PieData item : mData) {
+            if (mData.indexOf(item) == 2) {
+                canvas.save();
+                canvas.translate(mOffsetLength * (float) Math.cos(Math.toRadians(currentAngle + item.getAngle() / 2)),
+                        mOffsetLength * (float) Math.sin(Math.toRadians(currentAngle + item.getAngle() / 2)));
+            }
             mPaint.setColor(item.getColor());
-            canvas.drawArc(rectF,currentAngle,item.getAngle(),true,mPaint);
+            canvas.drawArc(rectF, currentAngle, item.getAngle(), true, mPaint);
             currentAngle += item.getAngle();
+            if (mData.indexOf(item) == 2) {
+                canvas.restore();
+            }
         }
     }
 
@@ -72,7 +84,7 @@ public class PieView extends View {
         invalidate();
     }
 
-    public void setData(ArrayList<PieData> data){
+    public void setData(ArrayList<PieData> data) {
         this.mData = data;
         initData(data);
         invalidate();
@@ -82,19 +94,17 @@ public class PieView extends View {
         if (null == data || data.isEmpty())
             return;
         float sumValue = 0;
-        for (PieData item : data){
+        for (PieData item : data) {
             sumValue += item.getValue();
             int j = data.indexOf(item) % mColors.length;
             item.setColor(mColors[j]);
         }
 
-        float sumAngle = 0;
-        for(PieData item : data){
+        for (PieData item : data) {
             float percentage = item.getValue() / sumValue;
             float angle = percentage * 360;
             item.setPercentage(percentage);
             item.setAngle(angle);
-            sumAngle += angle;
         }
     }
 }
