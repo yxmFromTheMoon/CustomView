@@ -106,6 +106,8 @@ public class TextView extends View {
         Paint.FontMetricsInt fontMetrics = mPaint.getFontMetricsInt();
         // top是一个负值，bottom是一个正值
         int dy = (fontMetrics.bottom - fontMetrics.top) / 2 - fontMetrics.bottom;
+        //另一种求法
+        //int dy = (fontMetrics.descent - fontMetrics.ascent) / 2 - fontMetrics.descent;
         int baseLine = getHeight() / 2 + dy;
         //x 开始的位置
         int x = getPaddingLeft();

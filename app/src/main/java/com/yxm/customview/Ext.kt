@@ -45,6 +45,9 @@ inline fun <reified T> FragmentActivity.startActivityForResult(requestCode: Int,
     this.startActivityForResult(intent, requestCode)
 }
 
-val Float.px: Float
+val Float.dp: Float
     get() = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
             this, getSystem().displayMetrics)
+
+val Int.dp: Float
+    get() = this.toFloat().dp

@@ -6,7 +6,7 @@ import android.os.Build
 import android.util.AttributeSet
 import android.view.View
 import androidx.annotation.RequiresApi
-import com.yxm.customview.px
+import com.yxm.customview.dp
 import java.lang.IllegalStateException
 import kotlin.math.cos
 import kotlin.math.sin
@@ -33,14 +33,14 @@ class DashBoardView @JvmOverloads constructor(context: Context, attributeSet: At
 
     //圆弧开口角度
     private var mOpenAngle = 120f
-    private var mOuterArcRadius = 150f.px
-    private var mPointerLength = 120f.px
+    private var mOuterArcRadius = 150f.dp
+    private var mPointerLength = 120f.dp
 
     //刻度线的矩形长
-    private var mDashLength = 10f.px
+    private var mDashLength = 10f.dp
 
     //刻度线的矩形宽
-    private var mDashWidth = 2f.px
+    private var mDashWidth = 2f.dp
     private var mDashPath = Path()
     private val mOuterArcPath = Path()
     private lateinit var mDashPathEffect: PathDashPathEffect
@@ -51,11 +51,11 @@ class DashBoardView @JvmOverloads constructor(context: Context, attributeSet: At
     init {
         mOuterArcPaint.color = Color.BLACK
         mOuterArcPaint.style = Paint.Style.STROKE
-        mOuterArcPaint.strokeWidth = 3f.px
+        mOuterArcPaint.strokeWidth = 3f.dp
         mDashPath.addRect(0f, 0f, mDashWidth, mDashLength, Path.Direction.CCW)
         mDashPaint.color = Color.RED
         mPointerPaint.color = Color.BLACK
-        mPointerPaint.strokeWidth = 5f.px
+        mPointerPaint.strokeWidth = 5f.dp
     }
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
