@@ -20,7 +20,7 @@ class CameraView @JvmOverloads constructor(context: Context, attributeSet: Attri
     private val mPaint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val mPadding = 50.dp
     private val bitmap = getBitmap(SIZE.toInt())
-    var cameraRotation = 0f
+    var flipRotation = 0f
         set(value) {
             field = value
             invalidate()
@@ -50,24 +50,29 @@ class CameraView @JvmOverloads constructor(context: Context, attributeSet: Attri
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onDraw(canvas: Canvas) {
+
         canvas.withSave {
             translate((mPadding + SIZE / 2), (mPadding + SIZE / 2))
-            rotate(-flipTop)
-            camera.rotateX(cameraRotation)
+            rotate(-flipRotation)
+            camera.save()
+            camera.rotateX(flipTop)
             camera.applyToCanvas(canvas)
+            camera.restore()
             clipRect(-SIZE, -SIZE, SIZE, 0f)
-            rotate(flipTop)
+            rotate(flipRotation)
             translate(-(mPadding + SIZE / 2), -(mPadding + SIZE / 2))
             drawBitmap(bitmap, mPadding, mPadding, null)
         }
 
         canvas.withSave {
             translate((mPadding + SIZE / 2), (mPadding + SIZE / 2))
-            rotate(-flipBottom)
-            camera.rotateX(cameraRotation)
+            rotate(-flipRotation)
+            camera.save()
+            camera.rotateX(flipBottom)
             camera.applyToCanvas(canvas)
+            camera.restore()
             clipRect(-SIZE, 0f, SIZE, SIZE)
-            rotate(flipBottom)
+            rotate(flipRotation)
             translate(-(mPadding + SIZE / 2), -(mPadding + SIZE / 2))
             drawBitmap(bitmap, mPadding, mPadding, null)
         }

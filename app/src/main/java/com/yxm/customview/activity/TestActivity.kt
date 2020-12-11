@@ -2,22 +2,9 @@ package com.yxm.customview.activity
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
-import android.content.Intent
-import android.media.Image
-import android.os.Debug
-import android.util.Log
-import android.view.View
-import android.view.animation.*
-import android.widget.ImageView
-import com.yxm.baselibrary.imageloader.ImageLoaderUtils
-import com.yxm.baselibrary.ui.banner.BannerAdapter
 import com.yxm.customview.R
-import com.yxm.customview.startActivity
-import com.yxm.customview.startActivityForResult
 import com.yxm.customview.view.TypeEvaluatorView
 import com.yxm.framelibrary.BaseSkinActivity
-import com.yxm.framelibrary.imagepicker.ImageSelector
-import com.yxm.framelibrary.imagepicker.SelectPictureActivity
 import kotlinx.android.synthetic.main.activity_test.*
 
 /**
@@ -38,12 +25,14 @@ class TestActivity : BaseSkinActivity() {
         animator.startDelay = 1000
         animator.start()
 
-        val animator1 = ObjectAnimator.ofFloat(camera_view,"flipBottom",0f,60f)
-
-        val animator2 = ObjectAnimator.ofFloat(camera_view,"flipTop",0f,60f)
+        val animator1 = ObjectAnimator.ofFloat(camera_view,"flipRotation",360f)
+        val animator2 = ObjectAnimator.ofFloat(camera_view,"flipTop",60f)
+        val animator3 = ObjectAnimator.ofFloat(camera_view,"flipBottom",60f)
+        val animator4 = ObjectAnimator.ofFloat(camera_view,"flipBottom",0f)
+        val animator5 = ObjectAnimator.ofFloat(camera_view,"flipTop",0f)
 
         val set = AnimatorSet()
-        set.playSequentially(animator1,animator2)
+        set.playSequentially(animator3,animator1,animator2,animator4,animator5)
         set.duration = 3000
         set.startDelay = 1000
         set.start()
