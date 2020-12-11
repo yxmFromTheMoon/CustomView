@@ -6,6 +6,7 @@ import android.os.Build
 import android.util.AttributeSet
 import android.view.View
 import androidx.annotation.RequiresApi
+import androidx.core.graphics.withSave
 import com.yxm.customview.R
 import com.yxm.customview.dp
 
@@ -16,11 +17,26 @@ import com.yxm.customview.dp
  */
 class CameraView @JvmOverloads constructor(context: Context, attributeSet: AttributeSet? = null)
     : View(context, attributeSet) {
-    private val width = 200.dp
-    private val height = 200.dp
     private val mPaint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val mPadding = 50.dp
-    private val bitmap = getBitmap(width.toInt())
+    private val bitmap = getBitmap(SIZE.toInt())
+    var cameraRotation = 0f
+        set(value) {
+            field = value
+            invalidate()
+        }
+
+    var flipBottom = 0f
+        set(value) {
+            field = value
+            invalidate()
+        }
+
+    var flipTop = 0f
+        set(value) {
+            field = value
+            invalidate()
+        }
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     private val clipPath = Path().apply {
@@ -29,42 +45,46 @@ class CameraView @JvmOverloads constructor(context: Context, attributeSet: Attri
     private val camera = Camera()
 
     init {
-        camera.rotateX(45f)
-        camera.setLocation(0f,0f,-6 * resources.displayMetrics.density)
+        camera.setLocation(0f, 0f, -6 * resources.displayMetrics.density)
     }
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onDraw(canvas: Canvas) {
-        canvas.save()
-        canvas.translate((mPadding + width / 2), (mPadding + height / 2))
-        canvas.rotate(-60f)
-        camera.applyToCanvas(canvas)
-        canvas.clipRect(-width,-height,width,0f)
-        canvas.rotate(60f)
-        canvas.translate(-(mPadding + width / 2), -(mPadding + height / 2))
-//        canvas.drawRect(mPadding, mPadding, width, height, mPaint)
-        canvas.drawBitmap(bitmap,mPadding,mPadding,null)
-        canvas.restore()
+        canvas.withSave {
+            translate((mPadding + SIZE / 2), (mPadding + SIZE / 2))
+            rotate(-flipTop)
+            camera.rotateX(cameraRotation)
+            camera.applyToCanvas(canvas)
+            clipRect(-SIZE, -SIZE, SIZE, 0f)
+            rotate(flipTop)
+            translate(-(mPadding + SIZE / 2), -(mPadding + SIZE / 2))
+            drawBitmap(bitmap, mPadding, mPadding, null)
+        }
 
-        canvas.save()
-        canvas.translate((mPadding + width / 2), (mPadding + height / 2))
-        canvas.rotate(-60f)
-        camera.applyToCanvas(canvas)
-        canvas.clipRect(-width,0f,width,height)
-        canvas.rotate(60f)
-        canvas.translate(-(mPadding + width / 2), -(mPadding + height / 2))
-        //canvas.drawRect(mPadding, mPadding, width, height, mPaint)
-        canvas.drawBitmap(bitmap,mPadding,mPadding,null)
-        canvas.restore()
+        canvas.withSave {
+            translate((mPadding + SIZE / 2), (mPadding + SIZE / 2))
+            rotate(-flipBottom)
+            camera.rotateX(cameraRotation)
+            camera.applyToCanvas(canvas)
+            clipRect(-SIZE, 0f, SIZE, SIZE)
+            rotate(flipBottom)
+            translate(-(mPadding + SIZE / 2), -(mPadding + SIZE / 2))
+            drawBitmap(bitmap, mPadding, mPadding, null)
+        }
+
     }
 
-    private fun getBitmap(width:Int):Bitmap{
+    private fun getBitmap(width: Int): Bitmap {
         val options = BitmapFactory.Options()
         options.inJustDecodeBounds = true
-        BitmapFactory.decodeResource(resources,R.drawable.test,options)
+        BitmapFactory.decodeResource(resources, R.drawable.test, options)
         options.inJustDecodeBounds = false
         options.inDensity = options.outWidth
         options.inTargetDensity = width
-        return BitmapFactory.decodeResource(resources,R.drawable.test,options)
+        return BitmapFactory.decodeResource(resources, R.drawable.test, options)
+    }
+
+    companion object {
+        private val SIZE = 200.dp
     }
 }

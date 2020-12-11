@@ -6,12 +6,19 @@
 
     <com.yxm.customview.view.DashBoardView
         android:id="@+id/dash_view"
-        android:layout_centerInParent="true"
         android:layout_width="match_parent"
-        android:visibility="gone"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
 
     <com.yxm.customview.view.CameraView
+        android:id="@+id/camera_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        />
+
+    <com.yxm.customview.view.TypeEvaluatorView
+        android:id="@+id/provinces_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </RelativeLayout>
