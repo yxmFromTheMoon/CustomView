@@ -9,6 +9,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.graphics.withSave
 import com.yxm.customview.R
 import com.yxm.customview.dp
+import com.yxm.customview.utils.Utils
 
 /**
  * Created by Myron at 2020/12/9 19:51
@@ -19,7 +20,7 @@ class CameraView @JvmOverloads constructor(context: Context, attributeSet: Attri
     : View(context, attributeSet) {
     private val mPaint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val mPadding = 50.dp
-    private val bitmap = getBitmap(SIZE.toInt())
+    private val bitmap = Utils.getBitmap(context,SIZE.toInt())
     var flipRotation = 0f
         set(value) {
             field = value
@@ -77,16 +78,6 @@ class CameraView @JvmOverloads constructor(context: Context, attributeSet: Attri
             drawBitmap(bitmap, mPadding, mPadding, null)
         }
 
-    }
-
-    private fun getBitmap(width: Int): Bitmap {
-        val options = BitmapFactory.Options()
-        options.inJustDecodeBounds = true
-        BitmapFactory.decodeResource(resources, R.drawable.test, options)
-        options.inJustDecodeBounds = false
-        options.inDensity = options.outWidth
-        options.inTargetDensity = width
-        return BitmapFactory.decodeResource(resources, R.drawable.test, options)
     }
 
     companion object {

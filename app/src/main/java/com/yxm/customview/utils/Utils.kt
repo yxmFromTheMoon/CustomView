@@ -3,11 +3,15 @@ package com.yxm.customview.utils
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.content.Context
+import android.content.res.Resources
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.PointF
 import android.util.DisplayMetrics
 import android.util.TypedValue
 import android.view.View
 import android.view.WindowManager
+import com.yxm.customview.R
 
 /**
  * @Author yxm
@@ -74,5 +78,15 @@ object Utils {
     fun getPointByPercent(startPoint: PointF, endPointF: PointF, fraction: Float): PointF {
         return PointF(evaluateValue(fraction, startPoint.x, endPointF.x),
                 evaluateValue(fraction, startPoint.y, endPointF.y))
+    }
+
+    fun getBitmap(context: Context,width: Int): Bitmap {
+        val options = BitmapFactory.Options()
+        options.inJustDecodeBounds = true
+        BitmapFactory.decodeResource(context.resources, R.drawable.test, options)
+        options.inJustDecodeBounds = false
+        options.inDensity = options.outWidth
+        options.inTargetDensity = width
+        return BitmapFactory.decodeResource(context.resources, R.drawable.test, options)
     }
 }
