@@ -1,6 +1,7 @@
 package com.yxm.customview.view
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.util.AttributeSet
 import android.view.GestureDetector
@@ -20,16 +21,29 @@ class ScalableImageView @JvmOverloads constructor(context: Context, attributeSet
         val IMAGE_SIZE = 300.dp
     }
 
-    private var smallScale = 1.0
-
-    private var bigScale = 1.5
+    private var offsetX = 0f
+    private var offsetY = 0f
+    private var smallScale = 0
+    private var bigScale = 0
+    private var isBigMode = false
 
     private val gestureDetector = GestureDetector(context, this)
-    private val bitmap = Utils.getBitmap(context, IMAGE_SIZE.toInt())
+    private var bitmap: Bitmap = Utils.getBitmap(context, IMAGE_SIZE.toInt())
+
+
+    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+        super.onSizeChanged(w, h, oldw, oldh)
+        offsetX = (width - IMAGE_SIZE) / 2
+        offsetY = (height - IMAGE_SIZE) / 2
+    }
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        canvas.drawBitmap(bitmap, (width - IMAGE_SIZE) / 2.toFloat(), (height - IMAGE_SIZE) / 2.toFloat(), null)
+        canvas.drawBitmap(bitmap, offsetX, offsetY, null)
+    }
+
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        return gestureDetector.onTouchEvent(event)
     }
 
     override fun onShowPress(e: MotionEvent?) {

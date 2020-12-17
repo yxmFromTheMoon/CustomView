@@ -3,7 +3,6 @@ package com.yxm.customview.utils
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.content.Context
-import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.PointF
@@ -80,7 +79,7 @@ object Utils {
                 evaluateValue(fraction, startPoint.y, endPointF.y))
     }
 
-    fun getBitmap(context: Context,width: Int): Bitmap {
+    fun getBitmap(context: Context, width: Int): Bitmap {
         val options = BitmapFactory.Options()
         options.inJustDecodeBounds = true
         BitmapFactory.decodeResource(context.resources, R.drawable.test, options)

@@ -7,7 +7,6 @@ import android.util.AttributeSet
 import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.core.graphics.withSave
-import com.yxm.customview.R
 import com.yxm.customview.dp
 import com.yxm.customview.utils.Utils
 
