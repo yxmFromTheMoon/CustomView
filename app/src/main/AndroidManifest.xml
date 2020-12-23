@@ -84,6 +84,9 @@
         <activity
             android:name="com.yxm.framelibrary.imagepicker.SelectPictureActivity"
             android:screenOrientation="portrait" />
+
+        <activity android:name=".activity.CameraViewActivity"/>
+        <activity android:name=".activity.ScalableImageViewActivity"/>
     </application>
 
 </manifest>

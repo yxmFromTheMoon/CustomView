@@ -17,7 +17,7 @@ import com.yxm.customview.utils.Utils
  */
 class CameraView @JvmOverloads constructor(context: Context, attributeSet: AttributeSet? = null)
     : View(context, attributeSet) {
-    private val mPaint = Paint(Paint.ANTI_ALIAS_FLAG)
+
     private val mPadding = 50.dp
     private val bitmap = Utils.getBitmap(context,SIZE.toInt())
     var flipRotation = 0f

@@ -115,6 +115,8 @@ class MainActivity : BaseSkinActivity() {
         val bean16 = ButtonBean("17", "Bezier")
         val bean17 = ButtonBean("18", "LoveLayout")
         val bean18 = ButtonBean("19", "DragRv")
+        val bean19 = ButtonBean("20", "CameraView")
+        val bean20 = ButtonBean("21", "ScalableImageView")
         mList.add(bean)
         mList.add(bean1)
         mList.add(bean2)
@@ -134,6 +136,8 @@ class MainActivity : BaseSkinActivity() {
         mList.add(bean16)
         mList.add(bean17)
         mList.add(bean18)
+        mList.add(bean19)
+        mList.add(bean20)
 
         val layoutManager = FlexboxLayoutManager(this)
         layoutManager.flexDirection = FlexDirection.ROW
@@ -143,7 +147,7 @@ class MainActivity : BaseSkinActivity() {
         mCommonAdapter = EnterListAdapterV2(this, mList)
 
         mCommonAdapter.setItemClickListener(object : ItemClickListener {
-            override fun onItemClick(holder: ViewHolder,position: Int) {
+            override fun onItemClick(holder: ViewHolder, position: Int) {
                 when (mList[position].tag) {
                     "1" -> {
                         startActivity<TextViewActivity> {}
@@ -201,6 +205,12 @@ class MainActivity : BaseSkinActivity() {
                     }
                     "19" -> {
                         startActivity<DragItemAnimatorActivity> {}
+                    }
+                    "20" -> {
+                        startActivity<CameraViewActivity> { }
+                    }
+                    "21" -> {
+                        startActivity<ScalableImageViewActivity> { }
                     }
                 }
             }
