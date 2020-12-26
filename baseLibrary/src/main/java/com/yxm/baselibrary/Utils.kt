@@ -8,6 +8,8 @@ import android.util.DisplayMetrics
 import android.util.TypedValue
 import android.view.View
 import android.view.WindowManager
+import okio.*
+import java.io.File
 
 /**
  * @Author yxm
@@ -74,5 +76,24 @@ object Utils {
     fun getPointByPercent(startPoint: PointF, endPointF: PointF, fraction: Float): PointF {
         return PointF(evaluateValue(fraction, startPoint.x, endPointF.x),
                 evaluateValue(fraction, startPoint.y, endPointF.y))
+    }
+
+    /**
+     * 使用okio拷贝资源文件夹下的文件
+     * @param context Context
+     * @param assetsFileName String
+     * @param targetDir String
+     * @return File
+     */
+    fun copyAssetsFile(context: Context, assetsFileName: String, targetFile: String): File {
+        val file = File("${context.cacheDir}${File.separator}$targetFile")
+        if(file.exists()){
+            file.delete()
+        }
+        val assets = context.assets.open(assetsFileName)
+        val source = assets.source()
+        val bufferSkin = file.sink().buffer()
+        bufferSkin.writeAll(source)
+        return file
     }
 }

@@ -1,11 +1,10 @@
 package com.yxm.customview.activity
 
-import android.animation.AnimatorSet
-import android.animation.ObjectAnimator
+import android.content.Context
 import com.yxm.customview.R
-import com.yxm.customview.view.TypeEvaluatorView
 import com.yxm.framelibrary.BaseSkinActivity
-import kotlinx.android.synthetic.main.activity_test.*
+import dalvik.system.DexClassLoader
+import java.io.File
 
 /**
  * @author yxm
@@ -20,13 +19,25 @@ class TestActivity : BaseSkinActivity() {
     }
 
     override fun initView() {
-        val animator = ObjectAnimator.ofObject(provinces_view, "mProvince", TypeEvaluatorView.StringEvaluator(), "北京市", "澳门特别行政区")
-        animator.duration = 3000
-        animator.startDelay = 1000
-        animator.start()
 
-        edit_text.isUseFloatLabel = true
+        val file = File("$cacheDir", "/demo.apk")
+        val assets = assets.open("plugin/plugindemo.apk")
+        assets.use { input ->
+            file.outputStream().use { output ->
+                input.copyTo(output, 8 * 1024)
+                input.close()
+                output.close()
+            }
+        }
 
+        if (file.exists()) {
+            val classLoader = DexClassLoader(file.path, cacheDir.path, null, null)
+            val clazz = classLoader.loadClass("com.yxm.plugindemo.PluginUtils")
+            val constructor = clazz.declaredConstructors[0]
+            val instance = constructor.newInstance()
+            val method = clazz.getDeclaredMethod("toast", Context::class.java)
+            method.invoke(instance, this)
+        }
     }
 
     override fun initListener() {
