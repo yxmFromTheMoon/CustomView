@@ -27,7 +27,7 @@ android {
     kotlinOptions{
         jvmTarget = "1.8"
     }
-    viewBinding.enabled = true
+
 }
 
 dependencies {
@@ -44,6 +44,8 @@ dependencies {
     //noinspection GradleDependency
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.2'
+    //releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.3'
 
     api project(":frameLibrary")
     implementation 'androidx.preference:preference:1.1.0'
