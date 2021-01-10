@@ -22,6 +22,7 @@ import com.yxm.baselibrary.recyclerview.ItemClickListener
 import com.yxm.baselibrary.recyclerview.ViewHolder
 import com.yxm.customview.R
 import com.yxm.customview.activity.*
+import com.yxm.customview.jetpack.lifecycle.LifecycleActivity
 import com.yxm.customview.showToast
 import com.yxm.customview.startActivity
 import com.yxm.framelibrary.BaseSkinActivity
@@ -117,6 +118,7 @@ class MainActivity : BaseSkinActivity() {
         val bean18 = ButtonBean("19", "DragRv")
         val bean19 = ButtonBean("20", "CameraView")
         val bean20 = ButtonBean("21", "ScalableImageView")
+        val bean21 = ButtonBean("22", "LifeCycleActivity")
         mList.add(bean)
         mList.add(bean1)
         mList.add(bean2)
@@ -138,6 +140,7 @@ class MainActivity : BaseSkinActivity() {
         mList.add(bean18)
         mList.add(bean19)
         mList.add(bean20)
+        mList.add(bean21)
 
         val layoutManager = FlexboxLayoutManager(this)
         layoutManager.flexDirection = FlexDirection.ROW
@@ -211,6 +214,9 @@ class MainActivity : BaseSkinActivity() {
                     }
                     "21" -> {
                         startActivity<ScalableImageViewActivity> { }
+                    }
+                    "22" -> {
+                        startActivity<LifecycleActivity> { }
                     }
                 }
             }

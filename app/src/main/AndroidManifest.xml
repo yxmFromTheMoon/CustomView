@@ -87,6 +87,7 @@
 
         <activity android:name=".activity.CameraViewActivity"/>
         <activity android:name=".activity.ScalableImageViewActivity"/>
+        <activity android:name=".jetpack.lifecycle.LifecycleActivity"/>
     </application>
 
 </manifest>
