@@ -1,6 +1,6 @@
 package com.yxm.customview.algorithm.algorithms
 
-import com.yxm.customview.algorithm.datastruct.LinkStack
+import com.yxm.customview.algorithm.datastruct.binarytree.Tree
 
 /**
  * Created by Myron at 2020/11/14 21:47s
@@ -9,12 +9,26 @@ import com.yxm.customview.algorithm.datastruct.LinkStack
  */
 
 fun main() {
-    val stack = LinkStack<Int>()
 
-    for (i in 0 until 2) {
-        stack.push(i)
-    }
-    println(stack.pop())
+    val A = Tree.TreeNode("a")
+    val B = Tree.TreeNode("b")
+    val C = Tree.TreeNode("c")
+    val D = Tree.TreeNode("d")
+    val E = Tree.TreeNode("e")
+    val F = Tree.TreeNode("f")
+    val G = Tree.TreeNode("g")
+
+    A.left = B
+    A.right = C
+    B.left = D
+    B.right = E
+    C.right = F
+    F.right = G
+
+    //Tree.preOrderTraverse(A)
+    //Tree.midOrderTraverse(A)
+    //Tree.postOrderTraverse(A)
+    println(Tree.isBalanceTree(A))
 }
 
 /**
