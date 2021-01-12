@@ -118,4 +118,9 @@ class BouquetLoadingView @JvmOverloads constructor(context: Context, attr: Attri
         isStopAnimator = true
     }
 
+    override fun onDetachedFromWindow() {
+        clearAnimation()
+        super.onDetachedFromWindow()
+    }
+
 }

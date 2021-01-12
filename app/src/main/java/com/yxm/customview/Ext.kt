@@ -7,6 +7,7 @@ import android.content.res.Resources.getSystem
 import android.util.TypedValue
 import android.view.View
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.yxm.customview.basic.MyApplication
 
@@ -37,6 +38,12 @@ inline fun <reified T> Context.startActivity(block: Intent.() -> Unit) {
     val intent = Intent(this, T::class.java)
     intent.block()
     this.startActivity(intent)
+}
+
+inline fun <reified T> Fragment.startActivity(block: Intent.() -> Unit){
+    val intent = Intent(activity,T::class.java)
+    intent.block()
+    activity?.startActivity(intent)
 }
 
 inline fun <reified T> FragmentActivity.startActivityForResult(requestCode: Int, block: Intent.() -> Unit) {

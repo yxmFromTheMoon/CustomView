@@ -16,6 +16,8 @@ import com.yxm.baselibrary.ioc.ViewUtils
  */
 abstract class BaseActivity : AppCompatActivity() {
 
+    protected lateinit var mContext :Context
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mContext = this
@@ -52,9 +54,5 @@ abstract class BaseActivity : AppCompatActivity() {
      */
     protected open fun <T : View?> viewById(viewId: Int): T {
         return findViewById<View>(viewId) as T
-    }
-
-    companion object {
-        lateinit var mContext: Context
     }
 }
