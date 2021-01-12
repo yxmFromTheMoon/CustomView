@@ -15,4 +15,5 @@ public class HelloWorld {
     public void makeChange(){}
 
     public void commit1(){}
+    public void commit2(){}
 }
