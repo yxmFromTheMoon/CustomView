@@ -32,7 +32,7 @@ class ItemFragment : Fragment() {
         textView.text = arguments?.getString(TEXT)
 
         textView.setOnClickListener {
-            context?.startActivity<ColorTrackTextViewActivity> {
+            startActivity<ColorTrackTextViewActivity> {
                 putExtra(TEXT, textView.text.toString())
             }
         }
