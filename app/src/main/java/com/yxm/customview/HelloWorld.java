@@ -19,4 +19,6 @@ public class HelloWorld {
     public void commit3(){}
     public void commit4(){}
     public void commit5(){}
+    public void commit6(){}
+    public void commit7(){}
 }
