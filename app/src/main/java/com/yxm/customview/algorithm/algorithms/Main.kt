@@ -1,5 +1,6 @@
 package com.yxm.customview.algorithm.algorithms
 
+import com.yxm.customview.algorithm.datastruct.binarytree.PriorityQueue
 import com.yxm.customview.algorithm.datastruct.binarytree.Tree
 
 /**
@@ -25,10 +26,18 @@ fun main() {
     C.right = F
     F.right = G
 
-    //Tree.preOrderTraverse(A)
-    //Tree.midOrderTraverse(A)
-    //Tree.postOrderTraverse(A)
     println(Tree.isBalanceTree(A))
+
+    val queue = PriorityQueue(5)
+    queue.push(10)
+    queue.push(20)
+    queue.push(6)
+    queue.push(90)
+    queue.push(40)
+
+    queue.datas.forEach {
+        println(it)
+    }
 }
 
 /**
