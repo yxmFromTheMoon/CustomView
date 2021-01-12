@@ -13,4 +13,6 @@ public class HelloWorld {
     }
 
     public void makeChange(){}
+
+    public void commit1(){}
 }
