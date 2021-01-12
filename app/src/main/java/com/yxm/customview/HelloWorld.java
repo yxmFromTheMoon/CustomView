@@ -17,4 +17,5 @@ public class HelloWorld {
     public void commit1(){}
     public void commit2(){}
     public void commit3(){}
+    public void commit4(){}
 }
