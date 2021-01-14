@@ -2,6 +2,7 @@ package com.yxm.customview.algorithm.algorithms
 
 import com.yxm.customview.algorithm.datastruct.binarytree.PriorityQueue
 import com.yxm.customview.algorithm.datastruct.binarytree.Tree
+import kotlin.random.Random
 
 /**
  * Created by Myron at 2020/11/14 21:47s
@@ -10,33 +11,12 @@ import com.yxm.customview.algorithm.datastruct.binarytree.Tree
  */
 
 fun main() {
-
-    val A = Tree.TreeNode("a")
-    val B = Tree.TreeNode("b")
-    val C = Tree.TreeNode("c")
-    val D = Tree.TreeNode("d")
-    val E = Tree.TreeNode("e")
-    val F = Tree.TreeNode("f")
-    val G = Tree.TreeNode("g")
-
-    A.left = B
-    A.right = C
-    B.left = D
-    B.right = E
-    C.right = F
-    F.right = G
-
-    println(Tree.isBalanceTree(A))
-
-    val queue = PriorityQueue(5)
-    queue.push(10)
-    queue.push(20)
-    queue.push(6)
-    queue.push(90)
-    queue.push(40)
-
-    queue.datas.forEach {
-        println(it)
+    val queue = PriorityQueue(10)
+    for (i in 0 until 10){
+        queue.push(Random.nextInt(0,100))
+    }
+    for (i in 0 until 10){
+        println(queue.pop())
     }
 }
 
