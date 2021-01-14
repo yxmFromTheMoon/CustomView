@@ -11,11 +11,14 @@ import kotlin.random.Random
  */
 
 fun main() {
-    val queue = PriorityQueue(10)
-    for (i in 0 until 10){
-        queue.push(Random.nextInt(0,100))
+
+    val arr = IntArray(10)
+    arr.forEachIndexed { index, i ->
+        arr[index] = Random.nextInt(0,100)
     }
-    for (i in 0 until 10){
+    val queue = PriorityQueue(arr,arr.size)
+
+    for (i in 1 until queue.datas.size){
         println(queue.pop())
     }
 }

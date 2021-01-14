@@ -9,11 +9,22 @@ package com.yxm.customview.algorithm.datastruct.binarytree;
 public class PriorityQueue {
 
     private int count;
-    private final int[] datas;
+    private int[] datas;
 
     public PriorityQueue(int count) {
         this.count = 0;
         datas = new int[count + 1];
+    }
+
+    public PriorityQueue(int[] arr, int n) {
+        datas = new int[n + 1];
+        for (int i = 0; i < n; i++) {
+            datas[i + 1] = arr[i];
+        }
+        this.count = n;
+        for (int index = count / 2; index >= 1; index--) {
+            shiftDown(index);
+        }
     }
 
     boolean isEmpty() {
