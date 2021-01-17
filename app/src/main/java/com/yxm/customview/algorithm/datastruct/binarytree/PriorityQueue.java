@@ -11,11 +11,19 @@ public class PriorityQueue {
     private int count;
     private int[] datas;
 
+    /**
+     * 堆排序version1，直接push数据，通过pop取数据
+     */
     public PriorityQueue(int count) {
         this.count = 0;
         datas = new int[count + 1];
     }
 
+    /**
+     * 堆排序version2，优化
+     * @param arr IntArray
+     * @param n Int
+     */
     public PriorityQueue(int[] arr, int n) {
         datas = new int[n + 1];
         for (int i = 0; i < n; i++) {
