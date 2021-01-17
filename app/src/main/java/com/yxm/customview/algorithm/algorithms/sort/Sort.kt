@@ -138,14 +138,18 @@ fun binarySearch(array: IntArray, target: Int): Int {
     var r = array.size - 1
 
     while (l <= r) {
-        val mid = (l + r) / 2
-        if (array[mid] == target) {
-            return mid
-        } else if (array[mid] > target) {
-            //在左边查找
-            r = mid - 1
-        } else {
-            l = mid + 1
+        val mid = l + (r + l) / 2
+        when {
+            array[mid] == target -> {
+                return mid
+            }
+            array[mid] > target -> {
+                //在左边查找
+                r = mid - 1
+            }
+            else -> {
+                l = mid + 1
+            }
         }
     }
     return -1
@@ -158,14 +162,18 @@ fun binarySearch(array: IntArray, l: Int, r: Int, target: Int): Int {
     if (l > r) {
         return -1
     }
-    val mid = (l + r) / 2
-    if (array[mid] == target) {
-        return mid
-    } else if (array[mid] > target) {
-        //在左边查找
-        return binarySearch(array, 0, mid - 1, target)
-    } else {
-        return binarySearch(array, mid + 1, r, target)
+    val mid = l + (l + r) / 2
+    return when {
+        array[mid] == target -> {
+            mid
+        }
+        array[mid] > target -> {
+            //在左边查找
+            binarySearch(array, 0, mid - 1, target)
+        }
+        else -> {
+            binarySearch(array, mid + 1, r, target)
+        }
     }
 }
 
