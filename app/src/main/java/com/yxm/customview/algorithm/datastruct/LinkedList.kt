@@ -27,7 +27,7 @@ class LinkedList<E> {
 //            head = newNode
 //        } else {
 //            //插入到最后一个的后面
-//            //记录last节点,时间复杂度变为0(1),这也是系统采用双向链表的一个原因
+//            //记录last节点,时间复杂度变为O(1),这也是系统采用双向链表的一个原因
 //            //经测试，插入100000条数据由8秒变为5毫秒
 //            tail?.next = newNode
 //        }
@@ -175,11 +175,26 @@ class LinkedList<E> {
      */
     private fun findNode(index: Int): Node<E>? {
         //从头节点开始找
-        var headNode = head
-        for (i in 0 until index) {
-            headNode = headNode?.next
+        //var headNode = head
+//        for (i in 0 until index) {
+//            headNode = headNode?.next
+//        }
+//        return headNode
+        //二分查找
+        val mid = len shr 1
+        return if (index < mid) {
+            var headNode = head
+            for (i in 0 until mid) {
+                headNode = head?.next
+            }
+            headNode
+        } else {
+            var lastNode = tail
+            for (i in len - 1 downTo mid) {
+                lastNode = tail?.pre
+            }
+            lastNode
         }
-        return headNode
     }
 
     inner class Node<E>(var value: E?, var pre: Node<E>?, var next: Node<E>?)
