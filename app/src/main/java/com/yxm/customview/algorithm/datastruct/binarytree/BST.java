@@ -148,18 +148,18 @@ public class BST<K, V> {
 
     public void removeMin() {
         if (root != null) {
-            removeMin(root);
+            root = removeMin(root);
         }
     }
 
     public void removeMax() {
         if (root != null) {
-            removeMax(root);
+            root = removeMax(root);
         }
     }
 
     public void remove(K key) {
-        remove(root, key);
+        root = remove(root, key);
     }
 
     /**
@@ -196,7 +196,6 @@ public class BST<K, V> {
             //删除待删除节点的右子树的最小节点，将successor的右子树指向它
             successor.right = removeMin(root.right);
             successor.left = root.left;
-            count--;
             return successor;
         }
     }
@@ -245,7 +244,7 @@ public class BST<K, V> {
         }
         //递归
 //        if(root.left == null){
-//            return root.value;
+//            return root;
 //        }
 //        return max(root.right);
         while (root.right != null) {
@@ -266,7 +265,7 @@ public class BST<K, V> {
         }
         //递归
 //        if(root.left == null){
-//            return root.value;
+//            return root;
 //        }
 //        return max(root.left);
         while (root.left != null) {
