@@ -1,5 +1,7 @@
 package com.yxm.customview.algorithm.algorithms
 
+import com.yxm.customview.algorithm.algorithms.array.removeDuplicateNumbers
+import com.yxm.customview.algorithm.algorithms.array.removeZero
 import com.yxm.customview.algorithm.algorithms.sort.swap
 import kotlin.random.Random
 
@@ -10,17 +12,8 @@ import kotlin.random.Random
  */
 
 fun main() {
-
-    val arr = IntArray(10)
-    arr.forEachIndexed { index, i ->
-        arr[index] = Random.nextInt(0, 100)
-    }
-//    val queue = PriorityQueue(arr, arr.size)
-//
-//    for (i in 1 until queue.datas.size) {
-//        println(queue.pop())
-//    }
-    heapSort(arr, arr.size)
+    val arr = intArrayOf(3,12,13,13)
+    println(removeDuplicateNumbers(arr))
 }
 
 /**
