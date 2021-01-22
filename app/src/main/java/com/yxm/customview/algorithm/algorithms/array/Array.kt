@@ -84,6 +84,35 @@ fun twoSum1(array: IntArray, target: Int): IntArray? {
 }
 
 /**
+ * 只有0，1，2三个元素的无序数组，对其进行排序
+ * 三路快排的思路，
+ * 0..zero左闭右开全是0,
+ * zero+1..i-1左闭右开都是1,
+ * two..array.size-1左闭右开都是2
+ */
+fun sortColor(array: IntArray){
+    var zero = -1
+    var two = array.size
+    var i = 0
+    while (i < two) {
+        when {
+            array[i] == 1 -> {
+                i++
+            }
+            array[i] == 2 -> {
+                two--
+                swap(array, i, two)
+            }
+            else -> {
+                zero++
+                swap(array, zero, i)
+                i++
+            }
+        }
+    }
+}
+
+/**
  * 给定一个已按照升序排列 的有序数组，找到两个数使得它们相加之和等于目标数。
 函数应该返回这两个下标值 index1 和 index2，其中 index1 必须小于 index2。
 说明:

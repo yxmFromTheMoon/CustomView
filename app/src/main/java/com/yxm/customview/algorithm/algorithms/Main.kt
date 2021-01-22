@@ -2,9 +2,8 @@ package com.yxm.customview.algorithm.algorithms
 
 import com.yxm.customview.algorithm.algorithms.array.isPalindrome
 import com.yxm.customview.algorithm.algorithms.array.removeDuplicateNumbers
-import com.yxm.customview.algorithm.algorithms.array.removeZero
+import com.yxm.customview.algorithm.algorithms.array.sortColor
 import com.yxm.customview.algorithm.algorithms.sort.swap
-import kotlin.random.Random
 
 /**
  * Created by Myron at 2020/11/14 21:47s
@@ -16,6 +15,11 @@ fun main() {
     val arr = intArrayOf(3,12,13,13)
     println(removeDuplicateNumbers(arr))
     println(isPalindrome("A man, a plan, a canal: Panama"))
+
+    sortColor(arr)
+    arr.forEach {
+        println(it)
+    }
 }
 
 /**
