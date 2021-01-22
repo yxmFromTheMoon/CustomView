@@ -83,6 +83,8 @@ fun twoSum1(array: IntArray, target: Int): IntArray? {
     return null
 }
 
+/**                   以下都可用双指针思想            **/
+
 /**
  * 只有0，1，2三个元素的无序数组，对其进行排序
  * 三路快排的思路，
@@ -90,7 +92,7 @@ fun twoSum1(array: IntArray, target: Int): IntArray? {
  * zero+1..i-1左闭右开都是1,
  * two..array.size-1左闭右开都是2
  */
-fun sortColor(array: IntArray){
+fun sortColor(array: IntArray) {
     var zero = -1
     var two = array.size
     var i = 0
@@ -127,7 +129,7 @@ fun sortColor(array: IntArray){
 链接：https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-fun twoSumII(array: IntArray, target: Int):IntArray {
+fun twoSumII(array: IntArray, target: Int): IntArray {
     var l = 0
     var r = array.size - 1
     while (l < r) {
@@ -145,6 +147,7 @@ fun twoSumII(array: IntArray, target: Int):IntArray {
     }
     return intArrayOf(0, 0)
 }
+
 /**
  * 给定一个字符串，验证它是否是回文串，只考虑字母和数字字符，可以忽略字母的大小写。
 说明：本题中，我们将空字符串定义为有效的回文串。
@@ -159,7 +162,7 @@ fun twoSumII(array: IntArray, target: Int):IntArray {
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 fun isPalindrome(s: String?): Boolean {
-    if(s.isNullOrEmpty()){
+    if (s.isNullOrEmpty()) {
         return true
     }
     val charArray = s.replace(Regex("[^a-zA-Z0-9\\u4E00-\\u9FA5]")) {
@@ -167,13 +170,36 @@ fun isPalindrome(s: String?): Boolean {
     }.toLowerCase(Locale.ROOT).toCharArray()
     var l = 0
     var r = charArray.size - 1
-    while (l <= r){
-        if(charArray[l] == charArray[r]){
+    while (l <= r) {
+        if (charArray[l] == charArray[r]) {
             l++
             r--
-        }else{
+        } else {
             return false
         }
     }
     return true
 }
+
+/**
+ * 反转字符串
+ */
+fun reverseStr(s: String?): String? {
+    if (s.isNullOrEmpty()) {
+        return s
+    }
+    var l = 0
+    val charArray = s.toCharArray()
+    var r = charArray.size - 1
+    while (l < r){
+        val leftChar = charArray[l]
+        charArray[l] = charArray[r]
+        charArray[r] = leftChar
+        l++
+        r--
+    }
+    return charArray.concatToString()
+}
+
+
+/**                            end                        **/

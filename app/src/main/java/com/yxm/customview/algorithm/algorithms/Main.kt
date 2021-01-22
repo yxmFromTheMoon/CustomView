@@ -2,8 +2,10 @@ package com.yxm.customview.algorithm.algorithms
 
 import com.yxm.customview.algorithm.algorithms.array.isPalindrome
 import com.yxm.customview.algorithm.algorithms.array.removeDuplicateNumbers
+import com.yxm.customview.algorithm.algorithms.array.reverseStr
 import com.yxm.customview.algorithm.algorithms.array.sortColor
 import com.yxm.customview.algorithm.algorithms.sort.swap
+import com.yxm.customview.algorithm.algorithms.string.reverseString
 
 /**
  * Created by Myron at 2020/11/14 21:47s
@@ -20,6 +22,7 @@ fun main() {
     arr.forEach {
         println(it)
     }
+    println(reverseStr("abcdef"))
 }
 
 /**

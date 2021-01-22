@@ -40,6 +40,27 @@ fun reverseString2(s: String): CharArray {
     return value
 }
 
+
+/**
+ * 反转字符串,双指针法
+ */
+fun reverseStr(s: String?): String? {
+    if (s.isNullOrEmpty()) {
+        return s
+    }
+    var l = 0
+    val charArray = s.toCharArray()
+    var r = charArray.size - 1
+    while (l < r){
+        val leftChar = charArray[l]
+        charArray[l] = charArray[r]
+        charArray[r] = leftChar
+        l++
+        r--
+    }
+    return charArray.concatToString()
+}
+
 /**
  * 字符串转int
  * 注意边界
