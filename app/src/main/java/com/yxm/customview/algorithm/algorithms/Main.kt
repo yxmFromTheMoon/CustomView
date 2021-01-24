@@ -1,9 +1,6 @@
 package com.yxm.customview.algorithm.algorithms
 
-import com.yxm.customview.algorithm.algorithms.array.isPalindrome
-import com.yxm.customview.algorithm.algorithms.array.removeDuplicateNumbers
-import com.yxm.customview.algorithm.algorithms.array.reverseStr
-import com.yxm.customview.algorithm.algorithms.array.sortColor
+import com.yxm.customview.algorithm.algorithms.array.*
 import com.yxm.customview.algorithm.algorithms.sort.swap
 import com.yxm.customview.algorithm.algorithms.string.reverseString
 
@@ -15,6 +12,7 @@ import com.yxm.customview.algorithm.algorithms.string.reverseString
 
 fun main() {
     val arr = intArrayOf(3,12,13,13)
+    val arr2 = intArrayOf(3,1,17,13)
     println(removeDuplicateNumbers(arr))
     println(isPalindrome("A man, a plan, a canal: Panama"))
 
@@ -23,6 +21,9 @@ fun main() {
         println(it)
     }
     println(reverseStr("abcdef"))
+    interSectionOfTwoArrays(arr,arr2).forEach {
+        println(it)
+    }
 }
 
 /**

@@ -3,6 +3,8 @@ package com.yxm.customview.algorithm.algorithms.array
 import com.yxm.customview.algorithm.algorithms.sort.swap
 import java.util.*
 import kotlin.collections.HashMap
+import kotlin.collections.HashSet
+import kotlin.math.min
 
 /**
  *@author: yxm
@@ -191,7 +193,7 @@ fun reverseStr(s: String?): String? {
     var l = 0
     val charArray = s.toCharArray()
     var r = charArray.size - 1
-    while (l < r){
+    while (l < r) {
         val leftChar = charArray[l]
         charArray[l] = charArray[r]
         charArray[r] = leftChar
@@ -203,3 +205,45 @@ fun reverseStr(s: String?): String? {
 
 
 /**                            end                        **/
+
+/**                        滑动窗口                             **/
+/**
+ * 最短子数组的长度
+ * 给定一个值和数组，找出数组中子数组的和>=s的最小子数组长度
+ */
+fun minSubArrayLen(target: Int, array: IntArray): Int {
+    var l = 0
+    var r = -1
+    var sum = 0
+    var result = array.size + 1
+    while (l < array.size) {
+        if (r + 1 < array.size && sum < target) {
+            r++
+            sum += array[r]
+        } else {
+            sum -= array[l]
+            l++
+        }
+        if (sum >= target) {
+            result = min(result, r - l + 1)
+        }
+    }
+    if (result == array.size + 1) {
+        return 0
+    }
+    return result
+}
+
+/**
+ * 两个数组的相同的元素
+ */
+fun interSectionOfTwoArrays(arr1: IntArray, arr2: IntArray): IntArray {
+    val result = HashSet<Int>()
+    val setRecord = arr1.toHashSet()
+    arr2.forEach {
+        if (setRecord.contains(it)) {
+            result.add(it)
+        }
+    }
+    return result.toIntArray()
+}
