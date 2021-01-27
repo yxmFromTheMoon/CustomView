@@ -1,9 +1,7 @@
 package com.yxm.customview.algorithm.algorithms
 
 import com.yxm.customview.algorithm.algorithms.array.*
-import com.yxm.customview.algorithm.algorithms.linkedlist.createLinkedList
-import com.yxm.customview.algorithm.algorithms.linkedlist.printLinkedList
-import com.yxm.customview.algorithm.algorithms.linkedlist.reverseLinkedList
+import com.yxm.customview.algorithm.algorithms.linkedlist.*
 import com.yxm.customview.algorithm.algorithms.sort.swap
 import com.yxm.customview.algorithm.algorithms.string.reverseString
 
@@ -14,7 +12,7 @@ import com.yxm.customview.algorithm.algorithms.string.reverseString
  */
 
 fun main() {
-    val arr = intArrayOf(3, 2, 6, 13, 6, 8, 64)
+    val arr = intArrayOf(3, 2,2, 6, 6, 8, 64)
 //    val arr2 = intArrayOf(3,1,17,13)
 //    println(removeDuplicateNumbers(arr))
 //    println(isPalindrome("A man, a plan, a canal: Panama"))
@@ -28,7 +26,7 @@ fun main() {
 //        println(it)
 //    }
     val head = createLinkedList(arr)
-    val reverseLinkedNode = reverseLinkedList(head)
+    val reverseLinkedNode = removeDuplicateNode(head)
     printLinkedList(reverseLinkedNode)
 }
 

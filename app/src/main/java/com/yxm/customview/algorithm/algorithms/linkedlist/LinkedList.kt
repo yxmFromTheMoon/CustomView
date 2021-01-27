@@ -51,15 +51,40 @@ fun reverseLinkedList(head: ListNode?): ListNode? {
 /**
  * 删除链表中值与给定的val相等的节点
  */
-fun removeValNode(head: ListNode?, value: Int) {
-
+fun removeValNode(head: ListNode?, value: Int): ListNode? {
+    var tempHead = head
+    while (tempHead != null && tempHead.value == value) {
+        tempHead = tempHead.next
+    }
+    var cur = tempHead
+    while (cur?.next != null) {
+        val next = cur.next
+        if (cur.next?.value == value) {
+            cur.next = next?.next
+        } else {
+            cur = cur.next
+        }
+    }
+    return tempHead
 }
 
 /**
- * 删除链表中重复的节点，使得每个节点只出现一次
+ * 删除链表中相邻重复的节点，使得每个节点只出现一次
  */
-fun removeDuplicateNode(head: ListNode?) {
-
+fun removeDuplicateNode(head: ListNode?): ListNode? {
+    if (head?.next == null) {
+        return head
+    }
+    var cur = head
+    while (cur?.next != null) {
+        val next = cur.next
+        if (cur.value == next?.value) {
+            cur.next = next.next
+        } else {
+            cur = next
+        }
+    }
+    return head
 }
 
 /**
