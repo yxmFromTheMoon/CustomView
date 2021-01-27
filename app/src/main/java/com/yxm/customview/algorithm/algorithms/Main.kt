@@ -1,6 +1,9 @@
 package com.yxm.customview.algorithm.algorithms
 
 import com.yxm.customview.algorithm.algorithms.array.*
+import com.yxm.customview.algorithm.algorithms.linkedlist.createLinkedList
+import com.yxm.customview.algorithm.algorithms.linkedlist.printLinkedList
+import com.yxm.customview.algorithm.algorithms.linkedlist.reverseLinkedList
 import com.yxm.customview.algorithm.algorithms.sort.swap
 import com.yxm.customview.algorithm.algorithms.string.reverseString
 
@@ -11,19 +14,22 @@ import com.yxm.customview.algorithm.algorithms.string.reverseString
  */
 
 fun main() {
-    val arr = intArrayOf(3,12,13,13)
-    val arr2 = intArrayOf(3,1,17,13)
-    println(removeDuplicateNumbers(arr))
-    println(isPalindrome("A man, a plan, a canal: Panama"))
-
-    sortColor(arr)
-    arr.forEach {
-        println(it)
-    }
-    println(reverseStr("abcdef"))
-    interSectionOfTwoArrays(arr,arr2).forEach {
-        println(it)
-    }
+    val arr = intArrayOf(3, 2, 6, 13, 6, 8, 64)
+//    val arr2 = intArrayOf(3,1,17,13)
+//    println(removeDuplicateNumbers(arr))
+//    println(isPalindrome("A man, a plan, a canal: Panama"))
+//
+//    sortColor(arr)
+//    arr.forEach {
+//        println(it)
+//    }
+//    println(reverseStr("abcdef"))
+//    interSectionOfTwoArrays(arr,arr2).forEach {
+//        println(it)
+//    }
+    val head = createLinkedList(arr)
+    val reverseLinkedNode = reverseLinkedList(head)
+    printLinkedList(reverseLinkedNode)
 }
 
 /**
