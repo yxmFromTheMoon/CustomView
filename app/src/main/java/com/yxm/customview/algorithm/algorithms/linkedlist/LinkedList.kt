@@ -89,10 +89,15 @@ fun removeDuplicateNode(head: ListNode?): ListNode? {
 
 /**
  * 删除链表中的某个节点
- * 思路：设置虚拟头节点
  */
-fun removeNode(head: ListNode?) {
-
+fun removeNode(node: ListNode?): ListNode? {
+    val delNode = node?.next
+    delNode?.let {
+        node.value = delNode.value
+        node.next = delNode.next
+    }
+    // TODO: 2021/1/28  
+    return null
 }
 
 /**
@@ -101,4 +106,27 @@ fun removeNode(head: ListNode?) {
  */
 fun swapNodeInPairs(head: ListNode?) {
 
+}
+
+/**
+ * 判断链表是否有环,快慢指针 O(n)
+ * 也可用集合记录每个节点，遍历链表,如果集合中存在某个元素，
+ * 则证明有环，性能较差
+ * @param head ListNode?
+ * @return Boolean
+ */
+fun hasCycle(head: ListNode?): Boolean {
+    if (head?.next == null) {
+        return false
+    }
+    var slow = head
+    var fast = head
+    while (fast?.next != null) {
+        slow = slow?.next
+        fast = fast.next?.next
+        if (slow == fast) {
+            return true
+        }
+    }
+    return false
 }
