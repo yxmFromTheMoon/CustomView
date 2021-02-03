@@ -90,14 +90,15 @@ fun removeDuplicateNode(head: ListNode?): ListNode? {
 /**
  * 删除链表中的某个节点
  */
-fun removeNode(node: ListNode?): ListNode? {
-    val delNode = node?.next
+fun removeNode(node: ListNode?) {
+    if (node == null) {
+        return
+    }
+    val delNode = node.next
     delNode?.let {
         node.value = delNode.value
         node.next = delNode.next
     }
-    // TODO: 2021/1/28  
-    return null
 }
 
 /**

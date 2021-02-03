@@ -1,7 +1,6 @@
 package com.yxm.customview.algorithm.algorithms.string
 
 import androidx.collection.ArrayMap
-import androidx.collection.arrayMapOf
 
 /**
  *@author: yxm
@@ -51,7 +50,7 @@ fun reverseStr(s: String?): String? {
     var l = 0
     val charArray = s.toCharArray()
     var r = charArray.size - 1
-    while (l < r){
+    while (l < r) {
         val leftChar = charArray[l]
         charArray[l] = charArray[r]
         charArray[r] = leftChar
@@ -159,7 +158,7 @@ fun countLetterCurrency(str: String) {
  * @return Int
  */
 fun romanToInt(s: String): Int {
-    val map = ArrayMap<Char,Int>()
+    val map = ArrayMap<Char, Int>()
     map['I'] = 1
     map['V'] = 5
     map['X'] = 10
@@ -179,4 +178,26 @@ fun romanToInt(s: String): Int {
         }
     }
     return result
+}
+
+/**
+ * 判断字符串是否为回文序列
+ * 双指针法
+ */
+fun isPalindrome(s: String): Boolean {
+    if (s == "") {
+        return true
+    }
+    val charArray = s.replace("[^a-zA-Z0-9\\u4E00-\\u9FA5]".toRegex(), "").toLowerCase().toCharArray()
+    var l = 0
+    var r = charArray.size - 1
+    while (l <= r) {
+        if (charArray[l] == charArray[r]) {
+            l++
+            r--
+        } else {
+            return false
+        }
+    }
+    return true
 }
