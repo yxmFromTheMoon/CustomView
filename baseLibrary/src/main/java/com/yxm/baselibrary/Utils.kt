@@ -2,14 +2,23 @@ package com.yxm.baselibrary
 
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
+import android.app.ActivityManager
 import android.content.Context
 import android.graphics.PointF
+import android.os.Process
+import android.text.TextUtils
 import android.util.DisplayMetrics
 import android.util.TypedValue
 import android.view.View
 import android.view.WindowManager
-import okio.*
+import okio.buffer
+import okio.sink
+import okio.source
+import java.io.BufferedReader
 import java.io.File
+import java.io.FileInputStream
+import java.io.InputStreamReader
+
 
 /**
  * @Author yxm
@@ -87,7 +96,7 @@ object Utils {
      */
     fun copyAssetsFile(context: Context, assetsFileName: String, targetFile: String): File {
         val file = File("${context.cacheDir}${File.separator}$targetFile")
-        if(file.exists()){
+        if (file.exists()) {
             file.delete()
         }
         val assets = context.assets.open(assetsFileName)
@@ -95,5 +104,60 @@ object Utils {
         val bufferSkin = file.sink().buffer()
         bufferSkin.writeAll(source)
         return file
+    }
+
+    fun isMainProcess(context: Context): Boolean {
+        val processName: String? = getCurProcessName(context)
+        return if (processName != null && processName.contains(":")) {
+            false
+        } else processName != null && processName == context.packageName
+    }
+
+    private fun getCurProcessName(context: Context): String? {
+        var processName: String? = ""
+        if (!TextUtils.isEmpty(processName)) {
+            return processName
+        }
+        try {
+            val pid = Process.myPid()
+            val mActivityManager = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+            for (appProcess in mActivityManager.runningAppProcesses) {
+                if (appProcess.pid == pid) {
+                    processName = appProcess.processName
+                    return processName
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        processName = getCurProcessNameFromProc()
+        return processName
+    }
+
+    private fun getCurProcessNameFromProc(): String? {
+        var cmdlineReader: BufferedReader? = null
+        try {
+            cmdlineReader = BufferedReader(InputStreamReader(
+                    FileInputStream(
+                            "/proc/" + Process.myPid() + "/cmdline"),
+                    "iso-8859-1"))
+            var c: Int
+            val processName = StringBuilder()
+            while (cmdlineReader.read().also { c = it } > 0) {
+                processName.append(c.toChar())
+            }
+            return processName.toString()
+        } catch (e: Throwable) {
+            // ignore
+        } finally {
+            if (cmdlineReader != null) {
+                try {
+                    cmdlineReader.close()
+                } catch (e: java.lang.Exception) {
+                    // ignore
+                }
+            }
+        }
+        return null
     }
 }
