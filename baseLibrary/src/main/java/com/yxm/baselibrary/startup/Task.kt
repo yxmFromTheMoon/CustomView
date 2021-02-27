@@ -3,6 +3,7 @@ package com.yxm.baselibrary.startup
 import android.os.Process
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.Executor
+import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 /**
@@ -86,7 +87,7 @@ abstract class Task : ITask {
         return true
     }
 
-    override fun runOn(): Executor {
+    override fun runOn(): ExecutorService {
         return Executors.newCachedThreadPool()
     }
 

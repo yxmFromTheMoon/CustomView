@@ -1,10 +1,9 @@
 package com.yxm.framelibrary.skin
 
-import android.app.Activity
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.util.ArrayMap
-import androidx.collection.arrayMapOf
 import com.yxm.framelibrary.skin.attr.SkinView
 import java.io.File
 
@@ -14,6 +13,7 @@ import java.io.File
  * 2020/11/8 13:41
  * @description 皮肤资源管理
  */
+@SuppressLint("StaticFieldLeak")
 object SkinManager {
 
     private lateinit var mContext: Context

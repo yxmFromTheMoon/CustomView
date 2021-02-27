@@ -19,7 +19,6 @@ class TestActivity : BaseSkinActivity() {
     }
 
     override fun initView() {
-
         val file = File("$cacheDir", "/demo.apk")
         val assets = assets.open("plugin/plugindemo.apk")
         assets.use { input ->

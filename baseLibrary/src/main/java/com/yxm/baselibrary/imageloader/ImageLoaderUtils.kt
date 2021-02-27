@@ -1,5 +1,6 @@
 package com.yxm.baselibrary.imageloader
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
 import android.widget.ImageView
@@ -14,14 +15,14 @@ import java.lang.RuntimeException
  *@time: 2020/10/16
  *@description:
  */
+@SuppressLint("StaticFieldLeak")
 object ImageLoaderUtils {
     private var mImageLoader: BaseImageLoader? = null
     private lateinit var mContext: Context
 
     fun init(context: Context) {
-        mContext = context
-        //默认使用Glide加载
-        mImageLoader = GlideImageLoader(context)
+        mContext = context.applicationContext
+        mImageLoader = GlideImageLoader(mContext)
     }
 
     private fun getImageLoader(): BaseImageLoader {

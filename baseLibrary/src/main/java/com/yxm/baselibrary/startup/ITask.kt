@@ -1,6 +1,7 @@
 package com.yxm.baselibrary.startup
 
 import android.os.Process
+import android.util.Log
 import androidx.annotation.IntRange
 import java.util.concurrent.Executor
 

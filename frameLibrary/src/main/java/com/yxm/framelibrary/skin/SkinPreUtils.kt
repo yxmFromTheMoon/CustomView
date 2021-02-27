@@ -1,5 +1,6 @@
 package com.yxm.framelibrary.skin
 
+import android.annotation.SuppressLint
 import android.content.Context
 import androidx.core.content.edit
 
@@ -9,6 +10,7 @@ import androidx.core.content.edit
  * 2020/11/8 20:22
  * @description
  */
+@SuppressLint("StaticFieldLeak")
 object SkinPreUtils {
     private lateinit var mContext: Context
 

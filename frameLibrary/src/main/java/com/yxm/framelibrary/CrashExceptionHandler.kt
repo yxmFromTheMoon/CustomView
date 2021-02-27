@@ -1,5 +1,6 @@
 package com.yxm.framelibrary
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
 
@@ -8,6 +9,7 @@ import android.util.Log
  *@time: 2020/10/10
  *@description: 全局异常处理
  */
+@SuppressLint("StaticFieldLeak")
 object CrashExceptionHandler : Thread.UncaughtExceptionHandler {
 
     private lateinit var mContext: Context
@@ -21,6 +23,6 @@ object CrashExceptionHandler : Thread.UncaughtExceptionHandler {
     }
 
     fun init(context: Context) {
-        this.mContext = context
+        this.mContext = context.applicationContext
     }
 }

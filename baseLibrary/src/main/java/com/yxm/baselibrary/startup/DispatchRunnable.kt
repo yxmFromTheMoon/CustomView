@@ -32,7 +32,7 @@ class DispatchRunnable @JvmOverloads constructor(private val task: Task,
         task.getTailRunnable()?.run()
 
         if (!task.needCall() || !task.runOnMainThread()) {
-            //TaskStat.markTaskDone()
+            TaskStat.markTaskDone()
             task.isFinished = true
             if (taskDispatcher != null) {
                 taskDispatcher.satisfyChildren(task)

@@ -16,14 +16,15 @@ object TaskSortUtil {
     fun getTasksHigh(): List<Task?>? {
         return sNewTasksHigh
     }
+
     /**
      * 任务的有向无环图的拓扑排序
      *
      * @return
      */
     @Synchronized
-    fun getSortResult(originTasks: List<Task>,
-                      clsLaunchTasks: List<Class<out Task>>): List<Task?>? {
+    fun getSortResult(originTasks: MutableList<Task>,
+                      clsLaunchTasks: List<Class<out Task>>): MutableList<Task> {
         val dependSet: MutableSet<Int> = ArraySet()
         val graph = Graph(originTasks.size)
         for (i in originTasks.indices) {
@@ -41,13 +42,13 @@ object TaskSortUtil {
                 graph.addEdge(indexOfDepend, i)
             }
         }
-        val indexList: List<Int>? = graph.topologicalSort()
+        val indexList: MutableList<Int>? = graph.topologicalSort()
         return getResultTasks(originTasks, dependSet, indexList!!)
     }
 
-    private fun getResultTasks(originTasks: List<Task>,
-                               dependSet: Set<Int>, indexList: List<Int>): List<Task?> {
-        val newTasksAll: MutableList<Task?> = ArrayList(originTasks.size)
+    private fun getResultTasks(originTasks: MutableList<Task>,
+                               dependSet: Set<Int>, indexList: MutableList<Int>): MutableList<Task> {
+        val newTasksAll: MutableList<Task> = ArrayList(originTasks.size)
         val newTasksDepended: MutableList<Task> = ArrayList() // 被别人依赖的
         val newTasksWithOutDepend: MutableList<Task> = ArrayList() // 没有依赖的
         val newTasksRunAsSoon: MutableList<Task> = ArrayList() // 需要提升自己优先级的，先执行（这个先是相对于没有依赖的先）

@@ -1,5 +1,6 @@
 package com.yxm.baselibrary.startup.sort
 
+import android.util.Log
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -8,14 +9,18 @@ import kotlin.collections.ArrayList
  * @email: yxmbest@163.com
  * @description: 邻接表实现的图
  */
-class Graph(private val verticeCount: Int) {
+class Graph(private val verticesCount: Int) {
     //顶点数
 
     //邻接表
-    private var mAdj: Array<MutableList<Int>> = arrayOf(ArrayList(verticeCount))
+    private var mAdj: Array<MutableList<Int>> = Array(verticesCount) {
+        mutableListOf()
+    }
 
     init {
-        for (i in 0 until verticeCount) {
+        Log.d("test_verticesCount", "$verticesCount")
+        Log.d("test_verticesCount", "${mAdj.size}")
+        for (i in 0 until verticesCount) {
             mAdj[i] = ArrayList()
         }
     }
@@ -34,15 +39,15 @@ class Graph(private val verticeCount: Int) {
      * 拓扑排序
      */
     fun topologicalSort(): Vector<Int>? {
-        val indegree = IntArray(verticeCount)
-        for (i in 0 until verticeCount) { //初始化所有点的入度数量
+        val indegree = IntArray(verticesCount)
+        for (i in 0 until verticesCount) { //初始化所有点的入度数量
             val temp = mAdj[i] as ArrayList<Int>?
             for (node in temp!!) {
                 indegree[node]++
             }
         }
         val queue: Queue<Int> = LinkedList<Int>()
-        for (i in 0 until verticeCount) { //找出所有入度为0的点
+        for (i in 0 until verticesCount) { //找出所有入度为0的点
             if (indegree[i] == 0) {
                 queue.add(i)
             }
@@ -59,7 +64,7 @@ class Graph(private val verticeCount: Int) {
             }
             cnt++
         }
-        check(cnt == verticeCount) {  //检查是否有环，理论上拿出来的点的次数和点的数量应该一致，如果不一致，说明有环
+        check(cnt == verticesCount) {  //检查是否有环，理论上拿出来的点的次数和点的数量应该一致，如果不一致，说明有环
             "Exists a cycle in the graph"
         }
         return topOrder
