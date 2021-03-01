@@ -14,7 +14,7 @@ import com.bumptech.glide.request.transition.Transition
  *@time: 2020/10/16
  *@description:
  */
-class GlideImageLoader(context: Context) : BaseImageLoader(context) {
+class GlideImageLoader(context: Context) : BaseImageLoader() {
 
     private val mContext = context
 

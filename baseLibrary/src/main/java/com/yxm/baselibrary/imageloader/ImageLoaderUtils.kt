@@ -20,18 +20,24 @@ object ImageLoaderUtils {
 
     fun init(context: Context) {
         mContext = context
+        //默认使用Glide加载
+        mImageLoader = GlideImageLoader(context)
     }
 
-     private fun getImageLoader(): BaseImageLoader {
+    private fun getImageLoader(): BaseImageLoader {
         if (mImageLoader != null) {
             return mImageLoader as BaseImageLoader
         }
-        if (isClazzExits("com.bumptech.glide.Glide")) {
-            mImageLoader = GlideImageLoader(mContext)
-        } else if (isClazzExits("coil.Coil")) {
-            mImageLoader = CoilImageLoader(mContext)
-        } else {
-            throw RuntimeException("找不到图片加载库")
+        mImageLoader = when {
+            isClazzExits("com.bumptech.glide.Glide") -> {
+                GlideImageLoader(mContext)
+            }
+            isClazzExits("coil.Coil") -> {
+                CoilImageLoader(mContext)
+            }
+            else -> {
+                throw RuntimeException("找不到图片加载库")
+            }
         }
         return mImageLoader as BaseImageLoader
     }

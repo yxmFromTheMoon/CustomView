@@ -6,7 +6,6 @@ import android.widget.ImageView
 import androidx.core.graphics.drawable.toBitmap
 import coil.ImageLoader
 import coil.annotation.ExperimentalCoilApi
-import coil.imageLoader
 import coil.intercept.Interceptor
 import coil.load
 import coil.loadAny
@@ -21,7 +20,7 @@ import kotlinx.coroutines.flow.first
  *@time: 2020/10/16
  *@description:
  */
-class CoilImageLoader(context: Context) : BaseImageLoader(context) {
+class CoilImageLoader(context: Context) : BaseImageLoader() {
 
     private val mContext = context
     @ExperimentalCoilApi

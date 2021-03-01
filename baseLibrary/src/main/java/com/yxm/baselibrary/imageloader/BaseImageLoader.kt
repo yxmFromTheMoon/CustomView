@@ -1,8 +1,6 @@
 package com.yxm.baselibrary.imageloader
 
 import android.app.Activity
-import android.content.Context
-import android.content.ContextWrapper
 import android.graphics.Bitmap
 import android.view.View
 import android.widget.ImageView
@@ -13,7 +11,7 @@ import androidx.annotation.DrawableRes
  *@time: 2020/10/16
  *@description: 图片加载引擎基类
  */
-abstract class BaseImageLoader(context: Context) {
+abstract class BaseImageLoader {
 
     protected open fun getPath(path: String?): String? {
         var result = path
