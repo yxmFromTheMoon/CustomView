@@ -1,7 +1,11 @@
 package com.yxm.customview.activity
 
+import android.annotation.SuppressLint
 import android.content.Context
+import com.yxm.customview.OnDoubleClickListener
 import com.yxm.customview.R
+import com.yxm.customview.showToast
+import com.yxm.customview.viewgruop.TagLayout
 import com.yxm.framelibrary.BaseSkinActivity
 import dalvik.system.DexClassLoader
 import java.io.File
@@ -18,7 +22,26 @@ class TestActivity : BaseSkinActivity() {
         return R.layout.activity_test
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun initView() {
+
+        val rootView = findViewById<TagLayout>(R.id.root)
+//        rootView.setOnClickListener {
+//            "onClickSystem".showToast()
+//        }
+        val onDoubleClickListener = OnDoubleClickListener()
+        onDoubleClickListener.listener = object : OnDoubleClickListener.OnDoubleClickListener {
+            override fun onDoubleClick() {
+                "onDoubleClick".showToast()
+            }
+
+            override fun onClick() {
+                "onClick".showToast()
+            }
+        }
+        rootView.setOnTouchListener(onDoubleClickListener)
+
+
         val file = File("$cacheDir", "/demo.apk")
         val assets = assets.open("plugin/plugindemo.apk")
         assets.use { input ->
