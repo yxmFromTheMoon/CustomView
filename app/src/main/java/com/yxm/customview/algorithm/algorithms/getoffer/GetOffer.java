@@ -40,7 +40,10 @@ public class GetOffer {
                 column++;
             }
         }
+        HashMap<Character,Integer> a = new HashMap();
+        for (Object o : a.keySet()) {
 
+        }
         return false;
     }
 

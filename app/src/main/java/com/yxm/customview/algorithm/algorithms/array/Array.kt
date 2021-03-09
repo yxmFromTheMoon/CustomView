@@ -247,3 +247,53 @@ fun interSectionOfTwoArrays(arr1: IntArray, arr2: IntArray): IntArray {
     }
     return result.toIntArray()
 }
+
+/**
+ *数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。
+ *例如输入一个长度为9的数组{1,2,3,2,2,2,5,4,2}。由于数字2在数组中出现了5次，
+ *超过数组长度的一半，因此输出2。如果不存在则输出0。
+ */
+
+fun MoreThanHalfNum_Solution(array: IntArray): Int {
+    if (array.size == 1) {
+        return array[0]
+    }
+    val map: HashMap<Int, Int> = HashMap()
+    for (i in array.indices) {
+        if (map.containsKey(array[i])) {
+            if (map[array[i]] == array.size / 2) {
+                return array[i]
+            } else {
+                map[array[i]] = map[array[i]]!! + 1
+            }
+        } else {
+            map[array[i]] = 1
+        }
+    }
+    return 0
+}
+
+/**
+在一个字符串(0<=字符串长度<=10000，全部由字母组成)中找到第一个只出现一次的字符,并返回它的位置,
+如果没有则返回 -1（需要区分大小写）.（从0开始计数）
+ */
+fun FirstNotRepeatingChar(str: String?): Int? {
+    if (str.isNullOrEmpty())
+        return -1
+    var result = Int.MAX_VALUE
+    val map = HashMap<Char, Int>()
+    val array = str.toCharArray()
+    for (c in array) {
+        if (map.containsKey(c)) {
+            map[c] = -1
+        } else {
+            map[c] = array.indexOf(c)
+        }
+    }
+    for (key in map.keys) {
+        if (map[key] != -1) {
+            result = min(map[key]!!, result)
+        }
+    }
+    return result
+}

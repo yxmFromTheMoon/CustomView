@@ -12,22 +12,8 @@ import com.yxm.customview.algorithm.algorithms.string.reverseString
  */
 
 fun main() {
-    val arr = intArrayOf(3, 2,2, 6, 6, 8, 64)
-//    val arr2 = intArrayOf(3,1,17,13)
-//    println(removeDuplicateNumbers(arr))
-//    println(isPalindrome("A man, a plan, a canal: Panama"))
-//
-//    sortColor(arr)
-//    arr.forEach {
-//        println(it)
-//    }
-//    println(reverseStr("abcdef"))
-//    interSectionOfTwoArrays(arr,arr2).forEach {
-//        println(it)
-//    }
-    val head = createLinkedList(arr)
-    val reverseLinkedNode = removeDuplicateNode(head)
-    printLinkedList(reverseLinkedNode)
+    val arr = intArrayOf(1,2,3,2,2,2,5,4,2)
+    println(MoreThanHalfNum_Solution(arr))
 }
 
 /**
