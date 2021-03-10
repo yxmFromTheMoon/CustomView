@@ -87,6 +87,7 @@ public class GetOffer {
         while (!stack.isEmpty()) {
             result.append(stack.pop()).append(" ");
         }
+        PriorityQueue<Integer> queue = new PriorityQueue<>();
         return result.toString().substring(0, result.length() - 1);
     }
 

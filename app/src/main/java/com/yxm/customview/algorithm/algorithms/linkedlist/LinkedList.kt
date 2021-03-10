@@ -131,3 +131,29 @@ fun hasCycle(head: ListNode?): Boolean {
     }
     return false
 }
+
+/**
+输入两个链表，找出它们的第一个公共结点。
+思路：由于两个链表长度不等，所以无法通过双指针直接遍历，设a链表的长度为A,b链表的长度为B,
+则A+B = B+A，遍历完a链表后，将当前链表指向B的头指针，遍历完b链表后，将当前节点指向A的头指针
+ **/
+fun FindFirstCommonNode(pHead1: ListNode?, pHead2: ListNode?): ListNode? {
+    if (pHead1 == null || pHead2 == null) {
+        return null
+    }
+    var node1 = pHead1
+    var node2 = pHead2
+    while (node1 != node2) {
+        node1 = node1?.next
+        node2 = node2?.next
+        if (node1 != node2) {
+            if (node1 == null) {
+                node1 = pHead2
+            }
+            if (node2 == null) {
+                node2 = pHead1
+            }
+        }
+    }
+    return node1
+}
