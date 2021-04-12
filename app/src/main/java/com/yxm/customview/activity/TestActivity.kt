@@ -2,6 +2,8 @@ package com.yxm.customview.activity
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.view.View
+import com.yxm.baselibrary.dialog.AlertDialog
 import com.yxm.customview.OnDoubleClickListener
 import com.yxm.customview.R
 import com.yxm.customview.showToast
@@ -24,6 +26,18 @@ class TestActivity : BaseSkinActivity() {
 
     @SuppressLint("ClickableViewAccessibility")
     override fun initView() {
+
+        AlertDialog.Builder(this)
+                .setContentView(R.layout.dialog_test_view)
+                .setCancelable(true)
+                .setText(R.id.test_tv, "test")
+                .setOnClickListener(R.id.test_tv, View.OnClickListener {
+                    "Test".showToast()
+                })
+                .fromBottom(true)
+                .fullWidth()
+                .create()
+                .show()
 
         val rootView = findViewById<TagLayout>(R.id.root)
 //        rootView.setOnClickListener {

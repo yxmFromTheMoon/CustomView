@@ -12,8 +12,11 @@ import com.yxm.customview.algorithm.algorithms.string.reverseString
  */
 
 fun main() {
-    val arr = intArrayOf(1,2,3,2,2,2,5,4,2)
-    println(MoreThanHalfNum_Solution(arr))
+    val arr = intArrayOf(6,1,10,3,532,5,56,412,26)
+    com.yxm.customview.algorithm.algorithms.sort.quickSort(arr)
+    for (i in arr) {
+        println(i)
+    }
 }
 
 /**

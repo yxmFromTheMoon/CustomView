@@ -128,6 +128,52 @@ fun shellSort(array: IntArray) {
     }
 }
 
+fun quickSort(array: IntArray) {
+    quickSort(array, 0, array.size - 1)
+}
+
+fun quickSort(array: IntArray, l: Int, r: Int) {
+    if (l >= r) {
+        return
+    }
+    val p = partition(array, l, r)
+    quickSort(array, l, p - 1)
+    quickSort(array, p + 1, r)
+}
+
+fun partition(array: IntArray, l: Int, r: Int): Int {
+    val left = array[l]
+    var j = l
+    for (i in l + 1..r step 1) {
+        if (array[i] < left) {
+            j++
+            swap(array, j, i)
+        }
+    }
+    swap(array, l, j)
+    return j
+}
+
+fun partitions(array: IntArray, left: Int, right: Int): Int {
+    var i = left
+    var j = right
+    val pivot = array[(left + right) / 2]
+    while (i <= j) {
+        while (array[i] < pivot)
+            i++
+        while (array[j] > pivot)
+            j--
+        if (i <= j) {
+            val tmp = array[i]
+            array[i] = array[j]
+            array[j] = tmp
+            i++
+            j--
+        }
+    }
+    return i
+}
+
 /**
  * 二分查找，必须是有序数组
  * @param array IntArray
@@ -138,7 +184,7 @@ fun binarySearch(array: IntArray, target: Int): Int {
     var r = array.size - 1
 
     while (l <= r) {
-        val mid = l + (r + l) / 2
+        val mid = l + (r - l) / 2
         when {
             array[mid] == target -> {
                 return mid
@@ -162,7 +208,7 @@ fun binarySearch(array: IntArray, l: Int, r: Int, target: Int): Int {
     if (l > r) {
         return -1
     }
-    val mid = l + (l + r) / 2
+    val mid = l + (r - l) / 2
     return when {
         array[mid] == target -> {
             mid
