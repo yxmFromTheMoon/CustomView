@@ -15,14 +15,14 @@ import kotlinx.coroutines.launch
  * 2020/10/26 20:25
  * @description
  */
-class UserViewModel : ViewModel() {
+class UserViewModel(private val repository: Repository) : ViewModel() {
 
     private val userLiveData = MutableLiveData<String>()
 
     var user: User? = null
 
     val liveData = Transformations.switchMap(userLiveData) {
-        Repository.getUserName(it)
+        repository.getUserName(it)
     }
 
     fun getUser(name: String) {

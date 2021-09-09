@@ -8,10 +8,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.yxm.customview.R
-import com.yxm.baselibrary.base.BaseActivity
 import com.yxm.baselibrary.recyclerview.GridItemDecoration
 import com.yxm.framelibrary.BaseSkinActivity
-import kotlinx.android.synthetic.main.activity_recyclerview.*
+import kotlinx.android.synthetic.main.activity_recycler.*
 
 /**
  * @author yxm
@@ -26,7 +25,7 @@ class RecyclerViewActivity : BaseSkinActivity() {
     private lateinit var mAdapter: MyAdapter
 
     override fun getLayoutId(): Int {
-        return R.layout.activity_recyclerview
+        return R.layout.activity_recycler
     }
 
     override fun initView() {
