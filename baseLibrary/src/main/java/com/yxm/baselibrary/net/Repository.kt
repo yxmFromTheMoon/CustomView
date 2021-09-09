@@ -12,7 +12,7 @@ import kotlin.coroutines.CoroutineContext
  * 2020/10/26 20:17
  * @description
  */
-object Repository {
+class Repository {
 
     fun getUserName(name: String) = fire(Dispatchers.IO) {
         val user = HttpUtils.getUser(name)
