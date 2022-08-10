@@ -3,7 +3,6 @@ package com.yxm.baselibrary.net
 import android.util.Log
 import androidx.lifecycle.liveData
 import kotlinx.coroutines.Dispatchers
-import java.lang.Exception
 import kotlin.coroutines.CoroutineContext
 
 /**
@@ -19,13 +18,14 @@ class Repository {
         Result.success(user)
     }
 
-    private fun <T> fire(context: CoroutineContext, block: suspend () -> Result<T>) = liveData<Result<T>>(context) {
-        val result = try {
-            block()
-        } catch (e: Exception) {
-            Log.d("test", e.message)
-            Result.failure<T>(e)
+    private fun <T> fire(context: CoroutineContext, block: suspend () -> Result<T>) =
+        liveData(context) {
+            val result = try {
+                block()
+            } catch (e: Exception) {
+                Log.d("test", e.message ?: "")
+                Result.failure(e)
+            }
+            emit(result)
         }
-        emit(result)
-    }
 }

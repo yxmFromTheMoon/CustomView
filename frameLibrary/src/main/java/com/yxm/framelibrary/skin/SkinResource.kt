@@ -30,7 +30,7 @@ class SkinResource(context: Context, skinPath: String) {
                     + File.separator + "test.skin")
             mResource = Resources(assetManager, superRes.displayMetrics, superRes.configuration)
 
-            mPackageName = context.packageManager.getPackageArchiveInfo(skinPath, PackageManager.GET_ACTIVITIES).packageName as String
+            mPackageName = context.packageManager.getPackageArchiveInfo(skinPath, PackageManager.GET_ACTIVITIES)?.packageName as String
         } catch (e: Exception) {
             e.printStackTrace()
         }

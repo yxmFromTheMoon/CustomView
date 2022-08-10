@@ -73,8 +73,12 @@ class SelectPictureActivity : BaseSkinActivity() {
 
         mSelectMode = intent.getIntExtra(SELECT_MODE_KEY, mSelectMode)
         mIsShowCamera = intent.getBooleanExtra(IS_SHOW_CAMERA_KEY, mIsShowCamera)
-        mMaxPictureSize = if (mSelectMode == MULTI_SELECT_MODE) intent.getIntExtra(MAX_SELECT_KEY, mMaxPictureSize) else 1
-        mSelectedPictureList = intent.getStringArrayListExtra(SELECTED_PICTURE_LIST_KEY)
+        mMaxPictureSize = if (mSelectMode == MULTI_SELECT_MODE) intent.getIntExtra(
+            MAX_SELECT_KEY,
+            mMaxPictureSize
+        ) else 1
+        mSelectedPictureList =
+            intent?.getStringArrayListExtra(SELECTED_PICTURE_LIST_KEY) as ArrayList<String> /* = java.util.ArrayList<kotlin.String> */
         if (mSelectedPictureList == null) {
             mSelectedPictureList = ArrayList()
         }
@@ -86,8 +90,10 @@ class SelectPictureActivity : BaseSkinActivity() {
             finish()
         }
         mConfirmTv.setOnClickListener {
-            Toast.makeText(this@SelectPictureActivity,
-                    "选了${mSelectedPictureList.size}张图片", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                this@SelectPictureActivity,
+                "选了${mSelectedPictureList.size}张图片", Toast.LENGTH_SHORT
+            ).show()
             setResult(RESULT_OK, Intent().apply {
                 putStringArrayListExtra(RESULT_LIST_KEY, mSelectedPictureList)
             })
@@ -97,20 +103,23 @@ class SelectPictureActivity : BaseSkinActivity() {
 
     private val mLoaderCallback = object : LoaderManager.LoaderCallbacks<Cursor> {
         val IMAGE_PROJECTION = arrayOf(
-                MediaStore.Images.Media.DATA,
-                MediaStore.Images.Media.DISPLAY_NAME,
-                MediaStore.Images.Media.DATE_ADDED,
-                MediaStore.Images.Media.MIME_TYPE,
-                MediaStore.Images.Media.SIZE,
-                MediaStore.Images.Media._ID)
+            MediaStore.Images.Media.DATA,
+            MediaStore.Images.Media.DISPLAY_NAME,
+            MediaStore.Images.Media.DATE_ADDED,
+            MediaStore.Images.Media.MIME_TYPE,
+            MediaStore.Images.Media.SIZE,
+            MediaStore.Images.Media._ID
+        )
 
         override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
             // 查询数据库一样 语句
 
-            return CursorLoader(this@SelectPictureActivity,
-                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI, IMAGE_PROJECTION,
-                    "${IMAGE_PROJECTION[4]} >0 AND ${IMAGE_PROJECTION[3]}=? OR ${IMAGE_PROJECTION[3]}=?",
-                    arrayOf("image/jpeg", "image/png"), "${IMAGE_PROJECTION[2]} DESC")
+            return CursorLoader(
+                this@SelectPictureActivity,
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI, IMAGE_PROJECTION,
+                "${IMAGE_PROJECTION[4]} >0 AND ${IMAGE_PROJECTION[3]}=? OR ${IMAGE_PROJECTION[3]}=?",
+                arrayOf("image/jpeg", "image/png"), "${IMAGE_PROJECTION[2]} DESC"
+            )
         }
 
         override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor?) {
@@ -134,8 +143,10 @@ class SelectPictureActivity : BaseSkinActivity() {
     }
 
     override fun initData() {
-        LoaderManager.getInstance(this).initLoader(LOADER_TYPE, null,
-                mLoaderCallback)
+        LoaderManager.getInstance(this).initLoader(
+            LOADER_TYPE, null,
+            mLoaderCallback
+        )
     }
 
     private fun showImageList(images: MutableList<String>) {
@@ -150,13 +161,17 @@ class SelectPictureActivity : BaseSkinActivity() {
             override fun onItemClick(holder: ViewHolder, position: Int) {
                 if (position == 0) {
                     //要申请拍照权限
-                    Toast.makeText(this@SelectPictureActivity,
-                            "点击拍照", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this@SelectPictureActivity,
+                        "点击拍照", Toast.LENGTH_SHORT
+                    ).show()
                     return
                 }
                 if (mSelectedPictureList.size >= mMaxPictureSize) {
-                    Toast.makeText(this@SelectPictureActivity,
-                            "最多只能选${mMaxPictureSize}张图片", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this@SelectPictureActivity,
+                        "最多只能选${mMaxPictureSize}张图片", Toast.LENGTH_SHORT
+                    ).show()
                     return
                 }
                 if (mSelectedPictureList.contains(images[position])) {

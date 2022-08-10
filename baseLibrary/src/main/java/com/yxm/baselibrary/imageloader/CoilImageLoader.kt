@@ -25,7 +25,6 @@ class CoilImageLoader(context: Context) : BaseImageLoader() {
     private val mContext = context
     @ExperimentalCoilApi
     private val mImageLoader = ImageLoader.Builder(mContext).componentRegistry {
-        add(PauseInterceptor())
     }.build()
 
     override fun displayDefault(imageView: ImageView?, path: String?, loadingResId: Int, failResId: Int) {
@@ -47,7 +46,6 @@ class CoilImageLoader(context: Context) : BaseImageLoader() {
         }
     }
 
-    @ExperimentalCoilApi
     override fun download(path: String?, delegate: DownloadCallback?) {
 
         val request = ImageRequest.Builder(mContext)
@@ -69,18 +67,17 @@ class CoilImageLoader(context: Context) : BaseImageLoader() {
 
     }
 
-    @ExperimentalCoilApi
-    class PauseInterceptor : Interceptor {
-
-        @ExperimentalCoroutinesApi
-        val isPaused = MutableStateFlow(false)
-
-        @ExperimentalCoroutinesApi
-        override suspend fun intercept(chain: Interceptor.Chain): ImageResult {
-            isPaused.first {
-                !it
-            }
-            return chain.proceed(chain.request)
-        }
-    }
+//    @ExperimentalCoilApi
+//    class PauseInterceptor : Interceptor {
+//
+//        @ExperimentalCoroutinesApi
+//        val isPaused = MutableStateFlow(false)
+//
+//        override suspend fun intercept(chain: Interceptor.Chain): ImageResult {
+//            isPaused.first {
+//                !it
+//            }
+//            return chain.proceed(chain.request)
+//        }
+//    }
 }

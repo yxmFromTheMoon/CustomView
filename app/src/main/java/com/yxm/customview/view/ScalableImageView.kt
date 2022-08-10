@@ -71,7 +71,7 @@ class ScalableImageView @JvmOverloads constructor(context: Context, attributeSet
         canvas.drawBitmap(bitmap, originalOffsetX, originalOffsetY, null)
     }
 
-    override fun onTouchEvent(event: MotionEvent?): Boolean {
+    override fun onTouchEvent(event: MotionEvent): Boolean {
         val result = scaleGestureDetector.onTouchEvent(event)
         if (!scaleGestureDetector.isInProgress) {
             gestureDetector.onTouchEvent(event)

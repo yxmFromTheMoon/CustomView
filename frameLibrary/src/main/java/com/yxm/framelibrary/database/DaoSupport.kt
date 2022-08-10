@@ -125,7 +125,7 @@ class DaoSupport<T> : IDaoSupport<T> {
                     mPutMethods[fieldTypeName] = putMethod
                 }
                 //此处调用method的invoke方法，相当于调用contentValues的put(key,value)方法
-                putMethod.invoke(values, mPutMethodArgs)
+                putMethod?.invoke(values, mPutMethodArgs)
             } catch (e: Exception) {
                 e.printStackTrace()
             } finally {

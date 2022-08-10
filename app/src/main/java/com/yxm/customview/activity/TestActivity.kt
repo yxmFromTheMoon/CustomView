@@ -2,7 +2,11 @@ package com.yxm.customview.activity
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import android.view.View
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.yxm.baselibrary.dialog.AlertDialog
 import com.yxm.customview.OnDoubleClickListener
 import com.yxm.customview.R
@@ -10,6 +14,8 @@ import com.yxm.customview.showToast
 import com.yxm.customview.viewgruop.TagLayout
 import com.yxm.framelibrary.BaseSkinActivity
 import dalvik.system.DexClassLoader
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.launch
 import java.io.File
 
 /**
@@ -27,17 +33,27 @@ class TestActivity : BaseSkinActivity() {
     @SuppressLint("ClickableViewAccessibility")
     override fun initView() {
 
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                flow {
+                    emit("test")
+                }.collect {
+                    Log.d("test", it)
+                }
+            }
+        }
         AlertDialog.Builder(this)
-                .setContentView(R.layout.dialog_test_view)
-                .setCancelable(true)
-                .setText(R.id.test_tv, "test")
-                .setOnClickListener(R.id.test_tv, View.OnClickListener {
-                    "Test".showToast()
-                })
-                .fromBottom(true)
-                .fullWidth()
-                .create()
-                .show()
+            .setContentView(R.layout.dialog_test_view)
+            .setCancelable(true)
+            .setText(R.id.test_tv, "test")
+            .setOnClickListener(R.id.test_tv, View.OnClickListener {
+                "Test".showToast()
+            })
+            .fromBottom(true)
+            .fullWidth()
+            .create()
+            .show()
 
         val rootView = findViewById<TagLayout>(R.id.root)
 //        rootView.setOnClickListener {

@@ -34,7 +34,7 @@ object SkinManager {
             return
         }
         val packageName = mContext.packageManager
-                .getPackageArchiveInfo(skinPath, PackageManager.GET_ACTIVITIES).packageName as String
+                .getPackageArchiveInfo(skinPath, PackageManager.GET_ACTIVITIES)?.packageName as String
         if (packageName.isEmpty()) {
             SkinPreUtils.clearSkinPath()
             return
@@ -56,7 +56,7 @@ object SkinManager {
             return SkinConfig.FILE_NOT_EXISTS
         }
         val packageName = mContext.packageManager
-                .getPackageArchiveInfo(skinPath, PackageManager.GET_ACTIVITIES).packageName as String
+                .getPackageArchiveInfo(skinPath, PackageManager.GET_ACTIVITIES)?.packageName as String
         if (packageName.isEmpty()) {
             return SkinConfig.BAD_SKIN_RESOURCE
         }
