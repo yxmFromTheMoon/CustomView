@@ -18,6 +18,7 @@ class Repository {
         Result.success(user)
     }
 
+
     private fun <T> fire(context: CoroutineContext, block: suspend () -> Result<T>) =
         liveData(context) {
             val result = try {
