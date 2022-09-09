@@ -19,7 +19,7 @@ object OkHttpClientManager {
             .writeTimeout(30L, TimeUnit.SECONDS)
             .followRedirects(true)
             .followSslRedirects(true)
-            .addInterceptor(BaseUrlInterceptor("https://api.example.com"))
+            .addInterceptor(BaseUrlInterceptor(mutableSetOf("https://api.example.com")))
             .build()
     }
 }

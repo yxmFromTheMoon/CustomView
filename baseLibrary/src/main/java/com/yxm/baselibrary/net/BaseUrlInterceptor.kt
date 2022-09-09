@@ -10,7 +10,7 @@ import java.lang.reflect.Method
  * @email: yinxiangming@lightinthebox.com
  * @description:
  */
-class BaseUrlInterceptor(private val baseUrl: String) : Interceptor {
+class BaseUrlInterceptor(private val baseUrl: MutableSet<String>) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
@@ -19,14 +19,15 @@ class BaseUrlInterceptor(private val baseUrl: String) : Interceptor {
         method?.getIgnoreAnnotationOrNull()?.let {
             return chain.proceed(chain.request())
         }
-        var baseUrlAnnotation = method?.annotations?.firstOrNull() as? BaseUrl
+        var baseUrlAnnotation = method?.getAnnotation(BaseUrl::class.java)
         if (baseUrlAnnotation == null) {
-            baseUrlAnnotation = method?.declaringClass?.annotations?.firstOrNull() as? BaseUrl
+            baseUrlAnnotation = method?.declaringClass?.getAnnotation(BaseUrl::class.java)
         }
         baseUrlAnnotation ?: return chain.proceed(request)
         val oldUrl = request.url().toString()
-        val newUrl = if (oldUrl.startsWith(baseUrl)) {
-            baseUrlAnnotation.value + oldUrl.replaceFirst(baseUrl, "")
+        val matchBaseUrl = baseUrl.firstOrNull { oldUrl.startsWith(it) }
+        val newUrl = if (matchBaseUrl != null) {
+            baseUrlAnnotation.value + oldUrl.replaceFirst(matchBaseUrl, "")
         } else {
             oldUrl
         }
