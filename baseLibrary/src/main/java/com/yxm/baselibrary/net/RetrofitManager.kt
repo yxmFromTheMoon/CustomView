@@ -16,7 +16,6 @@ object RetrofitManager {
             .baseUrl("https://api.github.com")
             .client(OkHttpClientManager.getOkHttpClient())
             .addConverterFactory(GsonConverterFactory.create())
-            //.addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
             .build()
 

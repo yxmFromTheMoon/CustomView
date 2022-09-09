@@ -13,12 +13,13 @@ object OkHttpClientManager {
 
     fun getOkHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
-                .connectTimeout(30L, TimeUnit.SECONDS)
-                .callTimeout(30L, TimeUnit.SECONDS)
-                .readTimeout(30L, TimeUnit.SECONDS)
-                .writeTimeout(30L, TimeUnit.SECONDS)
-                .followRedirects(true)
-                .followSslRedirects(true)
-                .build()
+            .connectTimeout(30L, TimeUnit.SECONDS)
+            .callTimeout(30L, TimeUnit.SECONDS)
+            .readTimeout(30L, TimeUnit.SECONDS)
+            .writeTimeout(30L, TimeUnit.SECONDS)
+            .followRedirects(true)
+            .followSslRedirects(true)
+            .addInterceptor(BaseUrlInterceptor("https://api.example.com"))
+            .build()
     }
 }

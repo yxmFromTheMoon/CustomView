@@ -12,6 +12,8 @@ import retrofit2.http.Path
  * @description
  */
 interface ApiService {
+
+    @BaseUrl("https://api.example.com")
     @GET("users/{login}")
     fun getUser(@Path("login") name: String): Call<User>
 
