@@ -11,6 +11,7 @@ import retrofit2.http.Path
  * 2020/10/21 20:19
  * @description
  */
+@Ignore
 interface ApiService {
 
     @BaseUrl("https://api.example.com")

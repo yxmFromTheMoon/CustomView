@@ -41,9 +41,9 @@ class BaseUrlInterceptor(private val baseUrl: MutableSet<String>) : Interceptor 
 }
 
 @Retention(AnnotationRetention.RUNTIME)
-@Target(AnnotationTarget.ANNOTATION_CLASS, AnnotationTarget.FUNCTION)
+@Target(AnnotationTarget.ANNOTATION_CLASS, AnnotationTarget.FUNCTION, AnnotationTarget.CLASS)
 annotation class BaseUrl(val value: String)
 
 @Retention(AnnotationRetention.RUNTIME)
-@Target(AnnotationTarget.ANNOTATION_CLASS, AnnotationTarget.FUNCTION)
+@Target(AnnotationTarget.ANNOTATION_CLASS, AnnotationTarget.FUNCTION, AnnotationTarget.CLASS)
 annotation class Ignore
