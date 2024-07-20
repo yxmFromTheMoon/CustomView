@@ -1,10 +1,8 @@
 package com.yxm.baselibrary.net
 
-import android.content.Context
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
-import android.os.Build
 import com.yxm.baselibrary.base.BaseResponse
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,7 +22,14 @@ object HttpUtils {
 
     suspend fun getUser(name: String) = mService.getUser(name).await()
 
-    fun getUser1(name: String): Call<BaseResponse<User>> = mService.getUser1(name)
+    suspend fun getUser1(name: String): BaseResponse<User> = mService.getUser1(name)
+
+    private fun getUserWithRxJava(name: String) = mService.getUserWithRxJava(name)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe {
+            it.name
+        }
 
     private suspend fun <T> Call<T>.await(): T {
         return suspendCoroutine { continuation ->
@@ -43,28 +48,5 @@ object HttpUtils {
                 }
             })
         }
-    }
-
-    /**
-     * 是否连接网络
-     * @param context
-     * @return
-     */
-    fun isConnected(context: Context): Boolean {
-        val manager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        if (manager != null) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                val networkCapabilities = manager.getNetworkCapabilities(manager.activeNetwork)
-                if (networkCapabilities != null) {
-                    return (networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
-                            || networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)
-                            || networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET))
-                }
-            } else {
-                val networkInfo = manager.activeNetworkInfo
-                return networkInfo != null && networkInfo.isConnected && networkInfo.isAvailable
-            }
-        }
-        return false
     }
 }
