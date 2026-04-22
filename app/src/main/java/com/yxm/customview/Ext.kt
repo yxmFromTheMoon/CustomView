@@ -40,21 +40,26 @@ inline fun <reified T> Context.startActivity(block: Intent.() -> Unit) {
     this.startActivity(intent)
 }
 
-inline fun <reified T> Fragment.startActivity(block: Intent.() -> Unit){
-    val intent = Intent(activity,T::class.java)
+inline fun <reified T> Fragment.startActivity(block: Intent.() -> Unit) {
+    val intent = Intent(activity, T::class.java)
     intent.block()
     activity?.startActivity(intent)
 }
 
-inline fun <reified T> FragmentActivity.startActivityForResult(requestCode: Int, block: Intent.() -> Unit) {
+inline fun <reified T> FragmentActivity.startActivityForResult(
+    requestCode: Int,
+    block: Intent.() -> Unit
+) {
     val intent = Intent(this, T::class.java)
     intent.block()
     this.startActivityForResult(intent, requestCode)
 }
 
 val Float.dp: Float
-    get() = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-            this, getSystem().displayMetrics)
+    get() = TypedValue.applyDimension(
+        TypedValue.COMPLEX_UNIT_DIP,
+        this, getSystem().displayMetrics
+    )
 
 val Int.dp: Float
     get() = this.toFloat().dp
