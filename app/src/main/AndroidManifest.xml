@@ -23,13 +23,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
 
-        <activity android:name=".testmvp.MvpTestActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.intent.action.VIEW" />
+        <activity android:name=".testmvp.MvpTestActivity"
+            android:exported="true">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".activity.HandlerActivity" />
         <activity android:name=".activity.TextViewActivity" />
@@ -63,8 +59,14 @@
         <activity android:name=".aidl.AidlActivity">
 
         </activity>
-        <activity android:name=".activity.TestActivity">
+        <activity android:name=".activity.TestActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <service
@@ -75,7 +77,8 @@
         <service
             android:name="com.yxm.framelibrary.pullalive.GuardService"
             android:process=":guardService" />
-        <service android:name="com.yxm.framelibrary.pullalive.MessageService">
+        <service android:name="com.yxm.framelibrary.pullalive.MessageService"
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.yxm.customview.message" />
             </intent-filter>
