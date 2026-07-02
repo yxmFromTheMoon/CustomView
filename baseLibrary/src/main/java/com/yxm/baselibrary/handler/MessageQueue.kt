@@ -36,7 +36,7 @@ class MessageQueue(quitAllowed: Boolean) {
         return true
     }
 
-    fun next(): Message? {
+    fun next(): Message {
         while (true) {
             synchronized(this) {
                 // Try to retrieve the next message.  Return if found.
@@ -53,11 +53,7 @@ class MessageQueue(quitAllowed: Boolean) {
                 if (msg != null) {
                     if (now < msg.`when`) {
                     } else {
-                        if (prevMsg != null) {
-                            prevMsg.next = msg.next
-                        } else {
-                            mMessages = msg.next
-                        }
+                        mMessages = msg.next
                         msg.next = null
                         return msg
                     }

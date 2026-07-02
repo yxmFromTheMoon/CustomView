@@ -1,11 +1,9 @@
-plugins {
-    id 'com.android.application'
-    id 'kotlin-android'
-}
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 
 android {
+    namespace 'com.yxm.plugindemo'
     compileSdkVersion 31
-    buildToolsVersion "29.0.3"
 
     defaultConfig {
         applicationId "com.yxm.plugindemo"

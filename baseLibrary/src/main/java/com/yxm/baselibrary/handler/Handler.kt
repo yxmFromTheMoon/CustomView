@@ -22,7 +22,7 @@ open class Handler {
         if (delayMillisTemp < 0) {
             delayMillisTemp = 0
         }
-        return sendMessageAtTime(msg, System.currentTimeMillis() + delayMillis)
+        return sendMessageAtTime(msg, System.currentTimeMillis() + delayMillisTemp)
     }
 
     fun sendMessageAtTime(msg: Message, uptimeMillis: Long): Boolean {

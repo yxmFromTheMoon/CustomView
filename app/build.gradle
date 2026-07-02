@@ -3,8 +3,9 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
 
 android {
+    namespace 'com.yxm.customview'
     compileSdkVersion 31
-    buildToolsVersion "29.0.3"
+
     defaultConfig {
         applicationId "com.yxm.customview"
         minSdkVersion 19
@@ -12,7 +13,7 @@ android {
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -28,8 +29,8 @@ android {
         jvmTarget = "1.8"
     }
 
-    viewBinding{
-        enabled = true
+    buildFeatures {
+        viewBinding true
     }
 
 }
@@ -48,10 +49,13 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.2'
-    //releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.3'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.3'
 
     api project(":frameLibrary")
     implementation 'androidx.preference:preference-ktx:1.2.0'
+    implementation "org.seleniumhq.selenium:selenium-java:4.44.0"
+    debugImplementation 'com.github.markzhai:blockcanary-android:1.5.0'
+    releaseImplementation 'com.github.markzhai:blockcanary-no-op:1.5.0'
 }
 repositories {
     mavenCentral()

@@ -1,29 +1,25 @@
 package com.yxm.customview.jetpack.lifecycle
 
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.OnLifecycleEvent
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
 
 /**
  * Created by Myron at 2021/1/7 20:14
  * @email yxmbest@163.com
  * @description
  */
-class MyLocationListener:LifecycleObserver {
+class MyLocationListener : DefaultLifecycleObserver {
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-    fun startLocation(){
+    override fun onCreate(owner: LifecycleOwner) {
         println("开始定位")
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
-    fun pauseLocation(){
+    override fun onPause(owner: LifecycleOwner) {
         println("暂停定位")
     }
 
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-    fun stopLocation(){
+    override fun onDestroy(owner: LifecycleOwner) {
         println("停止定位")
     }
 }
+

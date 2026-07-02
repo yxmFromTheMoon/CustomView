@@ -1,5 +1,7 @@
 package com.yxm.baselibrary.handler
 
+import android.os.Handler
+
 /**
  * Created by Myron at 2020/11/21 14:50
  * @email yxmbest@163.com
@@ -14,6 +16,7 @@ class Looper(quitAllowed: Boolean) {
         private val sThreadLocal = ThreadLocal<Looper>()
 
         fun prepare() {
+            val handler = Handler(android.os.Looper.getMainLooper())
             prepare(true);
         }
 

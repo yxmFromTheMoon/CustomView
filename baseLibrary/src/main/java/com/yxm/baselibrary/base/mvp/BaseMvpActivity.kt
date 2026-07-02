@@ -17,8 +17,9 @@ abstract class BaseMvpActivity<P : BasePresenter<*>> : AppCompatActivity(), Base
         super.onCreate(savedInstanceState)
         setContentView(getLayoutId())
         mPresenter = createPresenter()
-        //mPresenter?.attach(this)
-        //lifecycle.addObserver(mPresenter!!)
+        @Suppress("UNCHECKED_CAST")
+        (mPresenter as BasePresenter<BaseView>).attach(this)
+        lifecycle.addObserver(mPresenter!!)
 
         initView()
         initData()

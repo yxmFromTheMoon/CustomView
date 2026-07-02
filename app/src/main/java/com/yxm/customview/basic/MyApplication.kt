@@ -3,6 +3,8 @@ package com.yxm.customview.basic
 import android.app.Application
 import android.content.Context
 import androidx.multidex.MultiDex
+import com.github.moduth.blockcanary.BlockCanary
+import com.github.moduth.blockcanary.BlockCanaryContext
 import com.yxm.baselibrary.imageloader.GlideImageLoader
 import com.yxm.baselibrary.imageloader.ImageLoaderUtils
 import com.yxm.baselibrary.startup.TaskDispatcher
@@ -30,11 +32,13 @@ class MyApplication : Application() {
 
         val taskDispatcher = TaskDispatcher.createInstance()
         taskDispatcher.addTask(CrashExceptionHandlerTask())
-                .addTask(ImageLoaderTask())
-                .addTask(SkinManagerTask())
-                .addTask(SkinPreUtilsTask())
-                .start()
+            .addTask(ImageLoaderTask())
+            .addTask(SkinManagerTask())
+            .addTask(SkinPreUtilsTask())
+            .start()
         taskDispatcher.await()
+        BlockCanary.install(this, AppBlockCanaryContext())
+            .start()
     }
 
     override fun attachBaseContext(base: Context?) {

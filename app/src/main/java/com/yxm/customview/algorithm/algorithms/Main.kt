@@ -1,9 +1,7 @@
 package com.yxm.customview.algorithm.algorithms
 
-import com.yxm.customview.algorithm.algorithms.array.*
-import com.yxm.customview.algorithm.algorithms.linkedlist.*
 import com.yxm.customview.algorithm.algorithms.sort.swap
-import com.yxm.customview.algorithm.algorithms.string.reverseString
+import org.openqa.selenium.chrome.ChromeDriver
 
 /**
  * Created by Myron at 2020/11/14 21:47s
@@ -12,11 +10,8 @@ import com.yxm.customview.algorithm.algorithms.string.reverseString
  */
 
 fun main() {
-    val arr = intArrayOf(6,1,10,3,532,5,56,412,26)
-    com.yxm.customview.algorithm.algorithms.sort.quickSort(arr)
-    for (i in arr) {
-        println(i)
-    }
+    val driver = ChromeDriver()
+    driver.get("https://juejin.cn")
 }
 
 /**

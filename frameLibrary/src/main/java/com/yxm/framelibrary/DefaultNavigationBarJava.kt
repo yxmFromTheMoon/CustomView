@@ -21,12 +21,11 @@ class DefaultNavigationBarJava(params: DefaultNavigationParams?)
     }
 
     override fun applyView() {
-        // 绑定效果
-        setText(R.id.title, params!!.mTitle)
-        setText(R.id.right_text, params.mRightText)
-        setOnClickListener(R.id.right_text, params.mRightClickListener)
-        // 左边 要写一个默认的  finishActivity
-        setOnClickListener(R.id.back, params.mLeftClickListener)
+        val navigationParams = params!!
+        setText(R.id.title, navigationParams.mTitle)
+        setText(R.id.right_text, navigationParams.mRightText)
+        setOnClickListener(R.id.right_text, navigationParams.mRightClickListener)
+        setOnClickListener(R.id.back, navigationParams.mLeftClickListener)
     }
 
     class Builder : AbsNavigationBarJava.Builder {
