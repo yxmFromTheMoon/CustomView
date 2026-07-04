@@ -33,6 +33,15 @@ android {
         viewBinding true
     }
 
+    packagingOptions {
+        resources {
+            excludes += [
+                    'META-INF/INDEX.LIST',
+                    'META-INF/io.netty.versions.properties'
+            ]
+        }
+    }
+
 }
 
 dependencies {
@@ -48,12 +57,14 @@ dependencies {
     //noinspection GradleDependency
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.2'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.3'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.3'
 
     api project(":frameLibrary")
     implementation 'androidx.preference:preference-ktx:1.2.0'
-    implementation "org.seleniumhq.selenium:selenium-java:4.44.0"
+    // Newer Selenium releases pull Java 24 bytecode that AGP 7.4.2's
+    // Jetifier cannot process. This is only used by the desktop JVM demo.
+    implementation "org.seleniumhq.selenium:selenium-java:4.11.0"
     debugImplementation 'com.github.markzhai:blockcanary-android:1.5.0'
     releaseImplementation 'com.github.markzhai:blockcanary-no-op:1.5.0'
 }

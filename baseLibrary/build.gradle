@@ -57,14 +57,17 @@ dependencies {
     // (see https://github.com/ReactiveX/RxJava/releases for latest 3.x.x version)
     api 'io.reactivex.rxjava3:rxjava:3.1.5'
 
-    api 'com.squareup.okio:okio:3.7.0'
+    // Okio 3.7.0 is compiled with Kotlin 1.9 and cannot be consumed by the
+    // Kotlin 1.7.22 compiler used by this project.
+    api 'com.squareup.okio:okio:3.2.0'
 
     //coil 协程图片加载库
     api("io.coil-kt:coil:1.0.0-rc3")
 
     api 'org.greenrobot:eventbus:3.2.0'
 
-    api "com.squareup.moshi:moshi:1.15.1"
+    // Moshi 1.15.x pulls Kotlin 1.8 metadata; keep it aligned with Kotlin 1.7.
+    api "com.squareup.moshi:moshi:1.14.0"
     api "com.squareup.retrofit2:converter-moshi:2.9.0"
 
 }

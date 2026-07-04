@@ -24,7 +24,7 @@
         android:usesCleartextTraffic="true">
 
         <activity
-            android:name=".testmvp.MvpTestActivity"
+            android:name=".enter.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -65,15 +65,15 @@
         <activity android:name=".aidl.AidlActivity">
 
         </activity>
-        <activity android:name=".activity.TestActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.intent.action.VIEW" />
+<!--        <activity android:name=".activity.TestActivity"-->
+<!--            android:exported="true">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+<!--                <action android:name="android.intent.action.VIEW" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+<!--        </activity>-->
 
         <service
             android:name="com.yxm.framelibrary.pullalive.AliveJobService"
@@ -98,6 +98,32 @@
         <activity android:name=".activity.CameraViewActivity"/>
         <activity android:name=".activity.ScalableImageViewActivity"/>
         <activity android:name=".jetpack.lifecycle.LifecycleActivity"/>
+
+        <!-- 以下组件仅用于主动制造和分析 ANR，请勿用于生产环境。 -->
+        <activity
+            android:name=".anr.MainThreadBlockActivity"
+            android:exported="false" />
+        <activity
+            android:name=".anr.DeadLockActivity"
+            android:exported="false" />
+        <activity
+            android:name=".anr.BinderBlockActivity"
+            android:exported="false" />
+
+        <receiver
+            android:name=".anr.SlowReceiver"
+            android:exported="true" />
+
+        <provider
+            android:name=".anr.SlowProvider"
+            android:authorities="${applicationId}.slow-provider"
+            android:exported="false"
+            android:process=":anr_remote" />
+
+        <!-- BlockCanary 2.2 predates Android 12 and omits this required attribute. -->
+        <activity
+            android:name="com.github.moduth.blockcanary.ui.DisplayActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

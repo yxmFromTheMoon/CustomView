@@ -13,15 +13,6 @@ import com.yxm.baselibrary.net.User
 class UserModel : BaseModel {
 
     fun getUserInfo(userName: String, onSuccess: (User) -> Unit, onFailure: (String) -> Unit) {
-        HttpUtils.getUser1(userName).enqueue(object : RetrofitCallback<User>() {
 
-            override fun onSuccess(result: User) {
-                onSuccess.invoke(result)
-            }
-
-            override fun onFailure(msg: String, code: Int) {
-                onFailure.invoke(msg)
-            }
-        })
     }
 }

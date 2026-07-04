@@ -3,9 +3,6 @@ package com.yxm.customview.enter
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
-import android.os.Handler
-import android.os.Looper
-import android.os.Message
 import android.util.Log
 import android.view.View
 import androidx.annotation.RequiresApi
@@ -16,19 +13,38 @@ import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
-import com.yxm.baselibrary.base.BaseActivity
-import com.yxm.baselibrary.dialog.AlertDialog
 import com.yxm.baselibrary.recyclerview.ItemClickListener
 import com.yxm.baselibrary.recyclerview.ViewHolder
 import com.yxm.customview.R
-import com.yxm.customview.activity.*
+import com.yxm.customview.activity.BezierActivity
+import com.yxm.customview.activity.BouquetLoadingViewActivity
+import com.yxm.customview.activity.CTripLoadingViewActivity
+import com.yxm.customview.activity.CameraViewActivity
+import com.yxm.customview.activity.CheckViewActivity
+import com.yxm.customview.activity.CircleProgressViewActivity
+import com.yxm.customview.activity.CommonAdapterActivity
+import com.yxm.customview.activity.DragItemAnimatorActivity
+import com.yxm.customview.activity.KGMenuActivity
+import com.yxm.customview.activity.LetterSideBarActivity
+import com.yxm.customview.activity.ListDataScreenActivity
+import com.yxm.customview.activity.LoadingView58Activity
+import com.yxm.customview.activity.LoveActivity
+import com.yxm.customview.activity.PieViewActivity
+import com.yxm.customview.activity.QQStepViewActivity
+import com.yxm.customview.activity.RatingBarActivity
+import com.yxm.customview.activity.ScalableImageViewActivity
+import com.yxm.customview.activity.SmoothCheckBoxActivity
+import com.yxm.customview.activity.TestActivity
+import com.yxm.customview.activity.TextViewActivity
+import com.yxm.customview.activity.VerticalDragListViewActivity
+import com.yxm.customview.activity.ViewPagerActivity
+import com.yxm.customview.anr.BinderBlockActivity
+import com.yxm.customview.anr.DeadLockActivity
+import com.yxm.customview.anr.MainThreadBlockActivity
 import com.yxm.customview.jetpack.lifecycle.LifecycleActivity
 import com.yxm.customview.showToast
 import com.yxm.customview.startActivity
 import com.yxm.framelibrary.BaseSkinActivity
-import com.yxm.framelibrary.DefaultNavigationBarJava
-import kotlinx.android.synthetic.main.activity_main.*
-import java.util.*
 
 
 class MainActivity : BaseSkinActivity() {
@@ -36,8 +52,10 @@ class MainActivity : BaseSkinActivity() {
     private lateinit var mRecyclerView: RecyclerView
     private val mList = ArrayList<ButtonBean>()
     private lateinit var mCommonAdapter: EnterListAdapterV2
-    private val permissions = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    private val permissions = arrayOf(
+        Manifest.permission.READ_EXTERNAL_STORAGE,
+        Manifest.permission.WRITE_EXTERNAL_STORAGE
+    )
 
     override fun getLayoutId(): Int {
         return R.layout.activity_main
@@ -45,18 +63,24 @@ class MainActivity : BaseSkinActivity() {
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun initView() {
-        mRecyclerView = recycler_view
+        mRecyclerView = findViewById(R.id.recycler_view)
 
         val isAllGranted = checkPermissionAllGranted(permissions)
         if (isAllGranted) {
             return
         }
         // 一次请求多个权限, 如果其他有权限是已经授予的将会自动忽略掉
-        ActivityCompat.requestPermissions(this,
-                permissions, 1)
+        ActivityCompat.requestPermissions(
+            this,
+            permissions, 1
+        )
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
             1 -> {
@@ -74,6 +98,7 @@ class MainActivity : BaseSkinActivity() {
                     "权限都有".showToast()
                 }
             }
+
             else -> {
                 // 弹出对话框告诉用户需要权限的原因, 并引导用户去应用权限管理中手动打开权限按钮
                 //容易判断错
@@ -87,7 +112,11 @@ class MainActivity : BaseSkinActivity() {
      */
     private fun checkPermissionAllGranted(permissions: Array<String>): Boolean {
         for (permission in permissions) {
-            if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(
+                    this,
+                    permission
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
                 // 只要有一个权限没有被授予, 则直接返回 false
                 //Log.e("err","权限"+permission+"没有授权");
                 return false
@@ -119,6 +148,9 @@ class MainActivity : BaseSkinActivity() {
         val bean19 = ButtonBean("20", "CameraView")
         val bean20 = ButtonBean("21", "ScalableImageView")
         val bean21 = ButtonBean("22", "LifeCycleActivity")
+        val bean22 = ButtonBean("23", "主线程阻塞导致ANR")
+        val bean23 = ButtonBean("24", "死锁导致ANR")
+        val bean24 = ButtonBean("25", "Binder阻塞导致ANR")
         mList.add(bean)
         mList.add(bean1)
         mList.add(bean2)
@@ -141,6 +173,9 @@ class MainActivity : BaseSkinActivity() {
         mList.add(bean19)
         mList.add(bean20)
         mList.add(bean21)
+        mList.add(bean22)
+        mList.add(bean23)
+        mList.add(bean24)
 
         val layoutManager = FlexboxLayoutManager(this)
         layoutManager.flexDirection = FlexDirection.ROW
@@ -155,68 +190,101 @@ class MainActivity : BaseSkinActivity() {
                     "1" -> {
                         startActivity<TextViewActivity> {}
                     }
+
                     "2" -> {
                         startActivity<CheckViewActivity> {}
                     }
+
                     "3" -> {
                         startActivity<CircleProgressViewActivity> {}
                     }
+
                     "4" -> {
                         startActivity<LoadingView58Activity> {}
                     }
+
                     "5" -> {
                         startActivity<ViewPagerActivity> {}
                     }
+
                     "6" -> {
                         startActivity<PieViewActivity> {}
                     }
+
                     "7" -> {
                         startActivity<QQStepViewActivity> {}
                     }
+
                     "8" -> {
                         startActivity<RatingBarActivity> {}
                     }
+
                     "9" -> {
                         startActivity<SmoothCheckBoxActivity> {}
                     }
+
                     "10" -> {
                         startActivity<LetterSideBarActivity> {}
                     }
+
                     "11" -> {
                         startActivity<KGMenuActivity> { }
                     }
+
                     "12" -> {
                         startActivity<VerticalDragListViewActivity> {}
                     }
+
                     "13" -> {
                         startActivity<ListDataScreenActivity> { }
                     }
+
                     "14" -> {
                         startActivity<BouquetLoadingViewActivity> { }
                     }
+
                     "15" -> {
                         startActivity<CTripLoadingViewActivity> { }
                     }
+
                     "16" -> {
                         startActivity<CommonAdapterActivity> { }
                     }
+
                     "17" -> {
                         startActivity<BezierActivity> { }
                     }
+
                     "18" -> {
                         startActivity<LoveActivity> { }
                     }
+
                     "19" -> {
                         startActivity<DragItemAnimatorActivity> {}
                     }
+
                     "20" -> {
                         startActivity<CameraViewActivity> { }
                     }
+
                     "21" -> {
                         startActivity<ScalableImageViewActivity> { }
                     }
+
                     "22" -> {
                         startActivity<LifecycleActivity> { }
+                    }
+
+                    "23" -> {
+                        startActivity<MainThreadBlockActivity> {}
+                    }
+
+                    "24" -> {
+                        startActivity<DeadLockActivity> {}
+                    }
+
+                    "25" -> {
+                        startActivity<BinderBlockActivity> { }
                     }
                 }
             }
@@ -225,7 +293,7 @@ class MainActivity : BaseSkinActivity() {
     }
 
     override fun initListener() {
-        test_entry.setOnClickListener {
+        findViewById<View>(R.id.test_entry).setOnClickListener {
             startActivity<TestActivity> { }
         }
     }
